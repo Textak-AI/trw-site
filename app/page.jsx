@@ -60,7 +60,7 @@ function Home({nav}){return <>
       <h1 style={{fontFamily:F.h,fontSize:42,fontWeight:700,color:C.white,margin:"0 0 20px",lineHeight:1.15,maxWidth:640}}>Railroad Safety Culture <span style={{color:C.rust}}>Transformation</span></h1>
       <p style={{fontFamily:F.b,fontSize:17,color:"rgba(255,255,255,0.7)",margin:"0 0 12px",lineHeight:1.65,maxWidth:520}}>70–90% of organizational transformations fail. Yours doesn't have to.</p>
       <p style={{fontFamily:F.b,fontSize:15,color:"rgba(255,255,255,0.55)",margin:"0 0 32px",lineHeight:1.65,maxWidth:520}}>Build a Speak Up Culture where safety concerns don't wait for an accident. Not just training. Not just consulting. A cultural residency that creates lasting change.</p>
-      <div style={{display:"flex",gap:14}}><Btn primary onClick={()=>nav("contact")}>Take the Free Pulse Check</Btn><Btn onClick={()=>nav("speakup")}>What Is Speak Up Culture?</Btn></div>
+      <div style={{display:"flex",gap:14}}><Btn primary onClick={()=>document.getElementById('pulse-check')?.scrollIntoView({behavior:'smooth'})}>Take the Free Pulse Check</Btn><Btn onClick={()=>nav("speakup")}>What Is Speak Up Culture?</Btn></div>
     </div>
   </section>
 
@@ -171,6 +171,26 @@ function Home({nav}){return <>
           <p style={{fontFamily:F.b,fontSize:13,color:C.gray,margin:0,lineHeight:1.5}}>{t.desc}</p>
         </div>
       </div>)}
+    </div>
+  </Sec>
+
+  {/* PULSE CHECK — SurveyMonkey Embed */}
+  <Sec id="pulse-check" bg={C.white} pad="56px 0">
+    <div style={{textAlign:"center",marginBottom:28}}>
+      <Eye>Free Assessment</Eye>
+      <H2>Is Your Safety Culture a Competitive Advantage?</H2>
+      <P s={{maxWidth:560,margin:"0 auto 8px",textAlign:"center"}}>Find out in about 7 minutes. This pulse check benchmarks your organization against industry best practices across leadership alignment, psychological safety, frontline engagement, and culture sustainability.</P>
+      <P s={{fontSize:13,color:C.grayLt,textAlign:"center"}}>Your responses are confidential. Results are delivered upon completion.</P>
+    </div>
+    <div style={{maxWidth:720,margin:"0 auto",borderRadius:10,overflow:"hidden",border:`1px solid ${C.grayRule}`,background:C.cream}}>
+      <iframe
+        src="https://www.surveymonkey.com/r/RQTZW2W"
+        title="Safety Culture Pulse Check — Is Your Safety Culture a Competitive Advantage?"
+        style={{width:"100%",height:700,border:"none",display:"block"}}
+      />
+    </div>
+    <div style={{textAlign:"center",marginTop:16}}>
+      <P s={{fontSize:12,color:C.grayLt,textAlign:"center"}}>Prefer to talk first? <span onClick={()=>nav("contact")} style={{color:C.rust,cursor:"pointer",fontWeight:600}}>Schedule a consultation</span> instead.</P>
     </div>
   </Sec>
 
