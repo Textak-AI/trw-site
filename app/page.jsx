@@ -66,6 +66,39 @@ function Home({nav}){return <>
 
   <Sec bg={C.cream} pad="40px 0"><div style={{display:"flex",gap:20}}><Stat v="214%" l="ROI from safety culture programs" src="BCG Research, 2023"/><Stat v="4x" l="Higher employee retention with psychological safety" src="BCG Study"/><Stat v="565/yr" l="Average roadway worker injuries (2018–2023)" src="FRA Safety Reports"/></div></Sec>
 
+  {/* INDUSTRY RECOGNITION */}
+  <Sec pad="48px 0">
+    <div style={{textAlign:"center",marginBottom:28}}>
+      <Eye>Industry Recognition</Eye>
+      <H2>Building Generational Railroaders — and Industry Leaders</H2>
+    </div>
+    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:24,marginBottom:28}}>
+      <div style={{background:C.cream,borderRadius:10,padding:28,borderTop:`3px solid ${C.rust}`,display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
+        <div>
+          <p style={{fontFamily:F.b,fontSize:10,color:C.rust,textTransform:"uppercase",letterSpacing:"1.2px",margin:"0 0 8px"}}>Railway Age — 2026</p>
+          <h3 style={{fontFamily:F.h,fontSize:22,color:C.black,margin:"0 0 8px",lineHeight:1.25}}>John Orr</h3>
+          <p style={{fontFamily:F.h,fontSize:16,color:C.rust,margin:"0 0 12px",fontStyle:"italic"}}>2026 Railroader of the Year</p>
+          <P s={{fontSize:13}}>Railway Age's highest individual honor, recognizing John Orr of Norfolk Southern for exceptional leadership in rail operations and safety performance.</P>
+        </div>
+        <p style={{fontFamily:F.m,fontSize:10,color:C.grayLt,margin:0}}>Railway Age Magazine</p>
+      </div>
+      <div style={{background:C.cream,borderRadius:10,padding:28,borderTop:`3px solid ${C.rust}`,display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
+        <div>
+          <p style={{fontFamily:F.b,fontSize:10,color:C.rust,textTransform:"uppercase",letterSpacing:"1.2px",margin:"0 0 8px"}}>League of Railway Women — 2025</p>
+          <h3 style={{fontFamily:F.h,fontSize:22,color:C.black,margin:"0 0 8px",lineHeight:1.25}}>Diane Barnett</h3>
+          <p style={{fontFamily:F.h,fontSize:16,color:C.rust,margin:"0 0 12px",fontStyle:"italic"}}>2025 Railway Woman of the Year</p>
+          <P s={{fontSize:13}}>Recognized by the League of Railway Women as a people-first solutionist focused on nudging the progress needle — a generational railroader from Norfolk Southern.</P>
+        </div>
+        <p style={{fontFamily:F.m,fontSize:10,color:C.grayLt,margin:0}}>Progressive Railroading</p>
+      </div>
+    </div>
+    <div style={{background:C.brown,borderRadius:10,padding:"24px 32px",textAlign:"center"}}>
+      <p style={{fontFamily:F.h,fontSize:16,color:"rgba(255,255,255,0.9)",margin:"0 0 6px",lineHeight:1.5}}>We're proud of the work we've done with Norfolk Southern, helping elevate leadership capabilities and enhance safety performance.</p>
+      <p style={{fontFamily:F.b,fontSize:14,color:"rgba(255,255,255,0.55)",margin:"0 0 16px"}}>Two industry award winners. One client. Generational railroaders.</p>
+      <Btn primary onClick={()=>nav("contact")}>Discuss How We Can Help Your Organization</Btn>
+    </div>
+  </Sec>
+
   {/* WHAT WE DO — with training image */}
   <Sec>
     <div style={{display:"grid",gridTemplateColumns:"5fr 4fr",gap:40}}>
