@@ -6,25 +6,80 @@
 <title>Why Transformation Beats Training Every Time | The Rail Way™</title>
 <meta name="description" content="Why 70-90% of safety training programs fail to change behavior. The case for cultural residency in railroad safety.">
 <style>
-  .trw-site-nav {
-    position: sticky; top: 0; z-index: 100;
-    background: #fff; border-bottom: 1px solid #E0E0E0;
-    padding: 12px 20px;
-    display: flex; align-items: center; justify-content: space-between;
-    max-width: 100%; font-family: Arial, sans-serif;
+  .trw-nav-header {
+    background: #2C2C2C;
+    padding: 16px 0;
+    border-bottom: 3px solid #C4622D;
   }
-  .trw-site-nav a { text-decoration: none; }
-  .trw-site-nav .logo img { height: 32px; }
-  .trw-site-nav .back { color: #C4622D; font-size: 14px; font-weight: 600; }
-  .trw-site-nav .back:hover { text-decoration: underline; }
+  .trw-nav-header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .trw-nav-header .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .trw-nav-header .logo-img {
+    height: 28px;
+  }
+  .trw-nav-header .logo-text {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+  .trw-nav-header .logo-text span {
+    color: #C4622D;
+    font-weight: 700;
+  }
+  .trw-nav-header .back-link {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #C4622D;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .trw-nav-header .back-link:hover {
+    color: #e07a3a;
+    text-decoration: underline;
+  }
+  .trw-article-footer-nav {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    border-top: 1px solid #eee;
+  }
+  .trw-article-footer-nav a {
+    color: #C4622D;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .trw-article-footer-nav a:hover {
+    text-decoration: underline;
+  }
+  .trw-article-footer-nav .sep {
+    margin: 0 12px;
+    color: #ccc;
+  }
 </style>
 </head>
 <body>
-<div class="trw-site-nav">
-  <a href="/" class="logo">
-    <img src="https://raw.githubusercontent.com/Textak-AI/trw-assets/main/brand/rail-way-logo.png" alt="The Rail Way">
-  </a>
-  <a href="/insights" class="back">← All Insights</a>
+<div class="trw-nav-header">
+  <div class="trw-nav-header-inner">
+    <a href="/" class="logo-link">
+      <span class="logo-text">THE RAIL <span>WAY</span>™</span>
+    </a>
+    <a href="/" class="back-link">← Back to Main Site</a>
+  </div>
 </div>
 <!-- ARTICLE: Why Transformation Beats Training Every Time -->
 <!-- Slug: /transformation-vs-training/ -->
@@ -195,7 +250,7 @@
     <img src="https://therailway.us/wp-content/uploads/2025/10/PL_headshot_2025-01.jpg" alt="Pauline Lipkewich">
     <div class="bio-text">
         <strong>About The Rail Way&#8482;</strong><br>
-        The Rail Way&#8482; is a division of KingdomBuilding Leadership, Inc. &#8212; dedicated to being the preeminent voice on leadership, people, behaviors, and culture for the transportation industry. Contributing Editor Pauline Lipkewich has 14+ years in North American rail operations and writes regularly for Railway Age. Contact: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cfbfaebaa3a6a1aa8fbba7aabdaea6a3b8aeb6e1babc">[email&#160;protected]</a>
+        The Rail Way&#8482; is a division of KingdomBuilding Leadership, Inc. &#8212; dedicated to being the preeminent voice on leadership, people, behaviors, and culture for the transportation industry. Contributing Editor Pauline Lipkewich has 14+ years in North American rail operations and writes regularly for Railway Age. Contact: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cdbdacb8a1a4a3a88db9a5a8bfaca4a1baacb4e3b8be">[email&#160;protected]</a>
     </div>
 </div>
 
@@ -243,10 +298,10 @@ function submitLead4() {
     data.append('assessment', 'Transformation Readiness Assessment');
     data.append('score', document.querySelectorAll('.check4:checked').length + '/7');
     fetch('https://formspree.io/f/xnjbobyn', { method: 'POST', body: dat
-<div style="max-width:800px;margin:40px auto;padding:20px;text-align:center;font-family:Arial,sans-serif;">
-  <a href="/" style="color:#C4622D;font-weight:600;text-decoration:none;">← Back to The Rail Way</a>
-  <span style="margin:0 12px;color:#ccc;">|</span>
-  <a href="/insights" style="color:#C4622D;font-weight:600;text-decoration:none;">All Insights</a>
+<div class="trw-article-footer-nav">
+  <a href="/">← Back to The Rail Way</a>
+  <span class="sep">|</span>
+  <a href="/#insights">All Insights</a>
 </div>
 </body>
 </html>
