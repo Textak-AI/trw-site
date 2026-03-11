@@ -257,11 +257,22 @@ function Process({nav}){
 /* ══════ ABOUT ══════ */
 function About({nav}){return <>
   <Sec pad="48px 0 56px"><Bc items={PAGES.about.bc} nav={nav}/><Eye>About</Eye><H1>{PAGES.about.h1}</H1>
-    <div className="r-grid-2" style={{display:"grid",gridTemplateColumns:"2fr 1fr",gap:40}}>
-      <div><P s={{fontSize:17}}>Pauline has been railroading since 2011. She led the global group sales team for Rocky Mountaineer, growing revenues more than 7x in less than four years. She has worked alongside Class I operators at CN, KCS, and NS — targeting safety performance and operational effectiveness.</P><P>She holds a Bachelor of Commerce and a Master of Arts in Leadership from the University of Guelph. As Contributing Editor at Railway Age, her column reaches rail decision-makers across North America.</P><P>She founded KingdomBuilding Leadership with a core belief: when a leader gets better, everybody wins.</P></div>
-      <div><div style={{borderRadius:10,overflow:"hidden",marginBottom:16}}><Img src={IMG.paulineHeadshot} alt="Pauline Lipkewich"/></div><div style={{background:C.cream,borderRadius:8,padding:18,borderTop:`3px solid ${C.rust}`}}><h3 style={{fontFamily:F.h,fontSize:15,fontWeight:700,margin:"0 0 8px"}}>Credentials</h3><div style={{fontFamily:F.b,fontSize:13,color:C.gray,lineHeight:2}}>
-        <div>MA (Leadership), U of Guelph</div><div>B.Comm, U of Guelph</div><div>Contributing Editor, Railway Age</div><div>14+ years North American rail</div><div>Rocky Mountaineer: 7x revenue growth</div>
-      </div></div></div>
+    <div style={{display:"flex",gap:32,alignItems:"flex-start",flexWrap:"wrap"}}>
+      <div style={{width:220,flexShrink:0}}>
+        <div style={{borderRadius:10,overflow:"hidden",marginBottom:16}}><Img src={IMG.paulineHeadshot} alt="Pauline Lipkewich" style={{borderRadius:10,height:300,objectPosition:"center 20%"}}/></div>
+        <div style={{background:C.cream,borderRadius:8,padding:16,borderTop:`3px solid ${C.rust}`}}>
+          <h3 style={{fontFamily:F.h,fontSize:14,fontWeight:700,margin:"0 0 8px"}}>Credentials</h3>
+          <div style={{fontFamily:F.b,fontSize:12,color:C.gray,lineHeight:1.9}}>
+            <div>MA (Leadership), U of Guelph</div><div>B.Comm, U of Guelph</div><div>Contributing Editor, Railway Age</div><div>14+ years North American rail</div><div>Rocky Mountaineer: 7x revenue growth</div>
+          </div>
+        </div>
+      </div>
+      <div style={{flex:1,minWidth:300}}>
+        <P s={{fontSize:17}}>Pauline has been railroading since 2011. She led the global group sales team for Rocky Mountaineer, growing revenues more than 7x in less than four years. She has worked alongside Class I operators at CN, KCS, and NS — targeting safety performance and operational effectiveness.</P>
+        <P>She holds a Bachelor of Commerce and a Master of Arts in Leadership from the University of Guelph. As Contributing Editor at Railway Age, her column reaches rail decision-makers across North America.</P>
+        <P>She founded KingdomBuilding Leadership with a core belief: when a leader gets better, everybody wins.</P>
+        <div className="r-btn-row" style={{display:"flex",gap:12,marginTop:8}}><Btn primary onClick={()=>nav("contact")}>Get in Touch</Btn><Btn onClick={()=>nav("insights")}>Read Her Column</Btn></div>
+      </div>
     </div>
   </Sec>
   <Sec bg={C.cream}><div className="r-grid-2" style={{display:"grid",gridTemplateColumns:"2fr 1fr",gap:32,alignItems:"center"}}><div><H2>Pauline's Approach</H2><blockquote style={{fontFamily:F.h,fontSize:22,fontStyle:"italic",color:C.black,borderLeft:`4px solid ${C.rust}`,padding:"12px 0 12px 24px",margin:"0 0 20px"}}>"This isn't happening to you. It's happening with you."</blockquote><P>Transformation happens with the organization, not to it. Her approach is built on respect for the people doing the work — their expertise, challenges, and pride in the industry.</P></div><div style={{borderRadius:8,overflow:"hidden"}}><Img src={IMG.paulineSpeaking} alt="Pauline at a railway event"/></div></div></Sec>
