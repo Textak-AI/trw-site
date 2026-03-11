@@ -53,7 +53,8 @@ function DevBar({page}){const[o,setO]=useState(false);const p=PAGES[page];return
 function Home({nav}){return <>
   {/* HERO with real background image */}
   <section style={{position:"relative",minHeight:480,overflow:"hidden"}}>
-    <div style={{position:"absolute",inset:0}}><Img src={IMG.fieldLeadership} alt="Railroad tracks stretching to the horizon" className="r-img-hero" style={{borderRadius:0,filter:"brightness(0.3)"}}/></div>
+    <div style={{position:"absolute",inset:0}}><Img src={IMG.fieldLeadership} alt="Railroad tracks stretching to the horizon" 
+  style={{borderRadius:0,filter:"brightness(0.3)",objectPosition:"70% 35%"}}/></div>
     <div style={{position:"absolute",left:0,top:0,bottom:0,width:6,background:`linear-gradient(180deg,${C.rust},transparent)`,zIndex:2}}/>
     <div style={{position:"relative",zIndex:2,maxWidth:960,margin:"0 auto",padding:"80px 28px 72px"}}>
       <Eye>The Rail Way™ — From the Boardroom to the Ballast Line</Eye>
