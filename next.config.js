@@ -9,6 +9,15 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      // Leading Through Uncertainty series — proxied to WordPress
+      { source: '/insights/the-road-ahead-2', destination: 'https://therailway.us/the-road-ahead-2/' },
+      { source: '/insights/lead-yourself-first', destination: 'https://therailway.us/lead-yourself-first/' },
+      { source: '/insights/leading-through-uncertainty-part-2', destination: 'https://therailway.us/leading-through-uncertainty-part-2/' },
+      { source: '/insights/leaders-navigate-uncertainty', destination: 'https://therailway.us/leaders-navigate-uncertainty/' },
+    ];
+  },
 };
 
 module.exports = nextConfig;
