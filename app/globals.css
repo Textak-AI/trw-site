@@ -13,7 +13,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Eliminate orphan/widow words */
 h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
@@ -28,4 +27,119 @@ button {
 
 img {
   max-width: 100%;
+}
+
+/* Hero image focal point — slightly above center */
+section[style*="position: relative"] > div[style*="position: absolute"] img {
+  object-position: center 35%;
+}
+
+/* ═══ TABLET: 768px ═══ */
+@media (max-width: 768px) {
+
+  /* Force ALL grids to single column */
+  [style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  h1 { font-size: 28px !important; line-height: 1.2 !important; }
+  h2 { font-size: 22px !important; }
+
+  /* Header nav: horizontal scroll */
+  header > div {
+    height: auto !important;
+    padding: 10px 16px !important;
+    flex-wrap: wrap;
+    gap: 8px !important;
+  }
+
+  header nav {
+    gap: 10px !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+    width: 100%;
+    justify-content: flex-start !important;
+  }
+
+  header nav::-webkit-scrollbar { display: none; }
+
+  header nav > span {
+    white-space: nowrap;
+    font-size: 12px !important;
+    padding: 6px 4px !important;
+  }
+
+  /* Section padding */
+  section > div[style*="max-width"] {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  /* Hero min-heights */
+  [style*="min-height: 480"] { min-height: 360px !important; }
+  [style*="min-height: 280"],
+  [style*="min-height: 260"] { min-height: 220px !important; }
+
+  /* Flex wrapping */
+  [style*="display: flex"][style*="gap: 20"],
+  [style*="display: flex"][style*="gap: 14"],
+  [style*="display: flex"][style*="gap: 12"],
+  [style*="display: flex"][style*="gap: 40"] {
+    flex-wrap: wrap;
+  }
+
+  /* Footer: 2 cols on tablet */
+  footer [style*="grid-template-columns"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Iframe height */
+  iframe { height: 550px !important; }
+
+  /* Image container heights */
+  [style*="height: 220"] { height: 180px !important; }
+  [style*="height: 200"] { height: 160px !important; }
+
+  /* Hero image focal point on tablet */
+  section[style*="position: relative"] > div[style*="position: absolute"] img {
+    object-position: center 30%;
+  }
+}
+
+/* ═══ MOBILE: 480px ═══ */
+@media (max-width: 480px) {
+
+  h1 { font-size: 24px !important; }
+  h2 { font-size: 20px !important; }
+
+  header nav > span { font-size: 11px !important; }
+
+  /* Footer: full single col */
+  footer [style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  section > div[style*="max-width"] {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  button {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  iframe { height: 480px !important; }
+
+  p { font-size: 14px !important; }
+
+  [style*="padding: 28"] { padding: 20px !important; }
+  [style*="padding: 24"] { padding: 18px !important; }
+
+  /* Hero image focal point on mobile */
+  section[style*="position: relative"] > div[style*="position: absolute"] img {
+    object-position: center 25%;
+  }
 }
