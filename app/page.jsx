@@ -160,11 +160,11 @@ function Home({nav}){return <>
     <H2>Meet the Team Behind The Rail Way™</H2>
     <div className="r-grid-3" style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:24,marginTop:16}}>
       {[
-        {img:IMG.paulineAlt,name:"Pauline Lipkewich",role:"Founder & CEO",desc:"14+ years transforming cultures in heavy industry. Contributing Editor, Railway Age."},
-        {img:IMG.brenda,name:"Brenda Huizinga",role:"Performance Coaching",desc:"Enhancing mindsets, behaviors and competencies that drive organizational culture and results."},
-        {img:IMG.michael,name:"Michael Powell",role:"Business Optimization",desc:"Proven models driving profitable growth, operational effectiveness, and safety improvements."},
+        {img:IMG.paulineAlt,name:"Pauline Lipkewich",role:"Founder & CEO",desc:"14+ years transforming cultures in heavy industry. Contributing Editor, Railway Age.",op:"center 20%"},
+        {img:IMG.brenda,name:"Brenda Huizinga",role:"Performance Coaching",desc:"Enhancing mindsets, behaviors and competencies that drive organizational culture and results.",op:"center 25%"},
+        {img:IMG.michael,name:"Michael Powell",role:"Business Optimization",desc:"Proven models driving profitable growth, operational effectiveness, and safety improvements.",op:"center 15%"},
       ].map((t,i)=><div key={i} style={{background:C.white,borderRadius:8,overflow:"hidden"}}>
-        <div style={{height:200,overflow:"hidden"}}><Img src={t.img} alt={t.name}/></div>
+        <div style={{height:280,overflow:"hidden"}}><Img src={t.img} alt={t.name} style={{objectPosition:t.op}}/></div>
         <div style={{padding:"16px 18px"}}>
           <h3 style={{fontFamily:F.h,fontSize:17,fontWeight:700,color:C.black,margin:"0 0 2px"}}>{t.name}</h3>
           <p style={{fontFamily:F.b,fontSize:11,color:C.rust,textTransform:"uppercase",letterSpacing:"0.5px",margin:"0 0 8px"}}>{t.role}</p>
