@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rail Safety by the Numbers: What FRA Data Tells Us About Human Factors | The Rail Way™</title>
+<meta name="description" content="FRA data reveals that 65% of rail accidents are human factors. What this means for safety culture.">
+<style>
+  .trw-site-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: #fff; border-bottom: 1px solid #E0E0E0;
+    padding: 12px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 100%; font-family: Arial, sans-serif;
+  }
+  .trw-site-nav a { text-decoration: none; }
+  .trw-site-nav .logo { display: flex; align-items: center; gap: 8px; }
+  .trw-site-nav .logo img { height: 32px; }
+  .trw-site-nav .back { color: #C4622D; font-size: 14px; font-weight: 600; }
+  .trw-site-nav .back:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="trw-site-nav">
+  <a href="/" class="logo">
+    <img src="https://raw.githubusercontent.com/Textak-AI/trw-assets/main/brand/rail-way-logo.png" alt="The Rail Way">
+  </a>
+  <a href="/insights" class="back">← All Insights</a>
+</div>
+<style>
+    /* Header */
+    .trw-article-header {
+        background-color: #2C2C2C;
+        padding: 20px 0;
+        border-bottom: 3px solid #C4622D;
+    }
+
+    .trw-header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .trw-back-link {
+        color: #C4622D;
+        text-decoration: none;
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+    }
+
+    .trw-back-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Category banner */
+    .trw-category-banner {
+        background-color: #F5E6D3;
+        border-bottom: 2px solid #C4622D;
+        text-align: center;
+        padding: 12px 20px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        color: #2C2C2C;
+        letter-spacing: 0.03em;
+    }
+
+    .trw-category-banner strong {
+        color: #C4622D;
+    }
+
+    /* Hero */
+    .trw-article-hero {
+        background: linear-gradient(rgba(44, 44, 44, 0.72), rgba(44, 44, 44, 0.72)),
+                    url('https://therailway.us/wp-content/uploads/2025/11/freight-train.jpg') center/cover;
+        min-height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        padding: 60px 20px;
+    }
+
+    .trw-article-title {
+        font-family: Georgia, serif;
+        font-size: 44px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        max-width: 900px;
+        line-height: 1.2;
+        color: white;
+    }
+
+    .trw-article-subtitle {
+        font-family: Georgia, serif;
+        font-size: 22px;
+        font-weight: 300;
+        font-style: italic;
+        color: #f0f0f0;
+    }
+
+    /* Article meta block */
+    .trw-article-meta-block {
+        max-width: 800px;
+        margin: 40px auto 0;
+        padding: 0 40px 30px;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+
+    .trw-byline {
+        font-size: 18px;
+        color: #C4622D;
+        font-weight: 600;
+        margin-bottom: 6px;
+        letter-spacing: 0.05em;
+        font-family: Arial, sans-serif;
+    }
+
+    .trw-article-date {
+        font-size: 14px;
+        color: #666;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .trw-header-content {
+            padding: 0 20px;
+        }
+        .trw-article-title {
+            font-size: 28px;
+        }
+        .trw-article-subtitle {
+            font-size: 17px;
+        }
+        .trw-article-hero {
+            min-height: 280px;
+            padding: 40px 20px;
+        }
+        .trw-article-meta-block {
+            padding: 0 20px 20px;
+        }
+    }
+
+    /* Existing article styles */
+    .trw-article {
+        font-family: Georgia, serif;
+        line-height: 1.8;
+        color: #2C2C2C;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px 40px 40px;
+    }
+    .trw-article h2 {
+        font-size: 1.8em;
+        color: #C4622D;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+        border-bottom: 2px solid #C4622D;
+        padding-bottom: 0.3em;
+    }
+    .trw-article h3 {
+        font-size: 1.4em;
+        color: #2C3E50;
+        margin-top: 1.2em;
+    }
+    .trw-article .meta {
+        font-size: 0.9em;
+        color: #666;
+        margin-bottom: 1em;
+        font-style: italic;
+    }
+    .trw-article .stat-callout {
+        background: #F5E6D3;
+        border-left: 4px solid #C4622D;
+        padding: 1.5em;
+        margin: 2em 0;
+        font-size: 1.1em;
+    }
+    .trw-article .stat-callout strong {
+        color: #C4622D;
+        font-size: 1.3em;
+        display: block;
+        margin-bottom: 0.5em;
+    }
+    .trw-article .stat-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1em;
+        margin: 2em 0;
+    }
+    .trw-article .stat-card {
+        background: #2C3E50;
+        color: white;
+        padding: 1.5em;
+        border-radius: 5px;
+        text-align: center;
+    }
+    .trw-article .stat-card .number {
+        font-size: 2.5em;
+        font-weight: bold;
+        color: #F5E6D3;
+        display: block;
+        line-height: 1.1;
+    }
+    .trw-article .stat-card .label {
+        font-size: 0.9em;
+        margin-top: 0.5em;
+        line-height: 1.4;
+    }
+    .trw-article .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 2em 0;
+        font-size: 0.95em;
+    }
+    .trw-article .comparison-table th {
+        background: #2C3E50;
+        color: white;
+        padding: 1em;
+        text-align: left;
+        font-weight: bold;
+    }
+    .trw-article .comparison-table td {
+        padding: 1em;
+        border-bottom: 1px solid #ddd;
+    }
+    .trw-article .comparison-table tr:nth-child(even) {
+        background: #f9f9f9;
+    }
+    .trw-article .cta-button {
+        display: inline-block;
+        background: white;
+        color: #C4622D;
+        padding: 1em 2em;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        margin: 0.5em;
+        border: none;
+        cursor: pointer;
+        font-size: 1em;
+    }
+    .trw-article .cta-button:hover {
+        background: #F5E6D3;
+    }
+    .trw-article .inspection-bar {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        padding: 1.5em;
+        margin: 2em 0;
+        border-radius: 5px;
+    }
+    .trw-article .bar-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9em;
+        color: #666;
+        margin-bottom: 0.5em;
+    }
+    .trw-article .bar-track {
+        background: #ddd;
+        height: 24px;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 1em;
+    }
+    .trw-article .bar-fill-2018 {
+        background: #2C3E50;
+        height: 100%;
+        width: 100%;
+        border-radius: 4px;
+    }
+    .trw-article .bar-fill-2023 {
+        background: #C4622D;
+        height: 100%;
+        width: 68%;
+        border-radius: 4px;
+    }
+    .trw-article .assessment-box {
+        background: #f9f9f9;
+        border: 3px solid #C4622D;
+        padding: 2em;
+        margin: 2em 0;
+        border-radius: 5px;
+    }
+    .trw-article .assessment-box h3 {
+        color: #C4622D;
+        margin-top: 0;
+    }
+    .trw-article .assessment-checklist {
+        list-style: none;
+        padding-left: 0;
+    }
+    .trw-article .assessment-checklist li {
+        padding: 0.5em 0;
+        position: relative;
+        padding-left: 2em;
+    }
+    .trw-article .assessment-checklist input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        top: 0.7em;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
+    .trw-article .score-result {
+        background: #2C3E50;
+        color: white;
+        padding: 1.5em;
+        margin-top: 1.5em;
+        border-radius: 5px;
+        display: none;
+    }
+    .trw-article .score-result.show {
+        display: block;
+    }
+    .trw-article .score-result h4 {
+        margin-top: 0;
+        color: #F5E6D3;
+    }
+    .trw-article .lead-form {
+        background: #fff;
+        padding: 1.5em;
+        border: 2px solid #C4622D;
+        margin-top: 1em;
+        border-radius: 5px;
+    }
+    .trw-article .lead-form input {
+        width: 100%;
+        padding: 0.8em;
+        margin-bottom: 1em;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 1em;
+        box-sizing: border-box;
+    }
+    .trw-article .lead-form button {
+        width: 100%;
+        background: #C4622D;
+        color: white;
+        padding: 1em;
+        border: none;
+        border-radius: 3px;
+        font-size: 1em;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .trw-article .lead-form button:hover {
+        background: #a34d22;
+    }
+    .trw-article blockquote {
+        border-left: 4px solid #C4622D;
+        padding-left: 1.5em;
+        margin: 2em 0;
+        font-style: italic;
+        font-size: 1.15em;
+        color: #444;
+    }
+    .trw-article .source-note {
+        font-size: 0.8em;
+        color: #888;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    .trw-article .author-bio {
+        background: #f9f9f9;
+        border-top: 3px solid #C4622D;
+        padding: 1.5em;
+        margin-top: 3em;
+        font-size: 0.95em;
+    }
+    @media (max-width: 600px) {
+        .trw-article .stat-grid { grid-template-columns: 1fr; }
+        .trw-article { padding: 20px; }
+    }
+    @media print {
+        .trw-article-header,
+        .trw-category-banner,
+        .trw-article-hero,
+        .trw-article .assessment-box,
+        .trw-article .lead-form,
+        .trw-article .score-result {
+            display: none !important;
+        }
+    }
+</style>
+<div class="trw-article">
+
+<div class="stat-callout">
+    <strong>2 out of every 3 rail accidents are caused by human factors — not equipment failure, not track defects.</strong>
+    The biggest safety risk on any railroad isn't the infrastructure. It's the culture around how people communicate, make decisions, and support each other on the job.
+</div>
+
+<p>A track foreman arrives at the yard on a Tuesday morning. The crew is assembled. Equipment checks pass. The job briefing is complete. Everyone has signed the form.</p>
+
+<p>Two hours later, an injury occurs during a switching operation — not because anyone was untrained, and not because anyone violated a rule they didn't know about. It happened because when the foreman laid out the work plan, one of the crew members had a question about communication sequencing between the hi-rail and the ground crew. He didn't ask it. The environment didn't feel like a place where slowing down to ask questions was the norm. So he defaulted to what he assumed, and the assumption was wrong.</p>
+
+<p>This scenario — the unasked question, the assumption that turns out to matter — is among the most common threads running through rail incident reports. It shows up in the data with remarkable consistency.</p>
+
+<h2>The Numbers We Need to Confront</h2>
+
+<div class="stat-grid">
+    <div class="stat-card">
+        <span class="number">3,391</span>
+        <div class="label">Roadway worker injuries<br>2018–2023<br><em>~565 per year</em></div>
+    </div>
+    <div class="stat-card">
+        <span class="number">10,578</span>
+        <div class="label">Total rail incidents<br>in 2023<br><em>Highest in recent years</em></div>
+    </div>
+    <div class="stat-card">
+        <span class="number">970</span>
+        <div class="label">Railroad deaths<br>in 2023<br><em>+7% from 2022</em></div>
+    </div>
+    <div class="stat-card">
+        <span class="number">66%</span>
+        <div class="label">Of rail accidents<br>attributed to<br><em>human factors</em></div>
+    </div>
+</div>
+
+<p class="source-note">Source: U.S. DOT Office of Inspector General Report ST2025029, "Federal Railroad Administration's Oversight of Roadway Worker Protection," May 14, 2025</p>
+
+<p>Overall rail incidents reached 10,578 in 2023 — higher than in any of the immediately preceding years. Railroad deaths totaled 970, a 7% increase from 2022 and significantly above the levels recorded a decade ago.</p>
+
+<p>And then there's the number that should reshape every safety conversation at your railroad: human factors account for nearly two-thirds of all rail accidents and are the leading cause of derailments. In rail yards specifically, over half of all incidents are attributed to human error.</p>
+
+<p>These are not equipment failures. These are not acts of weather or infrastructure decay. These are preventable events — rooted in how people communicate, how they make decisions under pressure, and what the operating environment signals about whether it's safe to slow down and speak up.</p>
+
+<h2>What "Human Error" Actually Means in Rail Operations</h2>
+
+<p>The phrase "human error" appears with regularity in FRA accident reports and post-incident reviews. It is also, almost universally, incomplete as an explanation.</p>
+
+<p>When an incident is labeled human error, what the label is actually pointing to is the last link in a longer chain:</p>
+
+<ul>
+    <li>A roadway worker who was fatigued after back-to-back maintenance windows with inadequate crew rotation</li>
+    <li>A conductor undertrained on a specific piece of track or equipment configuration they encountered for the first time under time pressure</li>
+    <li>A car inspector under schedule pressure to turn a consist quickly who documented a concern but didn't escalate it because the response to previous concerns had been "we'll handle it"</li>
+    <li>A signal maintainer who knew a communication protocol wasn't being followed correctly but didn't push back on a supervisor with twenty more years of seniority</li>
+    <li>A crew member who knew the right procedure, was not confused about the rules, but operated in an environment where slowing down to follow them exactly felt riskier to their standing than the procedure shortcut itself</li>
+</ul>
+
+<blockquote>
+"Miscommunication. Fatigue. Failure to follow procedures. Shortcuts taken under time pressure. These aren't character flaws in your workforce. They are symptoms of a culture that hasn't been designed to catch them before they become incidents."
+</blockquote>
+
+<p>The distinction matters enormously for what you do next. If you read "human error" as a statement about individual failure, the response is more training, more enforcement, more accountability. If you read it as a statement about the operating environment, the response is a fundamentally different set of questions about what your culture signals to people when safety and speed are in tension.</p>
+
+<h2>The Data Visibility Problem</h2>
+
+<p>There is an additional complication embedded in the FRA data that most railroad leaders don't encounter unless they go looking for it.</p>
+
+<p>As the DOT OIG report notes, the FRA's employee injury reporting form doesn't currently define people as on-duty roadway workers — making it difficult to filter safety data by the specific circumstances of each injury, including whether RWP procedures were in effect at the time. The broad trends are visible in the aggregate numbers. The granular picture — the actual story of what was happening in the moments before each incident — largely remains invisible to regulators.</p>
+
+<p>That story is visible only to the people who were there. Which is precisely why those people need to feel safe enough to tell the organization what actually happened.</p>
+
+<p>An operating environment where workers underreport near-misses, where incident investigations focus primarily on accountability rather than learning, and where people self-censor about what they observed doesn't just create a culture problem. It creates a data problem. The numbers the FRA sees are a floor, not a ceiling. The actual frequency of close calls and hazard conditions on your property is almost certainly higher than what gets documented.</p>
+
+<h2>The Inspection Gap: 32% Fewer Eyes on the Ground</h2>
+
+<div class="inspection-bar">
+    <div class="bar-label"><span><strong>2018:</strong> 12,774 RWP inspections</span><span>100%</span></div>
+    <div class="bar-track"><div class="bar-fill-2018"></div></div>
+    <div class="bar-label"><span><strong>2023:</strong> 8,685 RWP inspections</span><span>68% (&#8595;32%)</span></div>
+    <div class="bar-track"><div class="bar-fill-2023"></div></div>
+    <p style="font-size:0.85em;color:#888;margin-top:0.5em;">FRA Roadway Worker Protection inspections declined 32% from 2018 to 2023, while total incidents and fatalities trended upward.</p>
+</div>
+
+<p>In that same five-year period, total incidents and fatalities trended upward. The FRA has acknowledged the staffing constraints that drive the inspection gap — inspectors cover vast territories, and as the OIG report notes, roadway workers are inherently difficult to locate in the field during regular safety reviews. These are real operational constraints, not explanations that diminish the significance of the trend.</p>
+
+<div class="stat-callout">
+    <strong>The inspection gap reinforces one of the clearest conclusions in the data:</strong>
+    You cannot rely on external regulatory oversight to keep your people safe. The most effective safety systems are internal — built on a culture where the front line monitors itself, not out of fear of being caught, but out of genuine commitment to each other.
+</div>
+
+<p>A railroad that waits for FRA inspection cycles to surface safety conditions is operating on a lag that the data shows is getting wider, not narrower. The organizations that will lead on safety in the coming decade are the ones building internal capacity to catch what external oversight increasingly cannot.</p>
+
+<h2>What the Data Demands: Three Unavoidable Conclusions</h2>
+
+<p><strong>Human factors are the dominant safety risk, and they cannot be addressed through compliance alone.</strong> You cannot regulate your way to zero incidents when the root cause is how your crews communicate, how they make decisions under time pressure, and whether they feel safe raising concerns. These are not rulebook problems. They are culture problems.</p>
+
+<p><strong>The most preventable incidents are the most common ones.</strong> Slips, trips, and falls. Miscommunications during switching operations. Procedure shortcuts under schedule pressure. These are not dramatic, unpredictable failures. They are the daily accumulation of small risks in environments where speaking up feels harder — or more professionally risky — than staying quiet. The path to incident reduction runs directly through the culture that makes those small risks visible before they compound.</p>
+
+<p><strong>External oversight is decreasing as incidents increase.</strong> This is not an argument for ignoring regulatory requirements — it's a statement about where the real leverage is. The railroads that will differentiate on safety over the next decade are the ones that build internal self-correction capacity. Cultures where frontline crews feel empowered and expected to surface problems before they escalate — not because someone is watching, but because that's how this railroad works.</p>
+
+<h2>The Compliance vs. Culture Framework</h2>
+
+<table class="comparison-table">
+    <thead>
+        <tr>
+            <th>Safety Approach</th>
+            <th>Compliance-Driven Model</th>
+            <th>Culture-Driven Model</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Primary Safety Tool</strong></td>
+            <td>FRA inspections and regulatory requirements</td>
+            <td>Internal monitoring and peer accountability</td>
+        </tr>
+        <tr>
+            <td><strong>Incident Response</strong></td>
+            <td>"Who violated the rule?"</td>
+            <td>"What in our system allowed this?"</td>
+        </tr>
+        <tr>
+            <td><strong>Worker Motivation</strong></td>
+            <td>Fear of citation or discipline</td>
+            <td>Commitment to each other's safety</td>
+        </tr>
+        <tr>
+            <td><strong>Data Quality</strong></td>
+            <td>Underreporting due to fear of blame</td>
+            <td>High reporting rates because people believe it matters</td>
+        </tr>
+        <tr>
+            <td><strong>Near-Miss Visibility</strong></td>
+            <td>Low — conditions remain invisible until incidents</td>
+            <td>High — problems surface early, before they escalate</td>
+        </tr>
+        <tr>
+            <td><strong>Adaptability</strong></td>
+            <td>Reacts to regulatory requirements</td>
+            <td>Proactively identifies and addresses risks</td>
+        </tr>
+        <tr>
+            <td><strong>Outcome</strong></td>
+            <td>Meets minimum standards; incidents follow patterns</td>
+            <td>Prevents incidents before they reach the data</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Self-Assessment: How Does Your Railroad Compare to the Data?</h2>
+
+<div class="assessment-box">
+    <h3>Data-Driven Culture Assessment</h3>
+    <p>Benchmark your safety culture against these indicators. Check all that apply:</p>
+    <ul class="assessment-checklist" id="assessment3">
+        <li><input type="checkbox" data-points="1"> You track near-miss reporting rates as a leading indicator alongside incident rates — and the ratio is monitored by leadership, not just the safety department</li>
+        <li><input type="checkbox" data-points="1"> Your incident data shows year-over-year improvement that you can attribute to specific cultural or operational changes, not just statistical variation</li>
+        <li><input type="checkbox" data-points="1"> You have a reliable way of knowing whether your roadway workers, dispatchers, and yard crews feel comfortable raising safety concerns — through anonymous surveys, regular frontline conversations, or both</li>
+        <li><input type="checkbox" data-points="1"> Your post-incident reviews produce operational or cultural changes that frontline crews can see and point to</li>
+        <li><input type="checkbox" data-points="1"> You have processes to capture near-misses and "what almost went wrong" events before they appear in FRA incident data</li>
+        <li><input type="checkbox" data-points="1"> Your frontline crews — track supervisors, yardmasters, dispatchers — can articulate your safety priorities in their own words, not just cite the rulebook</li>
+        <li><input type="checkbox" data-points="1"> You track both lagging indicators (incidents, injuries, FRA violations) and leading indicators (near-miss reports, safety concerns raised, crew-initiated hazard identification)</li>
+    </ul>
+    <button class="cta-button" style="background:#C4622D;color:white;margin-top:1em;" onclick="calculateScore3()">Calculate My Score</button>
+
+    <div id="scoreResult3" class="score-result">
+        <h4>Your Score: <span id="scoreValue3"></span>/7</h4>
+        <p id="scoreInterpretation3"></p>
+
+        <div class="lead-form">
+            <h4 style="margin-top:0; color:#C4622D;">Discuss Your Results With Our Team</h4>
+            <p style="font-size:0.9em; color:#2C2C2C;">Share your contact information and we'll reach out to walk through what your score means for your railroad — and where the highest-leverage opportunities are.</p>
+            <form id="assessmentForm3" action="https://formspree.io/f/xnjbobyn" method="POST">
+                <input type="text" name="name" id="trw_name3" placeholder="Your Name" required>
+                <input type="text" name="title" id="trw_jobtitle3" placeholder="Your Title (e.g., VP of Safety, COO)">
+                <input type="email" name="email" id="trw_email3" placeholder="Email Address" required>
+                <input type="text" name="company" id="trw_company3" placeholder="Railroad / Company Name" required>
+                <input type="hidden" name="assessment_type" value="Data-Driven Culture Assessment">
+                <input type="hidden" name="score" id="formScore3">
+                <input type="hidden" name="_subject" value="ASSESSMENT LEAD - Data-Driven Culture Assessment | Score: pending">
+                <button type="button" onclick="submitAssessment3()">Request a Follow-Up Conversation</button>
+            </form>
+            <div id="formSuccess3" style="display:none; background:#2C3E50; color:white; padding:1em; border-radius:4px; margin-top:1em;">
+                <strong>Thank you.</strong> Someone from our team will be in touch to walk through your results personally.
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2>From Data to Action</h2>
+
+<p>If you're a COO, VP of Safety, or operations leader at a Class II or III railroad, these numbers are about your property. Your crews. The people who show up at 4 a.m. to inspect the consist, walk the track segment, or manage the dispatch board through a busy freight window.</p>
+
+<p>The question the data raises isn't whether the industry has a safety problem — that's settled. The question is a more specific one: do your people feel safe enough to help you find the risks that exist right now on your railroad, before those risks find them?</p>
+
+<p>If the honest answer is that you're not sure — that's the data point that matters most. And it's one you can actually do something about.</p>
+
+<p>Your track crews are waiting to tell you what they see. Are you ready to listen?</p>
+
+<h2>Sources &amp; References</h2>
+
+<ul style="font-size:0.9em; color:#555;">
+    <li>U.S. DOT Office of Inspector General Report ST2025029, "Federal Railroad Administration's Oversight of Roadway Worker Protection," May 14, 2025</li>
+    <li>ASCE 2025 Infrastructure Report Card</li>
+    <li>FRA Safety Data (publicly available datasets)</li>
+    <li>Boston Consulting Group, research on psychological safety in the workplace</li>
+</ul>
+
+<div class="author-bio">
+    <p><em>Charlie writes about safety culture transformation in the rail industry for The Rail Way&#8482;, a publication of KingdomBuilding Leadership, Inc., founded by Pauline Lipkewich — Contributing Editor at Railway Age and Chief Transformation Officer with 14+ years of rail operations experience.</em></p>
+    <p>Questions or feedback? <a href="mailto:info@therailway.us">info@therailway.us</a></p>
+</div>
+
+</div><!-- /.trw-article -->
+<script>
+			document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+		</script>
+				<style>
+			.no-js img.lazyload {
+				display: none;
+			}
+
+			figure.wp-block-image img.lazyloading {
+				min-width: 150px;
+			}
+
+			.lazyload,
+			.lazyloading {
+				--smush-placeholder-width: 100px;
+				--smush-placeholder-aspect-ratio: 1/1;
+				width: var(--smush-image-width, var(--smush-placeholder-width)) !important;
+				aspect-ratio: var(--smush-image-aspect-ratio, var(--smush-placeholder-aspect-ratio)) !important;
+			}
+
+						.lazyload, .lazyloading {
+				opacity: 0;
+			}
+
+			.lazyloaded {
+				opacity: 1;
+				transition: opacity 400ms;
+				transition-delay: 0ms;
+			}
+
+					</style>
+		<meta name="generator" content="Elementor 3.35.5; features: e_font_icon_svg, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-swap">
+<!-- SEO meta tags powered by SmartCrawl https://wpmudev.com/project/smartcrawl-wordpress-seo/ -->
+<link rel="canonical" href="https://therailway.us/rail-safety-human-factors/" />
+<meta name="description" content="THE RAIL WAY&#8482; &#8592; Back to Main Site Industry Data &amp; Trends &nbsp;|&nbsp; Safety Culture Analysis &nbsp;|&nbsp; The Rail Way&#8482; Rail Safety ..." />
+<script type="application/ld+json">{"@context":"https:\/\/schema.org","@graph":[{"@type":"Organization","@id":"https:\/\/therailway.us\/#schema-publishing-organization","url":"https:\/\/therailway.us","name":"The Rail Way"},{"@type":"WebSite","@id":"https:\/\/therailway.us\/#schema-website","url":"https:\/\/therailway.us","name":"therailway.us","encoding":"UTF-8","potentialAction":{"@type":"SearchAction","target":"https:\/\/therailway.us\/search\/{search_term_string}\/","query-input":"required name=search_term_string"}},{"@type":"BreadcrumbList","@id":"https:\/\/therailway.us\/rail-safety-human-factors?page&name=rail-safety-human-factors\/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https:\/\/therailway.us"},{"@type":"ListItem","position":2,"name":"Industry Insights","item":"https:\/\/therailway.us\/industry-insights\/"},{"@type":"ListItem","position":3,"name":"Uncategorized","item":"https:\/\/therailway.us\/category\/uncategorized\/"},{"@type":"ListItem","position":4,"name":"Rail Safety by the Numbers: What FRA Data Tells Us About Human Factors"}]},{"@type":"Person","@id":"https:\/\/therailway.us\/author\/admin\/#schema-author","name":"admin","url":"https:\/\/therailway.us\/author\/admin\/"},{"@type":"WebPage","@id":"https:\/\/therailway.us\/rail-safety-human-factors\/#schema-webpage","isPartOf":{"@id":"https:\/\/therailway.us\/#schema-website"},"publisher":{"@id":"https:\/\/therailway.us\/#schema-publishing-organization"},"url":"https:\/\/therailway.us\/rail-safety-human-factors\/"},{"@type":"Article","mainEntityOfPage":{"@id":"https:\/\/therailway.us\/rail-safety-human-factors\/#schema-webpage"},"publisher":{"@id":"https:\/\/therailway.us\/#schema-publishing-organization"},"dateModified":"2026-02-27T04:29:05","datePublished":"2026-02-26T05:23:10","headline":"Rail Safety by the Numbers: What FRA Data Tells Us About Human Factors | The Rail Way","description":"THE RAIL WAY&#8482; &#8592; Back to Main Site Industry Data &amp; Trends &nbsp;|&nbsp; Safety Culture Analysis &nbsp;|&nbsp; The Rail Way&#8482; Rail Safety ...","name":"Rail Safety by the Numbers: What FRA Data Tells Us About Human Factors","author":{"@id":"https:\/\/therailway.us\/author\/admin\/#schema-author"},"image":{"@type":"ImageObject","@id":"https:\/\/therailway.us\/rail-safety-human-factors\/#schema-article-image","url":"https:\/\/therailway.us\/wp-content\/uploads\/2025\/11\/freight-train.jpg","height":800,"width":1200},"thumbnailUrl":"https:\/\/therailway.us\/wp-content\/uploads\/2025\/11\/freight-train.jpg"}]}</script>
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://therailway.us/rail-safety-human-factors/" />
+<meta property="og:title" content="Rail Safety by the Numbers: What FRA Data Tells Us About Human Factors | The Rail Way" />
+<meta property="og:description" content="THE RAIL WAY&#8482; &#8592; Back to Main Site Industry Data &amp; Trends &nbsp;|&nbsp; Safety Culture Analysis &nbsp;|&nbsp; The Rail Way&#8482; Rail Safety ..." />
+<meta property="og:image" content="https://therailway.us/wp-content/uploads/2025/11/freight-train.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="800" />
+<meta property="article:published_time" content="2026-02-26T05:23:10" />
+<meta property="article:author" content="admin" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Rail Safety by the Numbers: What FRA Data Tells Us About Human Factors | The Rail Way" />
+<meta name="twitter:description" content="THE RAIL WAY&#8482; &#8592; Back to Main Site Industry Data &amp; Trends &nbsp;|&nbsp; Safety Culture Analysis &nbsp;|&nbsp; The Rail Way&#8482; Rail Safety ..." />
+<meta name="twitter:image" content="https://therailway.us/wp-content/uploads/2025/11/freight-train.jpg" />
+<!-- /SEO -->
+			<style>
+				.e-con.e-parent:nth-of-type(n+4):not(.e-lazyloaded):not(.e-no-lazyload),
+				.e-con.e-parent:nth-of-type(n+4):not(.e-lazyloaded):not(.e-no-lazyload) * {
+					background-image: none !important;
+				}
+				@media screen and (max-height: 1024px) {
+					.e-con.e-parent:nth-of-type(n+3):not(.e-lazyloaded):not(.e-no-lazyload),
+					.e-con.e-parent:nth-of-type(n+3):not(.e-lazyloaded):not(.e-no-lazyload) * {
+						background-image: none !important;
+					}
+				}
+				@media screen and (max-height: 640px) {
+					.e-con.e-parent:nth-of-type(n+2):not(.e-lazyloaded):not(.e-no-lazyload),
+					.e-con.e-parent:nth-of-type(n+2):not(.e-lazyloaded):not(.e-no-lazyload) * {
+						background-image: none !important;
+					}
+				}
+			</style>
+			<link rel="icon" href="https://therailway.us/wp-content/uploads/2025/10/the_rail_way_fav-150x150.png" sizes="32x32" />
+<link rel="icon" href="https://therailway.us/wp-content/uploads/2025/10/the_rail_way_fav-300x300.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://therailway.us/wp-content/uploads/2025/10/the_rail_way_fav-300x300.png" />
+<meta name="msapplication-TileImage" content="https://therailway.us/wp-content/uploads/2025/10/the_rail_way_fav-300x300.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" /></head>
+<body class="wp-singular post-template-default single single-post postid-801 single-format-standard wp-custom-logo wp-embed-responsive wp-theme-hello-elementor hello-elementor-default elementor-default elementor-template-canvas elementor-kit-5 elementor-page elementor-page-801 elementor-page-13">
+			<div data-elementor-type="single-post" data-elementor-id="13" class="elementor elementor-13 elementor-location-single post-801 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized" data-elementor-post-type="elementor_library">
+			<div class="elementor-element elementor-element-43ed277 e-flex e-con-boxed e-con e-parent" data-id="43ed277" data-element_type="container" data-e-type="container">
+					<div class="e-con-inner">
+		<div class="elementor-element elementor-element-f44361e e-con-full e-flex e-con e-child" data-id="f44361e" data-element_type="container" data-e-type="container">
+				<div class="elementor-element elementor-element-6b76b57 elementor-widget elementor-widget-post-info" data-id="6b76b57" data-element_type="widget" data-e-type="widget" data-widget_type="post-info.default">
+							<ul class="elementor-inline-items elementor-icon-list-items elementor-post-info">
+								<li class="elementor-icon-list-item elementor-repeater-item-46cc7e6 elementor-inline-item" itemprop="author">
+						<a href="https://therailway.us/author/admin/">
+											<span class="elementor-icon-list-icon">
+								<svg aria-hidden="true" class="e-font-icon-svg e-far-user-circle" viewBox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><path d="M248 104c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96zm0 144c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm0-240C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 448c-49.7 0-95.1-18.3-130.1-48.4 14.9-23 40.4-38.6 69.6-39.5 20.8 6.4 40.6 9.6 60.5 9.6s39.7-3.1 60.5-9.6c29.2 1 54.7 16.5 69.6 39.5-35 30.1-80.4 48.4-130.1 48.4zm162.7-84.1c-24.4-31.4-62.1-51.9-105.1-51.9-10.2 0-26 9.6-57.6 9.6-31.5 0-47.4-9.6-57.6-9.6-42.9 0-80.6 20.5-105.1 51.9C61.9 339.2 48 299.2 48 256c0-110.3 89.7-200 200-200s200 89.7 200 200c0 43.2-13.9 83.2-37.3 115.9z"></path></svg>							</span>
+									<span class="elementor-icon-list-text elementor-post-info__item elementor-post-info__item--type-author">
+										admin					</span>
+									</a>
+				</li>
+				<li class="elementor-icon-list-item elementor-repeater-item-32892a3 elementor-inline-item" itemprop="datePublished">
+						<a href="https://therailway.us/2026/02/26/">
+											<span class="elementor-icon-list-icon">
+								<svg aria-hidden="true" class="e-font-icon-svg e-fas-calendar" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"></path></svg>							</span>
+									<span class="elementor-icon-list-text elementor-post-info__item elementor-post-info__item--type-date">
+										<time>February 26, 2026</time>					</span>
+									</a>
+				</li>
+				<li class="elementor-icon-list-item elementor-repeater-item-74aaca0 elementor-inline-item">
+										<span class="elementor-icon-list-icon">
+								<svg aria-hidden="true" class="e-font-icon-svg e-far-clock" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"></path></svg>							</span>
+									<span class="elementor-icon-list-text elementor-post-info__item elementor-post-info__item--type-time">
+										<time>5:23 am</time>					</span>
+								</li>
+				<li class="elementor-icon-list-item elementor-repeater-item-0e0fac9 elementor-inline-item" itemprop="commentCount">
+						<a href="https://therailway.us/rail-safety-human-factors/#respond">
+											<span class="elementor-icon-list-icon">
+								<svg aria-hidden="true" class="e-font-icon-svg e-far-comment-dots" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M144 208c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm112 0c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm112 0c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zM256 32C114.6 32 0 125.1 0 240c0 47.6 19.9 91.2 52.9 126.3C38 405.7 7 439.1 6.5 439.5c-6.6 7-8.4 17.2-4.6 26S14.4 480 24 480c61.5 0 110-25.7 139.1-46.3C192 442.8 223.2 448 256 448c141.4 0 256-93.1 256-208S397.4 32 256 32zm0 368c-26.7 0-53.1-4.1-78.4-12.1l-22.7-7.2-19.5 13.8c-14.3 10.1-33.9 21.4-57.5 29 7.3-12.1 14.4-25.7 19.9-40.2l10.6-28.1-20.6-21.8C69.7 314.1 48 282.2 48 240c0-88.2 93.3-160 208-160s208 71.8 208 160-93.3 160-208 160z"></path></svg>							</span>
+									<span class="elementor-icon-list-text elementor-post-info__item elementor-post-info__item--type-comments">
+										No Comments					</span>
+									</a>
+				</li>
+				</ul>
+						</div>
+				</div>
+		<div class="elementor-element elementor-element-1c9d4d7 e-con-full e-flex e-con e-child" data-id="1c9d4d7" data-element_type="container" data-e-type="container">
+		<div class="elementor-element elementor-element-093755b e-con-full e-flex e-con e-child" data-id="093755b" data-element_type="container" data-e-type="container">
+				<div class="elementor-element elementor-element-a135604 elementor-widget elementor-widget-theme-post-content" data-id="a135604" data-element_type="widget" data-e-type="widget" data-widget_type="theme-post-content.default">
+							<div data-elementor-type="wp-post" data-elementor-id="801" class="elementor elementor-801" data-elementor-post-type="post">
+				<div class="elementor-element elementor-element-5e6b267 e-flex e-con-boxed e-con e-parent" data-id="5e6b267" data-element_type="container" data-e-type="container">
+					<div class="e-con-inner">
+				<div class="elementor-element elementor-element-51cf423 elementor-widget elementor-widget-html" data-id="51cf423" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
+					<!-- METADATA
+    Title: Rail Safety by the Numbers: What FRA Data Tells Us About Human Factors
+    Author: Charlie
+    URL Slug: rail-safety-numbers
+    Focus Keyphrase: rail safety human factors data
+    Categories: Industry Data & Trends
+    Data Sources: U.S. DOT OIG, FRA, ASCE
+    Tags: FRA data, rail safety statistics, human factors, roadway worker safety, Class II railroads, Class III railroads, speak up culture, safety culture
+-->
+
+<style>
+    /* Header */
+    .trw-article-header {
+        background-color: #2C2C2C;
+        padding: 20px 0;
+        border-bottom: 3px solid #C4622D;
+    }
+
+    .trw-header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .trw-back-link {
+        color: #C4622D;
+        text-decoration: none;
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+    }
+
+    .trw-back-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Category banner */
+    .trw-category-banner {
+        background-color: #F5E6D3;
+        border-bottom: 2px solid #C4622D;
+        text-align: center;
+        padding: 12px 20px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        color: #2C2C2C;
+        letter-spacing: 0.03em;
+    }
+
+    .trw-category-banner strong {
+        color: #C4622D;
+    }
+
+    /* Hero */
+    .trw-article-hero {
+        background: linear-gradient(rgba(44, 44, 44, 0.72), rgba(44, 44, 44, 0.72)),
+                    url('https://therailway.us/wp-content/uploads/2025/11/freight-train.jpg') center/cover;
+        min-height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        padding: 60px 20px;
+    }
+
+    .trw-article-title {
+        font-family: Georgia, serif;
+        font-size: 44px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        max-width: 900px;
+        line-height: 1.2;
+        color: white;
+    }
+
+    .trw-article-subtitle {
+        font-family: Georgia, serif;
+        font-size: 22px;
+        font-weight: 300;
+        font-style: italic;
+        color: #f0f0f0;
+    }
+
+    /* Article meta block */
+    .trw-article-meta-block {
+        max-width: 800px;
+        margin: 40px auto 0;
+        padding: 0 40px 30px;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+
+    .trw-byline {
+        font-size: 18px;
+        color: #C4622D;
+        font-weight: 600;
+        margin-bottom: 6px;
+        letter-spacing: 0.05em;
+        font-family: Arial, sans-serif;
+    }
+
+    .trw-article-date {
+        font-size: 14px;
+        color: #666;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .trw-header-content {
+            padding: 0 20px;
+        }
+        .trw-article-title {
+            font-size: 28px;
+        }
+        .trw-article-subtitle {
+            font-size: 17px;
+        }
+        .trw-article-hero {
+            min-height: 280px;
+            padding: 40px 20px;
+        }
+        .trw-article-meta-block {
+            padding: 0 20px 20px;
+        }
+    }
+
+    /* Existing article styles */
+    .trw-article {
+        font-family: Georgia, serif;
+        line-height: 1.8;
+        color: #2C2C2C;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px 40px 40px;
+    }
+    .trw-article h2 {
+        font-size: 1.8em;
+        color: #C4622D;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+        border-bottom: 2px solid #C4622D;
+        padding-bottom: 0.3em;
+    }
+    .trw-article h3 {
+        font-size: 1.4em;
+        color: #2C3E50;
+        margin-top: 1.2em;
+    }
+    .trw-article .meta {
+        font-size: 0.9em;
+        color: #666;
+        margin-bottom: 1em;
+        font-style: italic;
+    }
+    .trw-article .stat-callout {
+        background: #F5E6D3;
+        border-left: 4px solid #C4622D;
+        padding: 1.5em;
+        margin: 2em 0;
+        font-size: 1.1em;
+    }
+    .trw-article .stat-callout strong {
+        color: #C4622D;
+        font-size: 1.3em;
+        display: block;
+        margin-bottom: 0.5em;
+    }
+    .trw-article .stat-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1em;
+        margin: 2em 0;
+    }
+    .trw-article .stat-card {
+        background: #2C3E50;
+        color: white;
+        padding: 1.5em;
+        border-radius: 5px;
+        text-align: center;
+    }
+    .trw-article .stat-card .number {
+        font-size: 2.5em;
+        font-weight: bold;
+        color: #F5E6D3;
+        display: block;
+        line-height: 1.1;
+    }
+    .trw-article .stat-card .label {
+        font-size: 0.9em;
+        margin-top: 0.5em;
+        line-height: 1.4;
+    }
+    .trw-article .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 2em 0;
+        font-size: 0.95em;
+    }
+    .trw-article .comparison-table th {
+        background: #2C3E50;
+        color: white;
+        padding: 1em;
+        text-align: left;
+        font-weight: bold;
+    }
+    .trw-article .comparison-table td {
+        padding: 1em;
+        border-bottom: 1px solid #ddd;
+    }
+    .trw-article .comparison-table tr:nth-child(even) {
+        background: #f9f9f9;
+    }
+    .trw-article .cta-button {
+        display: inline-block;
+        background: white;
+        color: #C4622D;
+        padding: 1em 2em;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        margin: 0.5em;
+        border: none;
+        cursor: pointer;
+        font-size: 1em;
+    }
+    .trw-article .cta-button:hover {
+        background: #F5E6D3;
+    }
+    .trw-article .inspection-bar {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        padding: 1.5em;
+        margin: 2em 0;
+        border-radius: 5px;
+    }
+    .trw-article .bar-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9em;
+        color: #666;
+        margin-bottom: 0.5em;
+    }
+    .trw-article .bar-track {
+        background: #ddd;
+        height: 24px;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 1em;
+    }
+    .trw-article .bar-fill-2018 {
+        background: #2C3E50;
+        height: 100%;
+        width: 100%;
+        border-radius: 4px;
+    }
+    .trw-article .bar-fill-2023 {
+        background: #C4622D;
+        height: 100%;
+        width: 68%;
+        border-radius: 4px;
+    }
+    .trw-article .assessment-box {
+        background: #f9f9f9;
+        border: 3px solid #C4622D;
+        padding: 2em;
+        margin: 2em 0;
+        border-radius: 5px;
+    }
+    .trw-article .assessment-box h3 {
+        color: #C4622D;
+        margin-top: 0;
+    }
+    .trw-article .assessment-checklist {
+        list-style: none;
+        padding-left: 0;
+    }
+    .trw-article .assessment-checklist li {
+        padding: 0.5em 0;
+        position: relative;
+        padding-left: 2em;
+    }
+    .trw-article .assessment-checklist input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        top: 0.7em;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
+    .trw-article .score-result {
+        background: #2C3E50;
+        color: white;
+        padding: 1.5em;
+        margin-top: 1.5em;
+        border-radius: 5px;
+        display: none;
+    }
+    .trw-article .score-result.show {
+        display: block;
+    }
+    .trw-article .score-result h4 {
+        margin-top: 0;
+        color: #F5E6D3;
+    }
+    .trw-article .lead-form {
+        background: #fff;
+        padding: 1.5em;
+        border: 2px solid #C4622D;
+        margin-top: 1em;
+        border-radius: 5px;
+    }
+    .trw-article .lead-form input {
+        width: 100%;
+        padding: 0.8em;
+        margin-bottom: 1em;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 1em;
+        box-sizing: border-box;
+    }
+    .trw-article .lead-form button {
+        width: 100%;
+        background: #C4622D;
+        color: white;
+        padding: 1em;
+        border: none;
+        border-radius: 3px;
+        font-size: 1em;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .trw-article .lead-form button:hover {
+        background: #a34d22;
+    }
+    .trw-article blockquote {
+        border-left: 4px solid #C4622D;
+        padding-left: 1.5em;
+        margin: 2em 0;
+        font-style: italic;
+        font-size: 1.15em;
+        color: #444;
+    }
+    .trw-article .source-note {
+        font-size: 0.8em;
+        color: #888;
+        font-style: italic;
+        margin-top: 0.5em;
+    }
+    .trw-article .author-bio {
+        background: #f9f9f9;
+        border-top: 3px solid #C4622D;
+        padding: 1.5em;
+        margin-top: 3em;
+        font-size: 0.95em;
+    }
+    @media (max-width: 600px) {
+        .trw-article .stat-grid { grid-template-columns: 1fr; }
+        .trw-article { padding: 20px; }
+    }
+    @media print {
+        .trw-article-header,
+        .trw-category-banner,
+        .trw-article-hero,
+        .trw-article .assessment-box,
+        .trw-article .lead-form,
+        .trw-article .score-result {
+            display: none !important;
+        }
+    }
+</style>
+
+<!-- Header -->
+<header class="trw-article-header">
+    <div class="trw-header-content">
+        <div style="color: white; font-family: Georgia, serif;">
+            <span style="font-size: 24px; font-weight: 400;">THE RAIL</span>
+            <span style="font-size: 24px; font-weight: 700; color: #C4622D;"> WAY</span><span style="font-size: 10px; color: white;">&#8482;</span>
+        </div>
+        <a href="https://therailway.us" class="trw-back-link">&#8592; Back to Main Site</a>
+    </div>
+</header>
+
+<!-- Category Banner -->
+<div class="trw-category-banner">
+    <strong>Industry Data &amp; Trends</strong> &nbsp;|&nbsp; Safety Culture Analysis &nbsp;|&nbsp; The Rail Way&#8482;
+</div>
+
+<!-- Hero -->
+<section class="trw-article-hero">
+    <div>
+        <h1 class="trw-article-title">Rail Safety by the Numbers: What FRA Data Tells Us About Human Factors</h1>
+        <p class="trw-article-subtitle">2 out of every 3 rail accidents are caused by human factors. Here&#8217;s what the data demands.</p>
+    </div>
+</section>
+
+<!-- Author Meta -->
+<div class="trw-article-meta-block">
+    <p class="trw-byline">By Charlie</p>
+    <p class="trw-article-date">The Rail Way &nbsp;//&nbsp; Industry Analysis</p>
+    <p class="trw-article-date" style="margin-top:4px; font-size:12px; color:#999;">Data Sources: U.S. DOT OIG &bull; FRA &bull; ASCE &bull; 10 min read</p>
+</div>
+
+<div class="trw-article">
+
+<div class="stat-callout">
+    <strong>2 out of every 3 rail accidents are caused by human factors — not equipment failure, not track defects.</strong>
+    The biggest safety risk on any railroad isn't the infrastructure. It's the culture around how people communicate, make decisions, and support each other on the job.
+</div>
+
+<p>A track foreman arrives at the yard on a Tuesday morning. The crew is assembled. Equipment checks pass. The job briefing is complete. Everyone has signed the form.</p>
+
+<p>Two hours later, an injury occurs during a switching operation — not because anyone was untrained, and not because anyone violated a rule they didn't know about. It happened because when the foreman laid out the work plan, one of the crew members had a question about communication sequencing between the hi-rail and the ground crew. He didn't ask it. The environment didn't feel like a place where slowing down to ask questions was the norm. So he defaulted to what he assumed, and the assumption was wrong.</p>
+
+<p>This scenario — the unasked question, the assumption that turns out to matter — is among the most common threads running through rail incident reports. It shows up in the data with remarkable consistency.</p>
+
+<h2>The Numbers We Need to Confront</h2>
+
+<div class="stat-grid">
+    <div class="stat-card">
+        <span class="number">3,391</span>
+        <div class="label">Roadway worker injuries<br>2018–2023<br><em>~565 per year</em></div>
+    </div>
+    <div class="stat-card">
+        <span class="number">10,578</span>
+        <div class="label">Total rail incidents<br>in 2023<br><em>Highest in recent years</em></div>
+    </div>
+    <div class="stat-card">
+        <span class="number">970</span>
+        <div class="label">Railroad deaths<br>in 2023<br><em>+7% from 2022</em></div>
+    </div>
+    <div class="stat-card">
+        <span class="number">66%</span>
+        <div class="label">Of rail accidents<br>attributed to<br><em>human factors</em></div>
+    </div>
+</div>
+
+<p class="source-note">Source: U.S. DOT Office of Inspector General Report ST2025029, "Federal Railroad Administration's Oversight of Roadway Worker Protection," May 14, 2025</p>
+
+<p>Overall rail incidents reached 10,578 in 2023 — higher than in any of the immediately preceding years. Railroad deaths totaled 970, a 7% increase from 2022 and significantly above the levels recorded a decade ago.</p>
+
+<p>And then there's the number that should reshape every safety conversation at your railroad: human factors account for nearly two-thirds of all rail accidents and are the leading cause of derailments. In rail yards specifically, over half of all incidents are attributed to human error.</p>
+
+<p>These are not equipment failures. These are not acts of weather or infrastructure decay. These are preventable events — rooted in how people communicate, how they make decisions under pressure, and what the operating environment signals about whether it's safe to slow down and speak up.</p>
+
+<h2>What "Human Error" Actually Means in Rail Operations</h2>
+
+<p>The phrase "human error" appears with regularity in FRA accident reports and post-incident reviews. It is also, almost universally, incomplete as an explanation.</p>
+
+<p>When an incident is labeled human error, what the label is actually pointing to is the last link in a longer chain:</p>
+
+<ul>
+    <li>A roadway worker who was fatigued after back-to-back maintenance windows with inadequate crew rotation</li>
+    <li>A conductor undertrained on a specific piece of track or equipment configuration they encountered for the first time under time pressure</li>
+    <li>A car inspector under schedule pressure to turn a consist quickly who documented a concern but didn't escalate it because the response to previous concerns had been "we'll handle it"</li>
+    <li>A signal maintainer who knew a communication protocol wasn't being followed correctly but didn't push back on a supervisor with twenty more years of seniority</li>
+    <li>A crew member who knew the right procedure, was not confused about the rules, but operated in an environment where slowing down to follow them exactly felt riskier to their standing than the procedure shortcut itself</li>
+</ul>
+
+<blockquote>
+"Miscommunication. Fatigue. Failure to follow procedures. Shortcuts taken under time pressure. These aren't character flaws in your workforce. They are symptoms of a culture that hasn't been designed to catch them before they become incidents."
+</blockquote>
+
+<p>The distinction matters enormously for what you do next. If you read "human error" as a statement about individual failure, the response is more training, more enforcement, more accountability. If you read it as a statement about the operating environment, the response is a fundamentally different set of questions about what your culture signals to people when safety and speed are in tension.</p>
+
+<h2>The Data Visibility Problem</h2>
+
+<p>There is an additional complication embedded in the FRA data that most railroad leaders don't encounter unless they go looking for it.</p>
+
+<p>As the DOT OIG report notes, the FRA's employee injury reporting form doesn't currently define people as on-duty roadway workers — making it difficult to filter safety data by the specific circumstances of each injury, including whether RWP procedures were in effect at the time. The broad trends are visible in the aggregate numbers. The granular picture — the actual story of what was happening in the moments before each incident — largely remains invisible to regulators.</p>
+
+<p>That story is visible only to the people who were there. Which is precisely why those people need to feel safe enough to tell the organization what actually happened.</p>
+
+<p>An operating environment where workers underreport near-misses, where incident investigations focus primarily on accountability rather than learning, and where people self-censor about what they observed doesn't just create a culture problem. It creates a data problem. The numbers the FRA sees are a floor, not a ceiling. The actual frequency of close calls and hazard conditions on your property is almost certainly higher than what gets documented.</p>
+
+<h2>The Inspection Gap: 32% Fewer Eyes on the Ground</h2>
+
+<div class="inspection-bar">
+    <div class="bar-label"><span><strong>2018:</strong> 12,774 RWP inspections</span><span>100%</span></div>
+    <div class="bar-track"><div class="bar-fill-2018"></div></div>
+    <div class="bar-label"><span><strong>2023:</strong> 8,685 RWP inspections</span><span>68% (&#8595;32%)</span></div>
+    <div class="bar-track"><div class="bar-fill-2023"></div></div>
+    <p style="font-size:0.85em;color:#888;margin-top:0.5em;">FRA Roadway Worker Protection inspections declined 32% from 2018 to 2023, while total incidents and fatalities trended upward.</p>
+</div>
+
+<p>In that same five-year period, total incidents and fatalities trended upward. The FRA has acknowledged the staffing constraints that drive the inspection gap — inspectors cover vast territories, and as the OIG report notes, roadway workers are inherently difficult to locate in the field during regular safety reviews. These are real operational constraints, not explanations that diminish the significance of the trend.</p>
+
+<div class="stat-callout">
+    <strong>The inspection gap reinforces one of the clearest conclusions in the data:</strong>
+    You cannot rely on external regulatory oversight to keep your people safe. The most effective safety systems are internal — built on a culture where the front line monitors itself, not out of fear of being caught, but out of genuine commitment to each other.
+</div>
+
+<p>A railroad that waits for FRA inspection cycles to surface safety conditions is operating on a lag that the data shows is getting wider, not narrower. The organizations that will lead on safety in the coming decade are the ones building internal capacity to catch what external oversight increasingly cannot.</p>
+
+<h2>What the Data Demands: Three Unavoidable Conclusions</h2>
+
+<p><strong>Human factors are the dominant safety risk, and they cannot be addressed through compliance alone.</strong> You cannot regulate your way to zero incidents when the root cause is how your crews communicate, how they make decisions under time pressure, and whether they feel safe raising concerns. These are not rulebook problems. They are culture problems.</p>
+
+<p><strong>The most preventable incidents are the most common ones.</strong> Slips, trips, and falls. Miscommunications during switching operations. Procedure shortcuts under schedule pressure. These are not dramatic, unpredictable failures. They are the daily accumulation of small risks in environments where speaking up feels harder — or more professionally risky — than staying quiet. The path to incident reduction runs directly through the culture that makes those small risks visible before they compound.</p>
+
+<p><strong>External oversight is decreasing as incidents increase.</strong> This is not an argument for ignoring regulatory requirements — it's a statement about where the real leverage is. The railroads that will differentiate on safety over the next decade are the ones that build internal self-correction capacity. Cultures where frontline crews feel empowered and expected to surface problems before they escalate — not because someone is watching, but because that's how this railroad works.</p>
+
+<h2>The Compliance vs. Culture Framework</h2>
+
+<table class="comparison-table">
+    <thead>
+        <tr>
+            <th>Safety Approach</th>
+            <th>Compliance-Driven Model</th>
+            <th>Culture-Driven Model</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Primary Safety Tool</strong></td>
+            <td>FRA inspections and regulatory requirements</td>
+            <td>Internal monitoring and peer accountability</td>
+        </tr>
+        <tr>
+            <td><strong>Incident Response</strong></td>
+            <td>"Who violated the rule?"</td>
+            <td>"What in our system allowed this?"</td>
+        </tr>
+        <tr>
+            <td><strong>Worker Motivation</strong></td>
+            <td>Fear of citation or discipline</td>
+            <td>Commitment to each other's safety</td>
+        </tr>
+        <tr>
+            <td><strong>Data Quality</strong></td>
+            <td>Underreporting due to fear of blame</td>
+            <td>High reporting rates because people believe it matters</td>
+        </tr>
+        <tr>
+            <td><strong>Near-Miss Visibility</strong></td>
+            <td>Low — conditions remain invisible until incidents</td>
+            <td>High — problems surface early, before they escalate</td>
+        </tr>
+        <tr>
+            <td><strong>Adaptability</strong></td>
+            <td>Reacts to regulatory requirements</td>
+            <td>Proactively identifies and addresses risks</td>
+        </tr>
+        <tr>
+            <td><strong>Outcome</strong></td>
+            <td>Meets minimum standards; incidents follow patterns</td>
+            <td>Prevents incidents before they reach the data</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Self-Assessment: How Does Your Railroad Compare to the Data?</h2>
+
+<div class="assessment-box">
+    <h3>Data-Driven Culture Assessment</h3>
+    <p>Benchmark your safety culture against these indicators. Check all that apply:</p>
+    <ul class="assessment-checklist" id="assessment3">
+        <li><input type="checkbox" data-points="1"> You track near-miss reporting rates as a leading indicator alongside incident rates — and the ratio is monitored by leadership, not just the safety department</li>
+        <li><input type="checkbox" data-points="1"> Your incident data shows year-over-year improvement that you can attribute to specific cultural or operational changes, not just statistical variation</li>
+        <li><input type="checkbox" data-points="1"> You have a reliable way of knowing whether your roadway workers, dispatchers, and yard crews feel comfortable raising safety concerns — through anonymous surveys, regular frontline conversations, or both</li>
+        <li><input type="checkbox" data-points="1"> Your post-incident reviews produce operational or cultural changes that frontline crews can see and point to</li>
+        <li><input type="checkbox" data-points="1"> You have processes to capture near-misses and "what almost went wrong" events before they appear in FRA incident data</li>
+        <li><input type="checkbox" data-points="1"> Your frontline crews — track supervisors, yardmasters, dispatchers — can articulate your safety priorities in their own words, not just cite the rulebook</li>
+        <li><input type="checkbox" data-points="1"> You track both lagging indicators (incidents, injuries, FRA violations) and leading indicators (near-miss reports, safety concerns raised, crew-initiated hazard identification)</li>
+    </ul>
+    <button class="cta-button" style="background:#C4622D;color:white;margin-top:1em;" onclick="calculateScore3()">Calculate My Score</button>
+
+    <div id="scoreResult3" class="score-result">
+        <h4>Your Score: <span id="scoreValue3"></span>/7</h4>
+        <p id="scoreInterpretation3"></p>
+
+        <div class="lead-form">
+            <h4 style="margin-top:0; color:#C4622D;">Discuss Your Results With Our Team</h4>
+            <p style="font-size:0.9em; color:#2C2C2C;">Share your contact information and we'll reach out to walk through what your score means for your railroad — and where the highest-leverage opportunities are.</p>
+            <form id="assessmentForm3" action="https://formspree.io/f/xnjbobyn" method="POST">
+                <input type="text" name="name" id="trw_name3" placeholder="Your Name" required>
+                <input type="text" name="title" id="trw_jobtitle3" placeholder="Your Title (e.g., VP of Safety, COO)">
+                <input type="email" name="email" id="trw_email3" placeholder="Email Address" required>
+                <input type="text" name="company" id="trw_company3" placeholder="Railroad / Company Name" required>
+                <input type="hidden" name="assessment_type" value="Data-Driven Culture Assessment">
+                <input type="hidden" name="score" id="formScore3">
+                <input type="hidden" name="_subject" value="ASSESSMENT LEAD - Data-Driven Culture Assessment | Score: pending">
+                <button type="button" onclick="submitAssessment3()">Request a Follow-Up Conversation</button>
+            </form>
+            <div id="formSuccess3" style="display:none; background:#2C3E50; color:white; padding:1em; border-radius:4px; margin-top:1em;">
+                <strong>Thank you.</strong> Someone from our team will be in touch to walk through your results personally.
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2>From Data to Action</h2>
+
+<p>If you're a COO, VP of Safety, or operations leader at a Class II or III railroad, these numbers are about your property. Your crews. The people who show up at 4 a.m. to inspect the consist, walk the track segment, or manage the dispatch board through a busy freight window.</p>
+
+<p>The question the data raises isn't whether the industry has a safety problem — that's settled. The question is a more specific one: do your people feel safe enough to help you find the risks that exist right now on your railroad, before those risks find them?</p>
+
+<p>If the honest answer is that you're not sure — that's the data point that matters most. And it's one you can actually do something about.</p>
+
+<p>Your track crews are waiting to tell you what they see. Are you ready to listen?</p>
+
+<h2>Sources &amp; References</h2>
+
+<ul style="font-size:0.9em; color:#555;">
+    <li>U.S. DOT Office of Inspector General Report ST2025029, "Federal Railroad Administration's Oversight of Roadway Worker Protection," May 14, 2025</li>
+    <li>ASCE 2025 Infrastructure Report Card</li>
+    <li>FRA Safety Data (publicly available datasets)</li>
+    <li>Boston Consulting Group, research on psychological safety in the workplace</li>
+</ul>
+
+<div class="author-bio">
+    <p><em>Charlie writes about safety culture transformation in the rail industry for The Rail Way&#8482;, a publication of KingdomBuilding Leadership, Inc., founded by Pauline Lipkewich — Contributing Editor at Railway Age and Chief Transformation Officer with 14+ years of rail operations experience.</em></p>
+    <p>Questions or feedback? <a href="mailto:info@therailway.us">info@therailway.us</a></p>
+</div>
+
+</div><!-- /.trw-article -->
+
+<script>
+function calculateScore3() {
+    const checkboxes = document.querySelectorAll('#assessment3 input[type="checkbox"]:checked');
+    const score = checkboxes.length;
+
+    document.getElementById('scoreValue3').textContent = score;
+    document.getElementById('formScore3').value = score + '/7';
+
+    const subjectField = document.querySelector('#assessmentForm3 input[name="_subject"]');
+    if (subjectField) subjectField.value = 'ASSESSMENT LEAD - Data-Driven Culture Assessment | Score: ' + score + '/7';
+
+    let interpretation = '';
+    if (score >= 5) {
+        interpretation = '<strong style="color:#4CAF50;">Strong Data Infrastructure (5&#8211;7)</strong><br>Your railroad is measuring safety in ways that give you real predictive visibility. The priority now is ensuring that what you\'re measuring is actually driving decisions — that leadership is acting on leading indicator data, not just reporting it. A strong measurement system that doesn\'t change behavior is still a compliance exercise, not a safety culture.';
+    } else if (score >= 3) {
+        interpretation = '<strong style="color:#FF9800;">Developing Visibility (3&#8211;4)</strong><br>You have meaningful data practices in some areas, but you\'re likely missing leading indicator visibility in others. The most common gap at this score level: near-miss reporting rates that are low relative to incident rates, suggesting underreporting. This usually indicates a trust problem, not a process problem — people aren\'t reporting because they\'re not confident something useful will happen when they do.';
+    } else {
+        interpretation = '<strong style="color:#F44336;">Limited Predictive Visibility (0&#8211;2)</strong><br>Your safety data is primarily telling you what has already gone wrong. Organizations operating primarily on lagging indicators are reacting to incidents rather than preventing them. The good news: improving leading indicator visibility doesn\'t require a sophisticated analytics infrastructure — it requires frontline trust. That\'s a culture problem, and it\'s solvable.';
+    }
+
+    document.getElementById('scoreInterpretation3').innerHTML = interpretation;
+    document.getElementById('scoreResult3').classList.add('show');
+}
+
+function submitAssessment3() {
+    const form = document.getElementById('assessmentForm3');
+    const name = document.getElementById('trw_name3').value.trim();
+    const email = document.getElementById('trw_email3').value.trim();
+    const company = document.getElementById('trw_company3').value.trim();
+
+    if (!name || !email || !company) {
+        alert('Please fill in your name, email, and railroad/company name.');
+        return;
+    }
+
+    const data = new FormData(form);
+
+    fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+    })
+    .then(response => {
+        if (response.ok) {
+            form.style.display = 'none';
+            document.getElementById('formSuccess3').style.display = 'block';
+        } else {
+            alert('There was a problem submitting the form. Please email us directly at info@therailway.us.');
+        }
+    })
+    .catch(() => {
+        alert('There was a problem submitting the form. Please email us directly at info@therailway.us.');
+    });
+}
+</script>
+
+<div style="max-width:800px;margin:40px auto;padding:20px;text-align:center;font-family:Arial,sans-serif;">
+  <a href="/" style="color:#C4622D;font-weight:600;text-decoration:none;">← Back to The Rail Way</a>
+  <span style="margin:0 12px;color:#ccc;">|</span>
+  <a href="/insights" style="color:#C4622D;font-weight:600;text-decoration:none;">All Insights</a>
+</div>
+</body>
+</html>
