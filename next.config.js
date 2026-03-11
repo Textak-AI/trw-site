@@ -16,6 +16,14 @@ const nextConfig = {
       { source: '/insights/lead-yourself-first', destination: 'https://therailway.us/lead-yourself-first/' },
       { source: '/insights/leading-through-uncertainty-part-2', destination: 'https://therailway.us/leading-through-uncertainty-part-2/' },
       { source: '/insights/leaders-navigate-uncertainty', destination: 'https://therailway.us/leaders-navigate-uncertainty/' },
+
+      // SPA page routes — all serve the main page.jsx
+      { source: '/speak-up-culture', destination: '/' },
+      { source: '/our-process', destination: '/' },
+      { source: '/about', destination: '/' },
+      { source: '/insights', destination: '/' },
+      { source: '/class-ii-iii', destination: '/' },
+      { source: '/contact', destination: '/' },
     ];
   },
 };

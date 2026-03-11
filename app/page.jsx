@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const U = "https://raw.githubusercontent.com/Textak-AI/trw-assets/main/";
 const IMG = {
@@ -299,10 +299,40 @@ function Header({page,nav}){return <header style={{background:C.white,borderBott
 function Footer({nav}){return <footer style={{background:C.blackDeep,padding:"48px 0 24px"}}><div style={{maxWidth:960,margin:"0 auto",padding:"0 28px"}}><div className="r-footer-grid" style={{display:"grid",gridTemplateColumns:"2fr 1fr 1fr 1fr",gap:28,marginBottom:28}}><div><img src={IMG.logoWhite} alt="The Rail Way™" style={{height:32,marginBottom:12,filter:"brightness(1.2)"}}/><p style={{fontFamily:F.b,fontSize:12,color:"rgba(255,255,255,0.4)",lineHeight:1.6,maxWidth:260}}>A division of KingdomBuilding Leadership, Inc. Transforming how the rail sector develops generational railroaders.</p></div><div><p style={{fontFamily:F.b,fontSize:11,fontWeight:700,color:"rgba(255,255,255,0.5)",textTransform:"uppercase",letterSpacing:"1px",marginBottom:12}}>Services</p>{["speakup","process","classii"].map(id=><p key={id} style={{margin:"0 0 6px"}}><span onClick={()=>nav(id)} style={{fontFamily:F.b,fontSize:13,color:"rgba(255,255,255,0.6)",cursor:"pointer"}}>{NAV.find(n=>n.id===id)?.l}</span></p>)}</div><div><p style={{fontFamily:F.b,fontSize:11,fontWeight:700,color:"rgba(255,255,255,0.5)",textTransform:"uppercase",letterSpacing:"1px",marginBottom:12}}>Insights</p>{[{t:"The Road Ahead",u:"/insights/the-road-ahead-2"},{t:"Lead Yourself First",u:"/insights/lead-yourself-first"},{t:"What's Your Style?",u:"/insights/leading-through-uncertainty-part-2"},{t:"Navigate Uncertainty",u:"/insights/leaders-navigate-uncertainty"}].map(a=><p key={a.t} style={{margin:"0 0 6px"}}><a href={a.u} target="_blank" rel="noopener noreferrer" style={{fontFamily:F.b,fontSize:13,color:"rgba(255,255,255,0.6)",textDecoration:"none"}}>{a.t}</a></p>)}</div><div><p style={{fontFamily:F.b,fontSize:11,fontWeight:700,color:"rgba(255,255,255,0.5)",textTransform:"uppercase",letterSpacing:"1px",marginBottom:12}}>Connect</p><p style={{fontFamily:F.b,fontSize:13,color:"rgba(255,255,255,0.6)",margin:"0 0 6px"}}>pauline@therailway.us</p><p style={{fontFamily:F.b,fontSize:13,color:"rgba(255,255,255,0.6)",margin:"0 0 6px"}}>+1.780.991.9993</p><p style={{margin:"0 0 6px"}}><span onClick={()=>nav("contact")} style={{fontFamily:F.b,fontSize:13,color:"rgba(255,255,255,0.6)",cursor:"pointer"}}>Book a Consultation</span></p></div></div><div style={{borderTop:"1px solid rgba(255,255,255,0.1)",paddingTop:16,display:"flex",justifyContent:"space-between"}}><p style={{fontFamily:F.b,fontSize:11,color:"rgba(255,255,255,0.3)",margin:0}}>© 2026 KingdomBuilding Leadership, Inc.</p><p style={{fontFamily:F.b,fontSize:11,color:"rgba(255,255,255,0.3)",margin:0}}>Privacy Policy • Terms</p></div></div></footer>;}
 
 /* ══════ MAIN ══════ */
+const ROUTES={"":  "home","/":"home","/speak-up-culture":"speakup","/our-process":"process","/about":"about","/insights":"insights","/class-ii-iii":"classii","/contact":"contact"};
+const PATHS={home:"/",speakup:"/speak-up-culture",process:"/our-process",about:"/about",insights:"/insights",classii:"/class-ii-iii",contact:"/contact"};
+
 export default function Site(){
-  const[page,setPage]=useState("home");
+  const[page,setPage]=useState(()=>{
+    if(typeof window==="undefined") return "home";
+    const p=window.location.pathname.replace(/\/$/,"");
+    return ROUTES[p]||"home";
+  });
   const topRef=useRef(null);
-  const nav=(p)=>{setPage(p);topRef.current?.scrollIntoView({behavior:"smooth"});};
+
+  const nav=(p)=>{
+    setPage(p);
+    const path=PATHS[p]||"/";
+    window.history.pushState({page:p},"",path);
+    topRef.current?.scrollIntoView({behavior:"smooth"});
+  };
+
+  useEffect(()=>{
+    const onPop=(e)=>{
+      const p=window.location.pathname.replace(/\/$/,"");
+      setPage(ROUTES[p]||"home");
+      topRef.current?.scrollIntoView({behavior:"smooth"});
+    };
+    window.addEventListener("popstate",onPop);
+    // Set initial URL if we're on / but state differs
+    const currentPath=window.location.pathname.replace(/\/$/,"")||"/";
+    const expectedPath=PATHS[page]||"/";
+    if(currentPath!==expectedPath&&currentPath==="/"){
+      // Don't push — we're on home, that's fine
+    }
+    return ()=>window.removeEventListener("popstate",onPop);
+  },[]);
+
   const pages={home:<Home nav={nav}/>,speakup:<SpeakUp nav={nav}/>,process:<Process nav={nav}/>,about:<About nav={nav}/>,insights:<Insights nav={nav}/>,classii:<ClassII nav={nav}/>,contact:<Contact nav={nav}/>};
   return <div ref={topRef} style={{fontFamily:F.b,background:C.white,minHeight:"100vh",paddingBottom:36}}><Header page={page} nav={nav}/><main>{pages[page]}</main><Footer nav={nav}/><DevBar page={page}/></div>;
 }
