@@ -11,19 +11,11 @@ const nextConfig = {
   },
   async rewrites() {
     return [
-      // Leading Through Uncertainty series — proxied to WordPress
+      // Leading Through Uncertainty series — proxied to WordPress until migrated
       { source: '/insights/the-road-ahead-2', destination: 'https://therailway.us/the-road-ahead-2/' },
       { source: '/insights/lead-yourself-first', destination: 'https://therailway.us/lead-yourself-first/' },
       { source: '/insights/leading-through-uncertainty-part-2', destination: 'https://therailway.us/leading-through-uncertainty-part-2/' },
       { source: '/insights/leaders-navigate-uncertainty', destination: 'https://therailway.us/leaders-navigate-uncertainty/' },
-
-      // SPA page routes — all serve the main page.jsx
-      { source: '/speak-up-culture', destination: '/' },
-      { source: '/our-process', destination: '/' },
-      { source: '/about', destination: '/' },
-      { source: '/insights', destination: '/' },
-      { source: '/class-ii-iii', destination: '/' },
-      { source: '/contact', destination: '/' },
     ];
   },
 };
