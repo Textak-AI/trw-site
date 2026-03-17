@@ -30,6 +30,7 @@ export const NAV = [
   {id:"classii",l:"Class II & III",href:"/class-ii-iii"},
   {id:"insights",l:"Insights",href:"/insights"},
   {id:"about",l:"About",href:"/about"},
+  {id:"legacies",l:"Legacies",href:"/legacies"},
   {id:"contact",l:"Contact",href:"/contact"},
 ];
 
@@ -41,4 +42,5 @@ export const PAGES = {
   insights:{title:"Rail Industry Insights | The Rail Way™",desc:"Expert perspectives on rail leadership, safety culture, and operational excellence.",h1:"Industry Insights — Rail Safety Culture & Leadership",bc:[{l:"Home",href:"/"},{l:"Insights"}],schema:"CollectionPage"},
   classii:{title:"Class II & III Railroad Safety Consulting | The Rail Way™",desc:"Right-sized safety culture transformation for regional and short-line railroads.",h1:"Safety Culture Consulting for Class II & III Railroads",bc:[{l:"Home",href:"/"},{l:"Class II & III"}],schema:"Service"},
   contact:{title:"Schedule a Consultation | The Rail Way™",desc:"Confidential consultation about your railroad's safety culture transformation.",h1:"Start a Conversation About Your Safety Culture",bc:[{l:"Home",href:"/"},{l:"Contact"}],schema:"ContactPage"},
+  legacies:{title:"Legacies — Honoring Rail Industry Leaders | The Rail Way™",desc:"Memorials, tributes, and leadership updates from across the North American rail industry.",h1:"Legacies — Honoring Those Who Built the Rail Industry",bc:[{l:"Home",href:"/"},{l:"Legacies"}],schema:"CollectionPage"},
 };

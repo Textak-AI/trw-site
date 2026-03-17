@@ -12,7 +12,7 @@ export default function Footer(){
         </div>
         <div>
           <p style={{fontFamily:F.b,fontSize:11,fontWeight:700,color:"rgba(255,255,255,0.5)",textTransform:"uppercase",letterSpacing:"1px",marginBottom:12}}>Services</p>
-          {[{l:"Speak Up Culture",href:"/speak-up-culture"},{l:"Our Process",href:"/our-process"},{l:"Class II & III",href:"/class-ii-iii"}].map(s=>
+          {[{l:"Speak Up Culture",href:"/speak-up-culture"},{l:"Our Process",href:"/our-process"},{l:"Class II & III",href:"/class-ii-iii"},{l:"Legacies",href:"/legacies"}].map(s=>
             <p key={s.l} style={{margin:"0 0 6px"}}><Link href={s.href} style={{fontFamily:F.b,fontSize:13,color:"rgba(255,255,255,0.6)",textDecoration:"none"}}>{s.l}</Link></p>
           )}
         </div>

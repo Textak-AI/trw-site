@@ -10,8 +10,8 @@ export function HomeContent(){return <>
     <div style={{position:"relative",zIndex:2,maxWidth:960,margin:"0 auto",padding:"80px 28px 72px"}}>
       <Eye>The Rail Way™ — From the Boardroom to the Ballast Line</Eye>
       <h1 className="r-h1" style={{fontFamily:F.h,fontSize:42,fontWeight:700,color:C.white,margin:"0 0 20px",lineHeight:1.15,maxWidth:640}}>Railroad Safety Culture <span style={{color:C.rust}}>Transformation</span></h1>
-      <p style={{fontFamily:F.b,fontSize:17,color:"rgba(255,255,255,0.7)",margin:"0 0 12px",lineHeight:1.65,maxWidth:520}}>70–90% of organizational transformations fail. Yours doesn't have to.</p>
-      <p style={{fontFamily:F.b,fontSize:15,color:"rgba(255,255,255,0.55)",margin:"0 0 32px",lineHeight:1.65,maxWidth:520}}>Build a Speak Up Culture where safety concerns don't wait for an accident. Not just training. Not just consulting. A cultural residency that creates lasting change.</p>
+      <p style={{fontFamily:F.b,fontSize:18,color:"rgba(255,255,255,0.7)",margin:"0 0 12px",lineHeight:1.65,maxWidth:520}}>70–90% of organizational transformations fail. Yours doesn't have to.</p>
+      <p style={{fontFamily:F.b,fontSize:16,color:"rgba(255,255,255,0.55)",margin:"0 0 32px",lineHeight:1.65,maxWidth:520}}>Build a Speak Up Culture where safety concerns don't wait for an accident. Not just training. Not just consulting. A cultural residency that creates lasting change.</p>
       <div className="r-btn-row" style={{display:"flex",gap:14}}><Btn primary onClick={()=>document.getElementById('pulse-check')?.scrollIntoView({behavior:'smooth'})}>Take the Free Pulse Check</Btn><Btn href="/speak-up-culture">What Is Speak Up Culture?</Btn></div>
     </div>
   </section>
@@ -75,8 +75,8 @@ export function HomeContent(){return <>
       <div>
         <Eye>Featured in Railway Age</Eye>
         <H2>Pauline Lipkewich — Contributing Editor</H2>
-        <P s={{fontSize:17,fontStyle:"italic",color:C.black}}>"I was blessed to live in a region where heavy industry thrived. I had the gift of seeing firsthand the fruits of labor that came from calloused hands and dusty work boots."</P>
-        <P>14+ years in North American rail operations. Grew Rocky Mountaineer revenue 7x. Worked alongside CN, KCS, and other Class I operators on safety performance and operational effectiveness. Today, she's the rail industry's voice on leadership behavior and culture transformation.</P>
+        <P s={{fontSize:17,fontStyle:"italic",color:C.black}}>"I am blessed to live in a region where heavy industry thrives. I have the gift of seeing firsthand the fruits of labor that come from calloused hands and dusty work boots."</P>
+        <P>14+ years in North American rail operations. Grew Rocky Mountaineer group revenue 7x. Worked alongside CN, KCS, and other Class I operators on safety performance and operational effectiveness. Today, she's the rail industry's voice on leadership behavior and culture transformation.</P>
         <div className="r-btn-row" style={{display:"flex",gap:12}}><Btn primary href="/about">Full Bio</Btn><Btn href="/insights">Read Her Column</Btn></div>
       </div>
     </div>
@@ -159,7 +159,7 @@ export function HomeContent(){return <>
 export function SpeakUpContent(){return <>
   <Sec pad="48px 0 56px"><Bc items={PAGES.speakup.bc}/><Eye>Speak Up Culture for Railroads</Eye><H1>{PAGES.speakup.h1}</H1>
     <div className="r-grid-2" style={{display:"grid",gridTemplateColumns:"3fr 2fr",gap:32}}>
-      <div><P s={{fontSize:17}}>Speak Up Culture is an organizational environment where every railroader — from track crews to the C-suite — feels safe raising safety concerns, reporting near-misses, and challenging unsafe conditions without fear of retaliation.</P><P>It is the single most reliable predictor of whether a railroad prevents incidents or merely investigates them after the fact. 65% of rail accidents are attributed to human factors — and the majority involve failures of communication, not knowledge.</P></div>
+      <div><P s={{fontSize:18}}>Speak Up Culture is an organizational environment where every railroader — from track crews to the C-suite — feels safe raising safety concerns, reporting near-misses, and challenging unsafe conditions without fear of retaliation.</P><P>It is the single most reliable predictor of whether a railroad prevents incidents or merely investigates them after the fact. 65% of rail accidents are attributed to human factors — and the majority involve failures of communication, not knowledge.</P></div>
       <div style={{borderRadius:8,overflow:"hidden"}}><Img src={IMG.paulineSpeaking} alt="Pauline Lipkewich discussing Speak Up Culture at a railway industry event"/></div>
     </div>
   </Sec>
@@ -188,7 +188,7 @@ export function ProcessContent(){
   return <>
   <section style={{position:"relative",minHeight:280,overflow:"hidden"}}>
     <div style={{position:"absolute",inset:0}}><Img src={IMG.leaderTalking} alt="Railroad leadership discussion" className="r-img-hero" style={{borderRadius:0,filter:"brightness(0.3)"}}/></div>
-    <div style={{position:"relative",zIndex:1,maxWidth:960,margin:"0 auto",padding:"48px 28px"}}><Bc items={PAGES.process.bc}/><Eye>Our Proven Process</Eye><h1 className="r-h1" style={{fontFamily:F.h,fontSize:38,fontWeight:700,color:C.white,margin:"0 0 16px",lineHeight:1.18}}>{PAGES.process.h1}</h1><p style={{fontFamily:F.b,fontSize:17,color:"rgba(255,255,255,0.7)",maxWidth:560,margin:0,lineHeight:1.6}}>Not training. Not consulting. A cultural residency that creates lasting change.</p></div>
+    <div style={{position:"relative",zIndex:1,maxWidth:960,margin:"0 auto",padding:"48px 28px"}}><Bc items={PAGES.process.bc}/><Eye>Our Proven Process</Eye><h1 className="r-h1" style={{fontFamily:F.h,fontSize:38,fontWeight:700,color:C.white,margin:"0 0 16px",lineHeight:1.18}}>{PAGES.process.h1}</h1><p style={{fontFamily:F.b,fontSize:18,color:"rgba(255,255,255,0.7)",maxWidth:560,margin:0,lineHeight:1.6}}>Not training. Not consulting. A cultural residency that creates lasting change.</p></div>
   </section>
   <Sec bg={C.cream}><div style={{display:"flex",flexDirection:"column",gap:24}}>{stages.map((s,i)=><div key={i} className="r-timeline" style={{display:"grid",gridTemplateColumns:"160px 1fr",gap:24}}><div style={{textAlign:"right",paddingTop:4}}><div style={{fontFamily:F.h,fontSize:14,color:C.rust,fontWeight:700}}>Stage {i+1}</div><div style={{fontFamily:F.m,fontSize:11,color:C.grayLt}}>{s.t}</div></div><div style={{background:C.white,borderRadius:8,padding:24,borderLeft:`4px solid ${C.rust}`}}><H3>{s.n}</H3><P>{s.d}</P></div></div>)}</div></Sec>
   <Sec><H2>Training vs. Transformation</H2><div className="r-grid-2" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:28}}><div style={{background:"#FFF5F5",borderRadius:8,padding:24,borderTop:"3px solid #CC4444"}}><h3 style={{fontFamily:F.h,fontSize:18,color:"#CC4444",margin:"0 0 12px"}}>Traditional Safety Training</h3><P s={{fontSize:13}}>External consultant delivers a program. Binders filled. Consultant leaves. Behaviors revert within 90 days.</P></div><div style={{background:C.tint,borderRadius:8,padding:24,borderTop:`3px solid ${C.rust}`}}><h3 style={{fontFamily:F.h,fontSize:18,color:C.rust,margin:"0 0 12px"}}>The Rail Way Cultural Residency</h3><P s={{fontSize:13}}>We embed with your team. Internal faculty developed. Materials white-labeled. Transformation happens with you, not to you.</P></div></div><div style={{marginTop:28,textAlign:"center"}}><Btn primary href="/contact">Discuss Your Transformation</Btn></div></Sec>
@@ -203,12 +203,12 @@ export function AboutContent(){return <>
         <div style={{background:C.cream,borderRadius:8,padding:16,borderTop:`3px solid ${C.rust}`}}>
           <h3 style={{fontFamily:F.h,fontSize:14,fontWeight:700,margin:"0 0 8px"}}>Credentials</h3>
           <div style={{fontFamily:F.b,fontSize:12,color:C.gray,lineHeight:1.9}}>
-            <div>MA (Leadership), U of Guelph</div><div>B.Comm, U of Guelph</div><div>Contributing Editor, Railway Age</div><div>14+ years North American rail</div><div>Rocky Mountaineer: 7x revenue growth</div>
+            <div>MA (Leadership), U of Guelph</div><div>B.Comm, U of Guelph</div><div>Contributing Editor, Railway Age</div><div>14+ years North American rail</div><div>Rocky Mountaineer: 7x group revenue growth</div>
           </div>
         </div>
       </div>
       <div style={{flex:1,minWidth:300}}>
-        <P s={{fontSize:17}}>Pauline has been railroading since 2011. She led the global group sales team for Rocky Mountaineer, growing revenues more than 7x in less than four years. She has worked alongside Class I operators at CN, KCS, and NS — targeting safety performance and operational effectiveness.</P>
+        <P s={{fontSize:17}}>Pauline has been railroading since 2011. She led the global group sales team for Rocky Mountaineer, growing revenues more than 7x in less than four years. She has worked alongside Class I operators at CN, KCS, and NS — targeting safety performance and operational effectiveness, seeing double and triple digit improvements within 2-3 years.</P>
         <P>She holds a Bachelor of Commerce and a Master of Arts in Leadership from the University of Guelph. As Contributing Editor at Railway Age, her column reaches rail decision-makers across North America.</P>
         <P>She founded KingdomBuilding Leadership with a core belief: when a leader gets better, everybody wins.</P>
         <div className="r-btn-row" style={{display:"flex",gap:12,marginTop:8}}><Btn primary href="/contact">Get in Touch</Btn><Btn href="/insights">Read Her Column</Btn></div>
@@ -224,10 +224,51 @@ return <><Sec pad="48px 0 56px"><Bc items={PAGES.insights.bc}/><Eye>The Rail Way
 
 /* ══════ CLASS II & III ══════ */
 export function ClassIIContent(){return <>
-  <section style={{position:"relative",minHeight:260,overflow:"hidden"}}><div style={{position:"absolute",inset:0}}><Img src={IMG.roadAhead} alt="Freight train on open track" className="r-img-hero" style={{borderRadius:0,filter:"brightness(0.3)"}}/></div><div style={{position:"relative",zIndex:1,maxWidth:960,margin:"0 auto",padding:"48px 28px"}}><Bc items={PAGES.classii.bc}/><Eye>For Regional & Short-Line Operators</Eye><h1 className="r-h1" style={{fontFamily:F.h,fontSize:38,fontWeight:700,color:C.white,margin:"0 0 16px",lineHeight:1.18}}>{PAGES.classii.h1}</h1><p style={{fontFamily:F.b,fontSize:17,color:"rgba(255,255,255,0.7)",maxWidth:560,margin:0}}>Same safety challenges as Class I — with a fraction of the resources. Right-sized programs that deliver results.</p></div></section>
+  <section style={{position:"relative",minHeight:260,overflow:"hidden"}}><div style={{position:"absolute",inset:0}}><Img src={IMG.roadAhead} alt="Freight train on open track" className="r-img-hero" style={{borderRadius:0,filter:"brightness(0.3)"}}/></div><div style={{position:"relative",zIndex:1,maxWidth:960,margin:"0 auto",padding:"48px 28px"}}><Bc items={PAGES.classii.bc}/><Eye>For Regional & Short-Line Operators</Eye><h1 className="r-h1" style={{fontFamily:F.h,fontSize:38,fontWeight:700,color:C.white,margin:"0 0 16px",lineHeight:1.18}}>{PAGES.classii.h1}</h1><p style={{fontFamily:F.b,fontSize:18,color:"rgba(255,255,255,0.7)",maxWidth:560,margin:0}}>Same safety challenges as Class I — with a fraction of the resources. Right-sized programs that deliver results.</p></div></section>
   <Sec><H2>Why Smaller Railroads See Faster Results</H2><div className="r-grid-3" style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:20}}>{[{t:"Leadership Proximity",d:"Executives closer to frontline. Behavioral modeling has direct impact."},{t:"Operational Agility",d:"Decisions in days, not quarters. No enterprise bureaucracy."},{t:"Community Identity",d:"'Railroad family' isn't a metaphor — it's the operational reality."}].map((c,i)=><div key={i} style={{background:C.cream,borderRadius:8,padding:24,borderTop:`3px solid ${C.rust}`}}><H3>{c.t}</H3><P s={{fontSize:13}}>{c.d}</P></div>)}</div><div style={{marginTop:28,textAlign:"center"}}><Btn primary href="/contact">Discuss Your Railroad's Needs</Btn></div></Sec>
 </>;}
 
 /* ══════ CONTACT ══════ */
 export function ContactContent(){return <><Sec pad="48px 0 56px"><Bc items={PAGES.contact.bc}/><Eye>Let's Talk</Eye><H1>{PAGES.contact.h1}</H1></Sec><Sec bg={C.cream}><div className="r-grid-2" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:40}}><div><H2>Schedule a Consultation</H2><div style={{display:"flex",flexDirection:"column",gap:12}}>{["First Name","Last Name","Email","Phone","Company","Job Title"].map(f=><div key={f}><label style={{fontFamily:F.b,fontSize:12,color:C.gray,display:"block",marginBottom:4}}>{f}</label><input style={{width:"100%",padding:"10px 12px",borderRadius:5,border:`1px solid ${C.grayRule}`,fontFamily:F.b,fontSize:14,boxSizing:"border-box"}}/></div>)}<select style={{width:"100%",padding:"10px 12px",borderRadius:5,border:`1px solid ${C.grayRule}`,fontFamily:F.b,fontSize:14,background:C.white}}><option>Railroad Type...</option><option>Class I</option><option>Regional (II)</option><option>Short Line (III)</option><option>Industrial</option><option>Passenger</option></select><textarea rows={3} placeholder="What would you like to discuss?" style={{width:"100%",padding:"10px 12px",borderRadius:5,border:`1px solid ${C.grayRule}`,fontFamily:F.b,fontSize:14,resize:"vertical",boxSizing:"border-box"}}/><Btn primary>Submit Request</Btn></div></div>
   <div><H2>Who This Is For</H2>{[{r:"C-Suite Executives",d:"Strategic culture transformation aligned with business objectives"},{r:"VPs of Safety",d:"Building sustainable safety cultures that deliver results"},{r:"VPs of Operations",d:"Creating conditions for operational excellence"},{r:"HR Leaders",d:"Engaging and retaining workforce through culture"}].map((r,i)=><div key={i} style={{background:C.white,borderRadius:8,padding:16,borderLeft:`3px solid ${C.rust}`,marginBottom:10}}><h3 style={{fontFamily:F.h,fontSize:15,fontWeight:700,color:C.black,margin:"0 0 3px"}}>{r.r}</h3><p style={{fontFamily:F.b,fontSize:13,color:C.gray,margin:0}}>{r.d}</p></div>)}<div style={{marginTop:20,padding:18,background:C.white,borderRadius:8}}><p style={{fontFamily:F.b,fontSize:13,color:C.gray,margin:"0 0 4px"}}>Reach out directly:</p><p style={{fontFamily:F.b,fontSize:14,color:C.black,margin:"0 0 2px",fontWeight:600}}>pauline@therailway.us</p><p style={{fontFamily:F.b,fontSize:14,color:C.black,margin:0}}>+1.780.991.9993</p></div></div></div></Sec></>;}
+
+/* ══════ LEGACIES ══════ */
+export function LegaciesContent(){return <>
+  <Sec pad="48px 0 56px">
+    <Bc items={PAGES.legacies.bc}/>
+    <Eye>Honoring Rail Industry Leaders</Eye>
+    <H1>{PAGES.legacies.h1}</H1>
+    <P s={{maxWidth:600}}>The rail industry is built by people who give their careers — and sometimes their lives — to keeping freight and passengers moving safely. This page honors their contributions and tracks leadership changes across the industry.</P>
+  </Sec>
+
+  <Sec bg={C.cream}>
+    <H2>In Memoriam</H2>
+    <div style={{background:C.white,borderRadius:10,padding:28,borderLeft:`4px solid ${C.rust}`,marginBottom:20}}>
+      <h3 style={{fontFamily:F.h,fontSize:22,color:C.black,margin:"0 0 4px"}}>Jesse Chalich</h3>
+      <p style={{fontFamily:F.b,fontSize:14,color:C.rust,margin:"0 0 12px",fontWeight:600}}>President & COO, Northern Plains Railroad & Rail Services</p>
+      <P>Jesse Chalich passed away unexpectedly in March 2026. A dedicated railroad leader, Jesse led Northern Plains Railroad and Rail Services with a commitment to operational excellence and the people who made it possible. His legacy lives in the crews and communities he served.</P>
+      <p style={{fontFamily:F.m,fontSize:11,color:C.grayLt,margin:0}}>March 2026</p>
+    </div>
+  </Sec>
+
+  <Sec>
+    <H2>People in the News</H2>
+    <div style={{display:"flex",flexDirection:"column",gap:16}}>
+      <div style={{background:C.cream,borderRadius:8,padding:24,borderTop:`3px solid ${C.rust}`}}>
+        <p style={{fontFamily:F.b,fontSize:10,color:C.rust,textTransform:"uppercase",letterSpacing:"1.2px",margin:"0 0 8px"}}>Leadership Change — March 2026</p>
+        <H3>CSX Announces Leadership Changes to Its Executive Team</H3>
+        <P s={{fontSize:14}}>CSX Corporation announced changes to its executive leadership team as part of ongoing organizational evolution. These leadership transitions reflect the rail industry's continued focus on operational performance and strategic growth.</P>
+        <a href="https://www.csx.com" target="_blank" rel="noopener noreferrer" style={{fontFamily:F.b,fontSize:13,color:C.rust,textDecoration:"none",fontWeight:600}}>Read on CSX.com →</a>
+      </div>
+    </div>
+  </Sec>
+
+  <section style={{position:"relative",overflow:"hidden",minHeight:200}}>
+    <div style={{position:"absolute",inset:0}}><Img src={IMG.railwayTraining} alt="Railroad operations" className="r-img-hero" style={{borderRadius:0,filter:"brightness(0.25)"}}/></div>
+    <div style={{position:"relative",zIndex:1,maxWidth:960,margin:"0 auto",padding:"48px 28px",textAlign:"center"}}>
+      <h2 style={{fontFamily:F.h,fontSize:24,color:C.white,margin:"0 0 10px"}}>Know Someone We Should Honor?</h2>
+      <p style={{fontFamily:F.b,fontSize:16,color:"rgba(255,255,255,0.6)",margin:"0 0 20px"}}>Help us recognize the people who shaped the rail industry.</p>
+      <Btn primary href="/contact">Submit a Legacy</Btn>
+    </div>
+  </section>
+</>;}

@@ -15,7 +15,7 @@ export function H1({children}){return <h1 className="r-h1" style={{fontFamily:F.
 export function H2({children,id}){return <h2 className="r-h2" id={id} style={{fontFamily:F.h,fontSize:28,fontWeight:700,color:C.black,margin:"0 0 16px",lineHeight:1.25}}>{children}</h2>;}
 export function H3({children}){return <h3 style={{fontFamily:F.h,fontSize:20,fontWeight:700,color:C.black,margin:"0 0 10px",lineHeight:1.3}}>{children}</h3>;}
 
-export function P({children,s={}}){return <p style={{fontFamily:F.b,fontSize:15,color:C.gray,lineHeight:1.7,margin:"0 0 16px",...s}}>{children}</p>;}
+export function P({children,s={}}){return <p style={{fontFamily:F.b,fontSize:16,color:C.gray,lineHeight:1.75,margin:"0 0 16px",...s}}>{children}</p>;}
 
 export function Btn({children,primary,onClick,href}){
   const style={padding:"12px 28px",borderRadius:5,border:"none",cursor:"pointer",fontFamily:F.b,fontSize:14,fontWeight:600,textDecoration:"none",display:"inline-block",textAlign:"center",...(primary?{background:C.rust,color:C.white}:{background:"transparent",color:C.rust,border:`1.5px solid ${C.rust}`})};
@@ -23,6 +23,6 @@ export function Btn({children,primary,onClick,href}){
   return <button onClick={onClick} style={style}>{children}</button>;
 }
 
-export function FAQ({q,a}){const[o,setO]=useState(false);return <div style={{borderBottom:`1px solid ${C.grayRule}`,padding:"16px 0"}}><div onClick={()=>setO(!o)} style={{display:"flex",justifyContent:"space-between",alignItems:"center",cursor:"pointer"}}><h3 style={{fontFamily:F.h,fontSize:17,fontWeight:700,color:C.black,margin:0,flex:1,lineHeight:1.35}}>{q}</h3><span style={{fontFamily:F.b,fontSize:18,color:C.rust,marginLeft:16,transition:"transform 0.2s",transform:o?"rotate(45deg)":"none"}}>+</span></div>{o&&<div style={{marginTop:12}}><P>{a}</P></div>}</div>;}
+export function FAQ({q,a}){const[o,setO]=useState(false);return <div style={{borderBottom:`1px solid ${C.grayRule}`,padding:"16px 0"}}><div onClick={()=>setO(!o)} style={{display:"flex",justifyContent:"space-between",alignItems:"center",cursor:"pointer"}}><h3 style={{fontFamily:F.h,fontSize:18,fontWeight:700,color:C.black,margin:0,flex:1,lineHeight:1.35}}>{q}</h3><span style={{fontFamily:F.b,fontSize:18,color:C.rust,marginLeft:16,transition:"transform 0.2s",transform:o?"rotate(45deg)":"none"}}>+</span></div>{o&&<div style={{marginTop:12}}><P>{a}</P></div>}</div>;}
 
-export function Stat({v,l,src}){return <div style={{background:C.white,borderRadius:8,padding:24,borderLeft:`4px solid ${C.rust}`,flex:1}}><div style={{fontFamily:F.h,fontSize:32,fontWeight:700,color:C.rust,marginBottom:6}}>{v}</div><div style={{fontFamily:F.b,fontSize:14,color:C.black,marginBottom:8,lineHeight:1.4}}>{l}</div><div style={{fontFamily:F.m,fontSize:10,color:C.grayLt}}>Source: {src}</div></div>;}
+export function Stat({v,l,src}){return <div style={{background:C.white,borderRadius:8,padding:24,borderLeft:`4px solid ${C.rust}`,flex:1}}><div style={{fontFamily:F.h,fontSize:32,fontWeight:700,color:C.rust,marginBottom:6}}>{v}</div><div style={{fontFamily:F.b,fontSize:15,color:C.black,marginBottom:8,lineHeight:1.4}}>{l}</div><div style={{fontFamily:F.m,fontSize:10,color:C.grayLt}}>Source: {src}</div></div>;}
