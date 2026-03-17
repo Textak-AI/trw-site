@@ -6,8 +6,8 @@ import { C, F, IMG, NAV } from "./shared";
 export default function Header(){
   const pathname = usePathname();
   return <header style={{background:C.white,borderBottom:`1px solid ${C.grayRule}`,position:"sticky",top:0,zIndex:100}}>
-    <div className="r-header" style={{maxWidth:960,margin:"0 auto",padding:"0 28px",display:"flex",alignItems:"center",justifyContent:"space-between",height:56}}>
-      <Link href="/"><img src={IMG.logo} alt="The Rail Way™" style={{height:36}}/></Link>
+    <div className="r-header" style={{maxWidth:960,margin:"0 auto",padding:"0 28px",display:"flex",alignItems:"center",justifyContent:"space-between",height:66}}>
+      <Link href="/"><img src={IMG.logo} alt="The Rail Way™" style={{height:48}}/></Link>
       <nav className="r-nav" style={{display:"flex",gap:16}}>
         {NAV.map(n=>{
           const active = (n.href==="/" && pathname==="/") || (n.href!=="/" && pathname===n.href);

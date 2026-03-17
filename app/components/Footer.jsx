@@ -7,7 +7,7 @@ export default function Footer(){
     <div style={{maxWidth:960,margin:"0 auto",padding:"0 28px"}}>
       <div className="r-footer-grid" style={{display:"grid",gridTemplateColumns:"2fr 1fr 1fr 1fr",gap:28,marginBottom:28}}>
         <div>
-          <img src={IMG.logoWhite} alt="The Rail Way™" style={{height:32,marginBottom:12,filter:"brightness(1.2)"}}/>
+          <img src={IMG.logoWhite} alt="The Rail Way™" style={{height:44,marginBottom:12,filter:"brightness(1.2)"}}/>
           <p style={{fontFamily:F.b,fontSize:12,color:"rgba(255,255,255,0.4)",lineHeight:1.6,maxWidth:260}}>A division of KingdomBuilding Leadership, Inc. Transforming how the rail sector develops generational railroaders.</p>
         </div>
         <div>
