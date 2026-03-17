@@ -244,10 +244,12 @@ export function LegaciesContent(){return <>
   <Sec bg={C.cream}>
     <H2>In Memoriam</H2>
     <div style={{background:C.white,borderRadius:10,padding:28,borderLeft:`4px solid ${C.rust}`,marginBottom:20}}>
-      <h3 style={{fontFamily:F.h,fontSize:22,color:C.black,margin:"0 0 4px"}}>Jesse Chalich</h3>
-      <p style={{fontFamily:F.b,fontSize:14,color:C.rust,margin:"0 0 12px",fontWeight:600}}>President & COO, Northern Plains Railroad & Rail Services</p>
-      <P>Jesse Chalich passed away unexpectedly in March 2026. A dedicated railroad leader, Jesse led Northern Plains Railroad and Rail Services with a commitment to operational excellence and the people who made it possible. His legacy lives in the crews and communities he served.</P>
-      <p style={{fontFamily:F.m,fontSize:11,color:C.grayLt,margin:0}}>March 2026</p>
+      <h3 style={{fontFamily:F.h,fontSize:22,color:C.black,margin:"0 0 4px"}}>Jesse James Chalich</h3>
+      <p style={{fontFamily:F.b,fontSize:14,color:C.rust,margin:"0 0 4px",fontWeight:600}}>President & COO, Northern Plains Railroad & Northern Plains Rail Services</p>
+      <p style={{fontFamily:F.b,fontSize:13,color:C.grayLt,margin:"0 0 12px"}}>September 21, 1976 — March 11, 2026</p>
+      <P>Jesse Chalich passed away unexpectedly on March 11, 2026, at the age of 49. A 4th generation railroader, Jesse began his career as a conductor/engineer on Northern Plains Railroad in 1997 — the year the company was founded. Over nearly three decades with the same organization, he rose through operations, customer service, and marketing to lead NPR and Northern Plains Rail Services as President and COO, helping grow the company from forty employees to more than two hundred.</P>
+      <P>Under Jesse's leadership, Northern Plains maintained a culture that put safety and family first. He was recognized by Progressive Railroading as one of the industry's "20 Rising Stars" in 2014 and served on the board of the Lake Superior Railroad Museum and the American Association of Railroad Superintendents.</P>
+      <P s={{margin:0}}>Jesse is survived by his wife Julie, four children, and grandson Beckett.</P>
     </div>
   </Sec>
 
