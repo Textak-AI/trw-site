@@ -5,16 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lead Yourself First: The Trinity of Excellence | The Rail Way</title>
 <style>
-.trw-nav-header{background:#2C2C2C;padding:16px 0;border-bottom:3px solid #C4622D}
-.trw-nav-header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
-.trw-nav-header .logo-text{font-family:Georgia,serif;font-size:18px;color:#fff;letter-spacing:.5px;text-decoration:none}
-.trw-nav-header .logo-text span{color:#C4622D;font-weight:700}
-.trw-nav-header .back-link{font-family:Arial,sans-serif;font-size:14px;color:#C4622D;text-decoration:none;font-weight:600}
-.trw-nav-header .back-link:hover{color:#e07a3a;text-decoration:underline}
+.site-nav{background:#fff;border-bottom:1px solid #E0E0E0;position:sticky;top:0;z-index:100}
+.site-nav-inner{max-width:960px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.site-nav img{height:36px}
+.site-nav-links{display:flex;gap:16px}
+.site-nav-links a{font-family:'Segoe UI',Arial,sans-serif;font-size:12.5px;font-weight:600;color:#666;text-decoration:none;padding:6px 0;border-bottom:2px solid transparent}
+.site-nav-links a:hover{color:#C4622D}
+.site-nav-links a.active{color:#C4622D;border-bottom-color:#C4622D}
+.site-footer{background:#1A1A1A;padding:48px 0 24px}
+.site-footer-inner{max-width:960px;margin:0 auto;padding:0 28px}
+.site-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px;margin-bottom:28px}
+.site-footer p{margin:0}
+.site-footer .col-head{font-family:'Segoe UI',Arial,sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.site-footer .col-link{font-family:'Segoe UI',Arial,sans-serif;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;display:block;margin-bottom:6px}
+.site-footer .col-link:hover{color:#C4622D}
+.site-footer .col-text{font-family:'Segoe UI',Arial,sans-serif;font-size:12px;color:rgba(255,255,255,0.4);line-height:1.6;max-width:260px}
+.site-footer .col-contact{font-family:'Segoe UI',Arial,sans-serif;font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:6px}
+.site-footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;display:flex;justify-content:space-between}
+.site-footer-bottom p{font-family:'Segoe UI',Arial,sans-serif;font-size:11px;color:rgba(255,255,255,0.3)}
+@media(max-width:768px){.site-nav-links{display:none}.site-footer-grid{grid-template-columns:1fr 1fr;gap:20px}}
 </style>
 </head>
-<body>
-<div class="trw-nav-header"><div class="trw-nav-header-inner"><a href="/" class="logo-text">THE RAIL <span>WAY</span>™</a><a href="/" class="back-link">← Back to Main Site</a></div></div>
+<body style="margin:0">
+<nav class="site-nav">
+<div class="site-nav-inner">
+<a href="/"><img src="https://raw.githubusercontent.com/Textak-AI/trw-assets/main/brand/rail-way-logo.png" alt="The Rail Way"></a>
+<div class="site-nav-links">
+<a href="/">Home</a>
+<a href="/speak-up-culture">Speak Up Culture</a>
+<a href="/our-process">Our Process</a>
+<a href="/class-ii-iii">Class II &amp; III</a>
+<a href="/insights" class="active">Insights</a>
+<a href="/about">About</a>
+<a href="/legacies">Legacies</a>
+<a href="/contact">Contact</a>
+</div>
+</div>
+</nav>
 <style>
         * {
             margin: 0;
@@ -30,20 +57,9 @@
         }
 
         /* Header */
-        .article-header {
-            background-color: #2C2C2C;
-            padding: 20px 0;
-            border-bottom: 3px solid #C4622D;
-        }
+        
 
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        
 
         .back-link {
             color: #C4622D;
@@ -453,15 +469,6 @@
             }
         }
     </style>
-<header class="article-header">
-        <div class="header-content">
-            <div style="color: white; font-family: Georgia, serif;">
-                <span style="font-size: 24px; font-weight: 400;">THE RAIL</span>
-                <span style="font-size: 24px; font-weight: 700; color: #C4622D;"> WAY</span><span style="font-size: 10px; color: white;">™</span>
-            </div>
-            <a href="https://therailway.us" class="back-link">← Back to Main Site</a>
-        </div>
-    </header>
 <div class="series-banner">
         <strong>Leading Through Uncertainty</strong> &nbsp;|&nbsp; Part 3 of a Series &nbsp;|&nbsp; Originally published in <a class="ra-link" href="https://raw.githubusercontent.com/Textak-AI/trw-assets/main/articles/series/field-leadership-hero.jpg" target="_blank" rel="noopener">Railway Age, January 2026</a>
     </div>
@@ -604,7 +611,7 @@
             <h3>Ready to Lead Yourself First?</h3>
             <p>Discover how The Rail Way™ helps rail leaders build the self-awareness, self-control and resilience that drives real organizational change</p>
             <a href="https://therailway.us#assessment" class="cta-button">Take the Pulse Check Assessment</a>
-            <a href="https://therailway.us#consultation" class="cta-button secondary">Schedule a Consultation</a>
+            <a href="/contact" class="cta-button secondary">Schedule a Consultation</a>
         </div>
     </section>
 <script>
@@ -625,6 +632,38 @@
             window.location.href = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
         }
     </script>
-<div style="max-width:800px;margin:40px auto;padding:20px;text-align:center;font-family:Arial,sans-serif;border-top:1px solid #eee"><a href="/" style="color:#C4622D;font-weight:600;text-decoration:none;font-size:14px">← Back to The Rail Way</a><span style="margin:0 12px;color:#ccc">|</span><a href="/insights" style="color:#C4622D;font-weight:600;text-decoration:none;font-size:14px">All Insights</a></div>
+<footer class="site-footer">
+<div class="site-footer-inner">
+<div class="site-footer-grid">
+<div>
+<img src="https://raw.githubusercontent.com/Textak-AI/trw-assets/main/brand/rail-way-logo-white.png" alt="The Rail Way" style="height:32px;margin-bottom:12px;filter:brightness(1.2)">
+<p class="col-text">A division of KingdomBuilding Leadership, Inc. Transforming how the rail sector develops generational railroaders.</p>
+</div>
+<div>
+<p class="col-head">Services</p>
+<a href="/speak-up-culture" class="col-link">Speak Up Culture</a>
+<a href="/our-process" class="col-link">Our Process</a>
+<a href="/class-ii-iii" class="col-link">Class II &amp; III</a>
+</div>
+<div>
+<p class="col-head">Insights</p>
+<a href="/insights/the-road-ahead" class="col-link">The Road Ahead</a>
+<a href="/insights/lead-yourself-first" class="col-link">Lead Yourself First</a>
+<a href="/insights/leading-through-uncertainty-part-2" class="col-link">What's Your Style?</a>
+<a href="/insights/leaders-navigate-uncertainty" class="col-link">Navigate Uncertainty</a>
+</div>
+<div>
+<p class="col-head">Connect</p>
+<p class="col-contact">pauline@therailway.us</p>
+<p class="col-contact">+1.780.991.9993</p>
+<a href="/contact" class="col-link" style="margin-top:4px">Book a Consultation</a>
+</div>
+</div>
+<div class="site-footer-bottom">
+<p>&copy; 2026 KingdomBuilding Leadership, Inc.</p>
+<p>Privacy Policy &bull; Terms</p>
+</div>
+</div>
+</footer>
 </body>
 </html>
