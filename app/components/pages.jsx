@@ -230,8 +230,73 @@ export function ClassIIContent(){return <>
 </>;}
 
 /* ══════ CONTACT ══════ */
-export function ContactContent(){return <><Sec pad="48px 0 56px"><Bc items={PAGES.contact.bc}/><Eye>Let's Talk</Eye><H1>{PAGES.contact.h1}</H1></Sec><Sec bg={C.cream}><div className="r-grid-2" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:40}}><div><H2>Schedule a Consultation</H2><div style={{display:"flex",flexDirection:"column",gap:12}}>{["First Name","Last Name","Email","Phone","Company","Job Title"].map(f=><div key={f}><label style={{fontFamily:F.b,fontSize:12,color:C.gray,display:"block",marginBottom:4}}>{f}</label><input style={{width:"100%",padding:"10px 12px",borderRadius:5,border:`1px solid ${C.grayRule}`,fontFamily:F.b,fontSize:14,boxSizing:"border-box"}}/></div>)}<select style={{width:"100%",padding:"10px 12px",borderRadius:5,border:`1px solid ${C.grayRule}`,fontFamily:F.b,fontSize:14,background:C.white}}><option>Railroad Type...</option><option>Class I</option><option>Regional (II)</option><option>Short Line (III)</option><option>Industrial</option><option>Passenger</option></select><textarea rows={3} placeholder="What would you like to discuss?" style={{width:"100%",padding:"10px 12px",borderRadius:5,border:`1px solid ${C.grayRule}`,fontFamily:F.b,fontSize:14,resize:"vertical",boxSizing:"border-box"}}/><Btn primary>Submit Request</Btn></div></div>
-  <div><H2>Who This Is For</H2>{[{r:"C-Suite Executives",d:"Strategic culture transformation aligned with business objectives"},{r:"VPs of Safety",d:"Building sustainable safety cultures that deliver results"},{r:"VPs of Operations",d:"Creating conditions for operational excellence"},{r:"HR Leaders",d:"Engaging and retaining workforce through culture"}].map((r,i)=><div key={i} style={{background:C.white,borderRadius:8,padding:16,borderLeft:`3px solid ${C.rust}`,marginBottom:10}}><h3 style={{fontFamily:F.h,fontSize:15,fontWeight:700,color:C.black,margin:"0 0 3px"}}>{r.r}</h3><p style={{fontFamily:F.b,fontSize:13,color:C.gray,margin:0}}>{r.d}</p></div>)}<div style={{marginTop:20,padding:18,background:C.white,borderRadius:8}}><p style={{fontFamily:F.b,fontSize:13,color:C.gray,margin:"0 0 4px"}}>Reach out directly:</p><p style={{fontFamily:F.b,fontSize:14,color:C.black,margin:"0 0 2px",fontWeight:600}}>pauline@therailway.us</p><p style={{fontFamily:F.b,fontSize:14,color:C.black,margin:0}}>+1.780.991.9993</p></div></div></div></Sec></>;}
+export function ContactContent(){
+  const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const formRef = useRef(null);
+
+  const handleSubmit = () => {
+    const form = formRef.current;
+    if (!form) return;
+    const firstName = form.querySelector('#trw_firstname').value;
+    const lastName = form.querySelector('#trw_lastname').value;
+    const email = form.querySelector('#trw_email').value;
+    if (!firstName || !lastName || !email) { alert('Please fill in your name and email.'); return; }
+
+    setSending(true);
+    const data = new FormData();
+    data.append('First Name', firstName);
+    data.append('Last Name', lastName);
+    data.append('email', email);
+    data.append('Phone', form.querySelector('#trw_phone').value);
+    data.append('Company', form.querySelector('#trw_company').value);
+    data.append('Job Title', form.querySelector('#trw_jobtitle').value);
+    data.append('Railroad Type', form.querySelector('#trw_rrtype').value);
+    data.append('Message', form.querySelector('#trw_message').value);
+    data.append('_subject', 'CONSULTATION REQUEST — ' + firstName + ' ' + lastName + ' | ' + (form.querySelector('#trw_company').value || 'Unknown Company'));
+
+    fetch('https://formspree.io/f/manlnepr', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(function(r) {
+      setSending(false);
+      if (r.ok) setSubmitted(true);
+      else alert('Something went wrong. Please email pauline@therailway.us directly.');
+    }).catch(function() {
+      setSending(false);
+      alert('Something went wrong. Please email pauline@therailway.us directly.');
+    });
+  };
+
+  return <><Sec pad="48px 0 56px"><Bc items={PAGES.contact.bc}/><Eye>Let's Talk</Eye><H1>{PAGES.contact.h1}</H1></Sec><Sec bg={C.cream}><div className="r-grid-2" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:40}}>
+  <div>
+    <H2>Schedule a Consultation</H2>
+    {submitted ? (
+      <div style={{background:C.white,borderRadius:8,padding:32,borderLeft:`4px solid ${C.rust}`,textAlign:"center"}}>
+        <h3 style={{fontFamily:F.h,fontSize:20,color:C.rust,margin:"0 0 12px"}}>Thank You</h3>
+        <P>Your consultation request has been received. Pauline or a member of the team will be in touch within one business day.</P>
+      </div>
+    ) : (
+      <div ref={formRef} style={{display:"flex",flexDirection:"column",gap:12}}>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+          <div><label style={{fontFamily:F.b,fontSize:12,color:C.gray,display:"block",marginBottom:4}}>First Name *</label><input id="trw_firstname" style={{width:"100%",padding:"10px 12px",borderRadius:5,border:`1px solid ${C.grayRule}`,fontFamily:F.b,fontSize:14,boxSizing:"border-box"}}/></div>
+          <div><label style={{fontFamily:F.b,fontSize:12,color:C.gray,display:"block",marginBottom:4}}>Last Name *</label><input id="trw_lastname" style={{width:"100%",padding:"10px 12px",borderRadius:5,border:`1px solid ${C.grayRule}`,fontFamily:F.b,fontSize:14,boxSizing:"border-box"}}/></div>
+        </div>
+        <div><label style={{fontFamily:F.b,fontSize:12,color:C.gray,display:"block",marginBottom:4}}>Email *</label><input id="trw_email" type="email" style={{width:"100%",padding:"10px 12px",borderRadius:5,border:`1px solid ${C.grayRule}`,fontFamily:F.b,fontSize:14,boxSizing:"border-box"}}/></div>
+        <div><label style={{fontFamily:F.b,fontSize:12,color:C.gray,display:"block",marginBottom:4}}>Phone</label><input id="trw_phone" type="tel" style={{width:"100%",padding:"10px 12px",borderRadius:5,border:`1px solid ${C.grayRule}`,fontFamily:F.b,fontSize:14,boxSizing:"border-box"}}/></div>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+          <div><label style={{fontFamily:F.b,fontSize:12,color:C.gray,display:"block",marginBottom:4}}>Company</label><input id="trw_company" style={{width:"100%",padding:"10px 12px",borderRadius:5,border:`1px solid ${C.grayRule}`,fontFamily:F.b,fontSize:14,boxSizing:"border-box"}}/></div>
+          <div><label style={{fontFamily:F.b,fontSize:12,color:C.gray,display:"block",marginBottom:4}}>Job Title</label><input id="trw_jobtitle" style={{width:"100%",padding:"10px 12px",borderRadius:5,border:`1px solid ${C.grayRule}`,fontFamily:F.b,fontSize:14,boxSizing:"border-box"}}/></div>
+        </div>
+        <div><label style={{fontFamily:F.b,fontSize:12,color:C.gray,display:"block",marginBottom:4}}>Railroad Type</label><select id="trw_rrtype" style={{width:"100%",padding:"10px 12px",borderRadius:5,border:`1px solid ${C.grayRule}`,fontFamily:F.b,fontSize:14,background:C.white}}><option value="">Railroad Type...</option><option>Class I</option><option>Regional (II)</option><option>Short Line (III)</option><option>Industrial</option><option>Passenger</option></select></div>
+        <div><label style={{fontFamily:F.b,fontSize:12,color:C.gray,display:"block",marginBottom:4}}>What would you like to discuss?</label><textarea id="trw_message" rows={3} style={{width:"100%",padding:"10px 12px",borderRadius:5,border:`1px solid ${C.grayRule}`,fontFamily:F.b,fontSize:14,resize:"vertical",boxSizing:"border-box"}}/></div>
+        <Btn primary onClick={handleSubmit}>{sending ? "Sending..." : "Submit Request"}</Btn>
+      </div>
+    )}
+  </div>
+  <div><H2>Who This Is For</H2>{[{r:"C-Suite Executives",d:"Strategic culture transformation aligned with business objectives"},{r:"VPs of Safety",d:"Building sustainable safety cultures that deliver results"},{r:"VPs of Operations",d:"Creating conditions for operational excellence"},{r:"HR Leaders",d:"Engaging and retaining workforce through culture"}].map((r,i)=><div key={i} style={{background:C.white,borderRadius:8,padding:16,borderLeft:`3px solid ${C.rust}`,marginBottom:10}}><h3 style={{fontFamily:F.h,fontSize:15,fontWeight:700,color:C.black,margin:"0 0 3px"}}>{r.r}</h3><p style={{fontFamily:F.b,fontSize:13,color:C.gray,margin:0}}>{r.d}</p></div>)}<div style={{marginTop:20,padding:18,background:C.white,borderRadius:8}}><p style={{fontFamily:F.b,fontSize:13,color:C.gray,margin:"0 0 4px"}}>Reach out directly:</p><p style={{fontFamily:F.b,fontSize:14,color:C.black,margin:"0 0 2px",fontWeight:600}}>pauline@therailway.us</p><p style={{fontFamily:F.b,fontSize:14,color:C.black,margin:0}}>+1.780.991.9993</p></div></div></div></Sec></>;
+}
 
 /* ══════ LEGACIES ══════ */
 export function LegaciesContent(){return <>
