@@ -35,6 +35,7 @@ function submitLead5() {
     data.append('jobtitle', document.getElementById('trw_jobtitle5').value);
     data.append('email', email);
     data.append('company', document.getElementById('trw_company5').value);
+    data.append('_cc', 'kyle@textak.ai');
     data.append('_subject', 'ASSESSMENT LEAD - Speak Up Culture | Score: ' + document.querySelectorAll('.check5:checked').length + '/8');
     data.append('assessment', 'Speak Up Culture Assessment');
     data.append('score', document.querySelectorAll('.check5:checked').length + '/8');

@@ -35,6 +35,7 @@ function submitLead4() {
     data.append('jobtitle', document.getElementById('trw_jobtitle4').value);
     data.append('email', email);
     data.append('company', document.getElementById('trw_company4').value);
+    data.append('_cc', 'kyle@textak.ai');
     data.append('_subject', 'ASSESSMENT LEAD - Transformation Readiness | Score: ' + document.querySelectorAll('.check4:checked').length + '/7');
     data.append('assessment', 'Transformation Readiness Assessment');
     data.append('score', document.querySelectorAll('.check4:checked').length + '/7');
