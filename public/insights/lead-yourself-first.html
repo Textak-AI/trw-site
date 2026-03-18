@@ -610,9 +610,9 @@ body{margin:0 !important;padding:0}
         <div class="share-section">
             <p>Share this article:</p>
             <div class="share-buttons">
-                <button class="share-button share-linkedin" onclick="shareOnLinkedIn()">Share on LinkedIn</button>
-                <button class="share-button share-twitter" onclick="shareOnTwitter()">Share on Twitter</button>
-                <button class="share-button share-email" onclick="shareViaEmail()">Share via Email</button>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=" class="share-btn linkedin" onclick="this.href=this.href.split("?")[0]+"?url="+encodeURIComponent(window.location.href)" target="_blank" rel="noopener">Share on LinkedIn</a>
+                <a href="https://twitter.com/intent/tweet?url=" class="share-btn twitter" onclick="this.href="https://twitter.com/intent/tweet?text="+encodeURIComponent(document.title)+"&url="+encodeURIComponent(window.location.href)" target="_blank" rel="noopener">Share on X</a>
+                <a href="mailto:" class="share-btn email" onclick="this.href="mailto:?subject="+encodeURIComponent(document.title)+"&body="+encodeURIComponent("Check out this article: "+window.location.href)">Share via Email</a>
             </div>
         </div>
 
