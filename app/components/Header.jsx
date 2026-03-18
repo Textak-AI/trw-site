@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { C, F, IMG, NAV } from "./shared";
@@ -17,72 +16,49 @@ const INSIGHT_LINKS = [
 
 export default function Header(){
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
 
-  return <header style={{background:C.white,borderBottom:`1px solid ${C.grayRule}`,position:"sticky",top:0,zIndex:100}}>
-    <div className="r-header" style={{maxWidth:960,margin:"0 auto",padding:"0 28px",display:"flex",alignItems:"center",justifyContent:"space-between",height:56}}>
-      <Link href="/"><img src={IMG.logo} alt="The Rail Way™" style={{height:36}}/></Link>
-      <nav className="r-nav" style={{display:"flex",gap:16}}>
-        {NAV.map(n=>{
-          const active = (n.href==="/" && pathname==="/") || (n.href!=="/" && pathname.startsWith(n.href));
-          
-          if (n.id === "insights") {
-            return <div key={n.id}
-              style={{position:"relative"}}
-              onMouseEnter={()=>setOpen(true)}
-              onMouseLeave={()=>setOpen(false)}
-            >
-              <Link href={n.href} style={{fontFamily:F.b,fontSize:12.5,fontWeight:600,color:active?C.rust:C.gray,textDecoration:"none",padding:"6px 0",borderBottom:active?`2px solid ${C.rust}`:"2px solid transparent",display:"inline-block"}}>
-                {n.l} <span style={{fontSize:10,opacity:0.5}}>▾</span>
-              </Link>
-              {open && <div style={{
-                position:"absolute",
-                top:"100%",
-                left:"50%",
-                transform:"translateX(-50%)",
-                paddingTop:8,
-                zIndex:200,
-              }}>
-                <div style={{
-                  background:C.white,
-                  borderRadius:8,
-                  boxShadow:"0 8px 30px rgba(0,0,0,0.12)",
-                  border:`1px solid ${C.grayRule}`,
-                  padding:"12px 0",
-                  minWidth:260,
-                }}>
-                  <Link href="/insights" style={{
-                    display:"block",
-                    padding:"8px 20px",
-                    fontFamily:F.b,fontSize:12,fontWeight:700,
-                    color:C.rust,textDecoration:"none",
-                    textTransform:"uppercase",letterSpacing:"1px",
-                    borderBottom:`1px solid ${C.grayRule}`,
-                    marginBottom:4,
-                  }}>All Insights</Link>
-                  {INSIGHT_LINKS.map(a=>
-                    <a key={a.href} href={a.href} style={{
-                      display:"block",
-                      padding:"7px 20px",
-                      fontFamily:F.b,fontSize:13,
-                      color:C.black,textDecoration:"none",
-                      lineHeight:1.4,
-                    }}
-                    onMouseOver={(e)=>{e.currentTarget.style.background=C.cream;e.currentTarget.style.color=C.rust}}
-                    onMouseOut={(e)=>{e.currentTarget.style.background="transparent";e.currentTarget.style.color=C.black}}
-                    >
-                      <span style={{display:"block"}}>{a.l}</span>
-                      <span style={{fontFamily:F.m,fontSize:10,color:C.grayLt}}>{a.cat}</span>
-                    </a>
-                  )}
+  return <>
+    <style>{`
+      .trw-dropdown{position:relative}
+      .trw-dropdown-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);padding-top:4px;z-index:200}
+      .trw-dropdown:hover .trw-dropdown-menu{display:block}
+      .trw-dropdown-panel{background:#fff;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,0.12);border:1px solid #E0E0E0;padding:12px 0;min-width:260px}
+      .trw-dropdown-panel .dd-head{display:block;padding:8px 20px;font-size:12px;font-weight:700;color:#C4622D;text-decoration:none;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #E0E0E0;margin-bottom:4px}
+      .trw-dropdown-panel .dd-item{display:block;padding:7px 20px;font-size:13px;color:#2C2C2C;text-decoration:none;line-height:1.4}
+      .trw-dropdown-panel .dd-item:hover{background:#FAF7F4;color:#C4622D}
+      .trw-dropdown-panel .dd-cat{display:block;font-family:'SF Mono',Consolas,monospace;font-size:10px;color:#999}
+    `}</style>
+    <header style={{background:C.white,borderBottom:`1px solid ${C.grayRule}`,position:"sticky",top:0,zIndex:100}}>
+      <div className="r-header" style={{maxWidth:960,margin:"0 auto",padding:"0 28px",display:"flex",alignItems:"center",justifyContent:"space-between",height:56}}>
+        <Link href="/"><img src={IMG.logo} alt="The Rail Way™" style={{height:36}}/></Link>
+        <nav className="r-nav" style={{display:"flex",gap:16,alignItems:"center"}}>
+          {NAV.map(n=>{
+            const active = (n.href==="/" && pathname==="/") || (n.href!=="/" && pathname.startsWith(n.href));
+            const linkStyle = {fontFamily:F.b,fontSize:12.5,fontWeight:600,color:active?C.rust:C.gray,textDecoration:"none",padding:"6px 0",borderBottom:active?`2px solid ${C.rust}`:"2px solid transparent"};
+
+            if (n.id === "insights") {
+              return <div key={n.id} className="trw-dropdown">
+                <Link href={n.href} style={linkStyle}>
+                  {n.l} <span style={{fontSize:10,opacity:0.5}}>&#9662;</span>
+                </Link>
+                <div className="trw-dropdown-menu">
+                  <div className="trw-dropdown-panel" style={{fontFamily:F.b}}>
+                    <Link href="/insights" className="dd-head">All Insights</Link>
+                    {INSIGHT_LINKS.map(a=>
+                      <a key={a.href} href={a.href} className="dd-item">
+                        <span style={{display:"block"}}>{a.l}</span>
+                        <span className="dd-cat">{a.cat}</span>
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>}
-            </div>;
-          }
-          
-          return <Link key={n.id} href={n.href} style={{fontFamily:F.b,fontSize:12.5,fontWeight:600,color:active?C.rust:C.gray,textDecoration:"none",padding:"6px 0",borderBottom:active?`2px solid ${C.rust}`:"2px solid transparent"}}>{n.l}</Link>;
-        })}
-      </nav>
-    </div>
-  </header>;
+              </div>;
+            }
+
+            return <Link key={n.id} href={n.href} style={linkStyle}>{n.l}</Link>;
+          })}
+        </nav>
+      </div>
+    </header>
+  </>;
 }
