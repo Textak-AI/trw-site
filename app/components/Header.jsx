@@ -31,7 +31,7 @@ export default function Header(){
     `}</style>
     <header style={{background:C.white,borderBottom:`1px solid ${C.grayRule}`,position:"sticky",top:0,zIndex:100}}>
       <div className="r-header" style={{maxWidth:960,margin:"0 auto",padding:"0 28px",display:"flex",alignItems:"center",justifyContent:"space-between",height:56}}>
-        <Link href="/"><img src={IMG.logo} alt="The Rail Way™" style={{height:44}}/></Link>
+        <Link href="/" style={{display:"flex",alignItems:"center",height:"100%"}}><img src={IMG.logo} alt="The Rail Way™" style={{height:44,display:"block"}}/></Link>
         <nav className="r-nav" style={{display:"flex",gap:16,alignItems:"center",height:"100%"}}>
           {NAV.map(n=>{
             const active = (n.href==="/" && pathname==="/") || (n.href!=="/" && pathname.startsWith(n.href));
