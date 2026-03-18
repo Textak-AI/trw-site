@@ -253,7 +253,7 @@ export function ContactContent(){
     data.append('Job Title', form.querySelector('#trw_jobtitle').value);
     data.append('Railroad Type', form.querySelector('#trw_rrtype').value);
     data.append('Message', form.querySelector('#trw_message').value);
-    data.append('_cc', 'kyle@textak.ai');
+    data.append('_cc', 'pauline@therailway.us');
     data.append('_subject', 'CONSULTATION REQUEST — ' + firstName + ' ' + lastName + ' | ' + (form.querySelector('#trw_company').value || 'Unknown Company'));
 
     fetch('https://formspree.io/f/manlnepr', {

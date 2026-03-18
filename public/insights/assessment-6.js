@@ -35,7 +35,7 @@ function submitLead6() {
     data.append('jobtitle', document.getElementById('trw_jobtitle6').value);
     data.append('email', email);
     data.append('company', document.getElementById('trw_company6').value);
-    data.append('_cc', 'kyle@textak.ai');
+    data.append('_cc', 'pauline@therailway.us');
     data.append('_subject', 'ASSESSMENT LEAD - Safety Culture ROI | Score: ' + document.querySelectorAll('.check6:checked').length + '/6');
     data.append('assessment', 'Safety Culture ROI Readiness Assessment');
     data.append('score', document.querySelectorAll('.check6:checked').length + '/6');
