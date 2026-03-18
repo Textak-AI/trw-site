@@ -5,7 +5,13 @@ import Footer from "./components/Footer";
 
 export const metadata = {
   metadataBase: new URL("https://trw-site.vercel.app"),
-  icons: { icon: "/favicon.ico" },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
