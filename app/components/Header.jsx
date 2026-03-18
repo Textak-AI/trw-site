@@ -19,11 +19,12 @@ export default function Header(){
 
   return <>
     <style>{`
-      .trw-dropdown{position:relative}
-      .trw-dropdown-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);padding-top:4px;z-index:200}
+      .trw-dropdown{position:relative;display:flex;align-items:center;padding:14px 0}
+      .trw-dropdown-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);padding-top:0;z-index:200}
       .trw-dropdown:hover .trw-dropdown-menu{display:block}
       .trw-dropdown-panel{background:#fff;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,0.12);border:1px solid #E0E0E0;padding:12px 0;min-width:260px}
       .trw-dropdown-panel .dd-head{display:block;padding:8px 20px;font-size:12px;font-weight:700;color:#C4622D;text-decoration:none;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #E0E0E0;margin-bottom:4px}
+      .trw-dropdown-panel .dd-head:hover{background:#FAF7F4}
       .trw-dropdown-panel .dd-item{display:block;padding:7px 20px;font-size:13px;color:#2C2C2C;text-decoration:none;line-height:1.4}
       .trw-dropdown-panel .dd-item:hover{background:#FAF7F4;color:#C4622D}
       .trw-dropdown-panel .dd-cat{display:block;font-family:'SF Mono',Consolas,monospace;font-size:10px;color:#999}
@@ -31,7 +32,7 @@ export default function Header(){
     <header style={{background:C.white,borderBottom:`1px solid ${C.grayRule}`,position:"sticky",top:0,zIndex:100}}>
       <div className="r-header" style={{maxWidth:960,margin:"0 auto",padding:"0 28px",display:"flex",alignItems:"center",justifyContent:"space-between",height:56}}>
         <Link href="/"><img src={IMG.logo} alt="The Rail Way™" style={{height:36}}/></Link>
-        <nav className="r-nav" style={{display:"flex",gap:16,alignItems:"center"}}>
+        <nav className="r-nav" style={{display:"flex",gap:16,alignItems:"center",height:"100%"}}>
           {NAV.map(n=>{
             const active = (n.href==="/" && pathname==="/") || (n.href!=="/" && pathname.startsWith(n.href));
             const linkStyle = {fontFamily:F.b,fontSize:12.5,fontWeight:600,color:active?C.rust:C.gray,textDecoration:"none",padding:"6px 0",borderBottom:active?`2px solid ${C.rust}`:"2px solid transparent"};

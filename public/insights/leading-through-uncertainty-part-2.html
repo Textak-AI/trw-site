@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Leading Through Uncertainty (Part 2) | The Rail Way</title>
 <style>
-.site-nav{background:#fff;border-bottom:1px solid #E0E0E0;position:sticky;top:0;z-index:100}
-.site-nav-inner{max-width:960px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.site-nav{background:#fff;border-bottom:1px solid #E0E0E0;position:sticky;top:0;z-index:100;overflow:visible}
+.site-nav-inner{max-width:960px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:56px;overflow:visible}
 .site-nav img{height:36px}
-.site-nav-links{display:flex;gap:16px}
+.site-nav-links{display:flex;gap:16px;align-items:center;height:100%}
 .site-nav-links a{font-family:'Segoe UI',Arial,sans-serif;font-size:12.5px;font-weight:600;color:#666;text-decoration:none;padding:6px 0;border-bottom:2px solid transparent}
 .site-nav-links a:hover{color:#C4622D}
 .site-nav-links a.active{color:#C4622D;border-bottom-color:#C4622D}
@@ -34,6 +34,17 @@
 
 
 .site-footer-grid{grid-template-columns:1fr 1fr;gap:20px}}
+
+.site-nav .si-dd{position:relative;display:inline-flex;align-items:center;padding:14px 0;margin:-14px 0}
+.site-nav .si-dd>a{font-family:'Segoe UI',Arial,sans-serif;font-size:12.5px;font-weight:600;color:#C4622D;text-decoration:none;padding:6px 0;border-bottom:2px solid #C4622D}
+.site-nav .si-dd-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);z-index:200;padding-top:0}
+.site-nav .si-dd:hover .si-dd-menu{display:block}
+.site-nav .si-dd-panel{background:#fff;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,0.12);border:1px solid #E0E0E0;padding:12px 0;min-width:260px}
+.site-nav .si-dd-panel a.si-head{display:block;padding:8px 20px;font-family:'Segoe UI',Arial,sans-serif;font-size:12px;font-weight:700;color:#C4622D;text-decoration:none;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #E0E0E0;margin-bottom:4px}
+.site-nav .si-dd-panel a.si-head:hover{background:#FAF7F4}
+.site-nav .si-dd-panel a.si-item{display:block;padding:7px 20px;font-family:'Segoe UI',Arial,sans-serif;font-size:13px;color:#2C2C2C;text-decoration:none;line-height:1.4}
+.site-nav .si-dd-panel a.si-item:hover{background:#FAF7F4;color:#C4622D}
+.site-nav .si-dd-panel .si-cat{display:block;font-family:'SF Mono',Consolas,monospace;font-size:10px;color:#999}
 </style>
 </head>
 <body style="margin:0">
@@ -45,7 +56,7 @@
 <a href="/speak-up-culture">Speak Up Culture</a>
 <a href="/our-process">Our Process</a>
 <a href="/class-ii-iii">Class II &amp; III</a>
-<a href="/insights" class="active">Insights</a>
+<div class="si-dd"><a href="/insights">Insights <span style="font-size:10px;opacity:0.5">&#9662;</span></a><div class="si-dd-menu"><div class="si-dd-panel"><a href="/insights" class="si-head">All Insights</a><a href="/insights/the-road-ahead" class="si-item">The Road Ahead<span class="si-cat">Series Part 4</span></a><a href="/insights/lead-yourself-first" class="si-item">Lead Yourself First<span class="si-cat">Series Part 3</span></a><a href="/insights/leading-through-uncertainty-part-2" class="si-item">What's Your Style?<span class="si-cat">Series Part 2</span></a><a href="/insights/leaders-navigate-uncertainty" class="si-item">Navigate Uncertainty<span class="si-cat">Series Part 1</span></a><a href="/insights/rail-safety-human-factors" class="si-item">Rail Safety by the Numbers<span class="si-cat">Data &amp; Analysis</span></a><a href="/insights/speak-up-culture-rail-safety" class="si-item">Speak Up Culture<span class="si-cat">Speak Up Culture</span></a><a href="/insights/transformation-vs-training" class="si-item">Transformation vs. Training<span class="si-cat">Culture Change</span></a><a href="/insights/roi-safety-culture" class="si-item">The ROI of Safety Culture<span class="si-cat">ROI &amp; Data</span></a></div></div></div>
 <a href="/about">About</a>
 <a href="/legacies">Legacies</a>
 <a href="/contact">Contact</a>
