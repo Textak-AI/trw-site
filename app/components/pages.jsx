@@ -1,4 +1,5 @@
 "use client";
+import { useState, useRef } from "react";
 import { C, F, IMG, PAGES } from "./shared";
 import { Img, Sec, Eye, H1, H2, H3, P, Btn, FAQ, Stat, Bc } from "./ui";
 
