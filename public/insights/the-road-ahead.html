@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Road Ahead | The Rail Way</title>
+<style>
+.trw-nav-header{background:#2C2C2C;padding:16px 0;border-bottom:3px solid #C4622D}
+.trw-nav-header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.trw-nav-header .logo-text{font-family:Georgia,serif;font-size:18px;color:#fff;letter-spacing:.5px;text-decoration:none}
+.trw-nav-header .logo-text span{color:#C4622D;font-weight:700}
+.trw-nav-header .back-link{font-family:Arial,sans-serif;font-size:14px;color:#C4622D;text-decoration:none;font-weight:600}
+.trw-nav-header .back-link:hover{color:#e07a3a;text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="trw-nav-header"><div class="trw-nav-header-inner"><a href="/" class="logo-text">THE RAIL <span>WAY</span>™</a><a href="/" class="back-link">← Back to Main Site</a></div></div>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.7;
+            color: #333;
+            background-color: #fff;
+        }
+
+        /* Header */
+        .article-header {
+            background-color: #2C2C2C;
+            padding: 20px 0;
+            border-bottom: 3px solid #C4622D;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            color: #C4622D;
+            text-decoration: none;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Series banner */
+        .series-banner {
+            background-color: #F5E6D3;
+            border-bottom: 2px solid #C4622D;
+            text-align: center;
+            padding: 12px 20px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #2C2C2C;
+            letter-spacing: 0.03em;
+        }
+
+        .series-banner strong {
+            color: #C4622D;
+        }
+
+        .ra-link {
+            color: #C4622D;
+            text-decoration: none;
+        }
+
+        .ra-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Hero Section */
+        .article-hero {
+            background: linear-gradient(rgba(44, 44, 44, 0.72), rgba(44, 44, 44, 0.72)),
+                        url('https://raw.githubusercontent.com/Textak-AI/trw-assets/main/articles/series/the-road-ahead-hero.jpg') center/cover;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 60px 20px;
+        }
+
+        .article-title {
+            font-size: 44px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            max-width: 900px;
+            line-height: 1.2;
+        }
+
+        .article-subtitle {
+            font-size: 22px;
+            font-weight: 300;
+            font-style: italic;
+            color: #f0f0f0;
+        }
+
+        /* Article Content */
+        .article-content {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 40px;
+        }
+
+        .article-meta {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .byline {
+            font-size: 18px;
+            color: #C4622D;
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: 0.05em;
+        }
+
+        .article-date {
+            font-size: 14px;
+            color: #666;
+            font-family: Arial, sans-serif;
+            margin-bottom: 4px;
+        }
+
+        /* RA badge */
+        .ra-published {
+            display: inline-block;
+            background-color: #2C2C2C;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 3px;
+            margin-bottom: 12px;
+        }
+
+        .article-content p {
+            margin-bottom: 25px;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .article-content h2 {
+            font-size: 26px;
+            color: #1a7a9e;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .article-content ul {
+            margin: 25px 0 25px 40px;
+            list-style-type: disc;
+        }
+
+        .article-content li {
+            margin-bottom: 12px;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .pullquote {
+            background-color: #f8f8f8;
+            border-left: 5px solid #C4622D;
+            padding: 30px 40px;
+            margin: 40px 0;
+            font-size: 22px;
+            font-style: italic;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        /* Stat callout */
+        .stat-callout {
+            background-color: #2C2C2C;
+            color: #fff;
+            border-radius: 8px;
+            padding: 30px 40px;
+            margin: 40px 0;
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .stat-item .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #C4622D;
+            line-height: 1;
+            display: block;
+            font-family: Georgia, serif;
+        }
+
+        .stat-item .stat-label {
+            font-size: 14px;
+            color: #ccc;
+            font-family: Arial, sans-serif;
+            margin-top: 8px;
+            display: block;
+            max-width: 160px;
+            line-height: 1.4;
+        }
+
+        /* Series recap box */
+        .series-recap {
+            background-color: #F5E6D3;
+            border: 2px solid #C4622D;
+            border-radius: 8px;
+            padding: 30px 40px;
+            margin: 40px 0;
+        }
+
+        .series-recap p.recap-label {
+            font-family: Arial, sans-serif;
+            font-size: 12px !important;
+            color: #C4622D !important;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 16px !important;
+            font-weight: 700;
+        }
+
+        .series-recap .recap-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 14px;
+            align-items: flex-start;
+        }
+
+        .recap-num {
+            background-color: #C4622D;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .recap-text {
+            font-size: 16px;
+            color: #2C2C2C;
+            line-height: 1.5;
+        }
+
+        .recap-text strong {
+            color: #C4622D;
+        }
+
+        /* Synthesis list */
+        .synthesis-list {
+            list-style: none !important;
+            margin: 0 0 25px 0 !important;
+            padding: 0;
+        }
+
+        .synthesis-list li {
+            font-size: 18px !important;
+            line-height: 1.8 !important;
+            margin-bottom: 18px !important;
+            padding-left: 28px;
+            position: relative;
+        }
+
+        .synthesis-list li::before {
+            content: "&#8212;";
+            position: absolute;
+            left: 0;
+            color: #C4622D;
+            font-weight: 700;
+        }
+
+        .synthesis-list li strong {
+            color: #1a7a9e;
+        }
+
+        /* Assessment CTA */
+        .assessment-cta {
+            background-color: #f8f8f8;
+            border-left: 5px solid #1a7a9e;
+            border-radius: 0 8px 8px 0;
+            padding: 25px 35px;
+            margin: 40px 0;
+        }
+
+        .assessment-cta p {
+            margin-bottom: 15px !important;
+            font-size: 16px !important;
+            color: #555;
+        }
+
+        .assessment-cta a.assessment-btn {
+            display: inline-block;
+            background-color: #C4622D;
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .assessment-cta a.assessment-btn:hover {
+            background-color: #a54d1e;
+        }
+
+        /* Inline Images */
+        .inline-image-right {
+            float: right;
+            width: 45%;
+            margin: 0 0 30px 40px;
+        }
+
+        .inline-image-left {
+            float: left;
+            width: 45%;
+            margin: 0 40px 30px 0;
+        }
+
+        .inline-image-right img,
+        .inline-image-left img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .image-caption {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* Series nav */
+        .series-nav {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 25px 30px;
+            margin: 40px 0;
+        }
+
+        .series-nav p {
+            font-family: Arial, sans-serif;
+            font-size: 14px !important;
+            color: #666 !important;
+            margin-bottom: 10px !important;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .series-nav a {
+            display: block;
+            font-size: 16px;
+            color: #C4622D;
+            text-decoration: none;
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+
+        .series-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .series-nav .current {
+            color: #2C2C2C;
+            font-weight: 600;
+            pointer-events: none;
+        }
+
+        /* Author Bio */
+        .author-bio {
+            background-color: #f8f8f8;
+            padding: 40px;
+            margin-top: 60px;
+            border-radius: 8px;
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .author-image { flex-shrink: 0; }
+
+        .author-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-text h3 {
+            color: #2C2C2C;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .author-text p {
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background-color: #2C2C2C;
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .cta-section h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #ddd;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: #C4622D;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover { background-color: #a54d1e; }
+
+        .cta-button.secondary {
+            background-color: transparent;
+            border: 2px solid #C4622D;
+        }
+
+        .cta-button.secondary:hover { background-color: #C4622D; }
+
+        /* Social Share */
+        .share-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px 0;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .share-section p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #666;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .share-button {
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: Arial, sans-serif;
+        }
+
+        .share-linkedin { background: #0077b5; }
+        .share-twitter  { background: #1da1f2; }
+        .share-email    { background: #666; }
+
+        .share-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Clearfix */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        @media (max-width: 768px) {
+            .article-title { font-size: 28px; }
+            .article-subtitle { font-size: 17px; }
+            .article-content { padding: 0 20px; }
+            .article-content p { font-size: 16px; }
+            .article-content h2 { font-size: 22px; }
+            .inline-image-right,
+            .inline-image-left {
+                float: none;
+                width: 100%;
+                margin: 30px 0;
+            }
+            .author-bio {
+                flex-direction: column;
+                text-align: center;
+            }
+            .pullquote {
+                font-size: 18px;
+                padding: 20px 25px;
+            }
+            .stat-callout { flex-direction: column; gap: 20px; }
+            .stat-item .stat-number { font-size: 36px; }
+            .cta-button {
+                display: block;
+                margin: 10px auto;
+                max-width: 280px;
+                text-align: center;
+            }
+        }
+    </style>
+<header class="article-header">
+        <div class="header-content">
+            <div style="color: white; font-family: Georgia, serif;">
+                <span style="font-size: 24px; font-weight: 400;">THE RAIL</span>
+                <span style="font-size: 24px; font-weight: 700; color: #C4622D;"> WAY</span><span style="font-size: 10px; color: white;">™</span>
+            </div>
+            <a href="https://therailway.us" class="back-link">← Back to Main Site</a>
+        </div>
+    </header>
+<div class="series-banner">
+        <strong>Leading Through Uncertainty</strong> &nbsp;|&nbsp; Part 4 of 4 — Series Conclusion &nbsp;|&nbsp; Railway Age, February 2026
+    </div>
+<section class="article-hero">
+        <div>
+            <h1 class="article-title">The Road Ahead: Putting It All&nbsp;Together</h1>
+            <p class="article-subtitle">Hope is not a strategy. Here is what is.</p>
+        </div>
+    </section>
+<article class="article-content">
+
+        <!-- Author / Publication Info -->
+        <div class="article-meta">
+            <span class="ra-published">Railway Age — Series Conclusion, Part 2 of 4</span>
+            <p class="byline">PAULINE LIPKEWICH</p>
+            <p class="article-date">Contributing Editor — Chief Transformation Officer, KingdomBuilding Leadership, Inc.</p>
+            <p class="article-date">Railway Age &nbsp;//&nbsp; February 2026</p>
+        </div>
+
+        <p>The numbers don't lie.</p>
+
+        <!-- Stats Callout -->
+        <div class="stat-callout">
+            <div class="stat-item">
+                <span class="stat-number">54%</span>
+                <span class="stat-label">of workers say job insecurity significantly impacts their stress</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">44%</span>
+                <span class="stat-label">say changes happen at work with little to no warning</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">40%</span>
+                <span class="stat-label">expect the job market to worsen in 2026</span>
+            </div>
+        </div>
+
+        <p>According to the American Psychological Association's 2025 Work in America survey, more than half of workers say job insecurity is significantly impacting their stress levels, and nearly half report facing major changes with little to no warning. Manufacturing activity has contracted for ten consecutive months, tariff uncertainty continues to reshape supply chains, and freight volumes remain volatile.</p>
+
+        <p>For our industry specifically, the challenges cut deeper. Financial Editor David Nahass observed that the industrial economy is bearing the brunt of a kind of weakness creating great uncertainty about 2026 and its prospects. In a recent survey of rail contractors, workforce availability emerged as a top concern heading into the year — a labor shortage that can negatively impact project timelines, profitability, and safety performance.</p>
+
+        <p>These are our realities. And they are precisely why the leadership principles we've explored throughout this series matter more now than ever.</p>
+
+        <h2>The Choice Before Every Rail Leader</h2>
+
+        <div class="inline-image-right">
+            <img decoding="async" data-src="https://raw.githubusercontent.com/Textak-AI/trw-assets/main/articles/series/leader-talking-tracks.jpg" alt="Freight train on open track representing the road ahead" src="https://raw.githubusercontent.com/Textak-AI/trw-assets/main/articles/series/leader-talking-tracks.jpg" class=" ls-is-cached lazyloaded" style="--smush-placeholder-width: 800px; --smush-placeholder-aspect-ratio: 800/533;">
+            <p class="image-caption">The road ahead requires leaders who choose resolve over retreat</p>
+        </div>
+
+        <p>The past three articles examined what distinguishes leaders who transform uncertainty into competitive advantage. We started with the four-stage cycle: Heighten Awareness, Increase Clarity, Build Alignment, and Drive Momentum. We explored the leadership styles that emerge under stress — the Hammer who gets short-term results while destroying long-term trust, and the People Pleaser who mistakes kindness for permissiveness. Recognizing we must lead ourselves before leading others, Article 3 reviewed the Trinity of Excellence: self-awareness, self-control, and self-respect.</p>
+
+        <!-- Series Recap -->
+        <div class="series-recap">
+            <p class="recap-label">The Series at a Glance — Leading Through Uncertainty</p>
+            <div class="recap-item">
+                <span class="recap-num">1</span>
+                <span class="recap-text"><strong>The Four-Stage Cycle:</strong> Heighten Awareness, Increase Clarity, Build Alignment, Drive Momentum</span>
+            </div>
+            <div class="recap-item">
+                <span class="recap-num">2</span>
+                <span class="recap-text"><strong>Leadership Under Stress:</strong> Recognizing the Hammer and the People Pleaser — and choosing a better path</span>
+            </div>
+            <div class="recap-item">
+                <span class="recap-num">3</span>
+                <span class="recap-text"><strong>The Trinity of Excellence:</strong> Know Yourself, Control Yourself, Respect Yourself</span>
+            </div>
+            <div class="recap-item">
+                <span class="recap-num">4</span>
+                <span class="recap-text"><strong>The Road Ahead:</strong> Putting it all together when it matters most</span>
+            </div>
+        </div>
+
+        <p>We now have a choice. We can use these realities and predictions to justify fear, paralysis, and retreat — or we can recognize them for what they are:</p>
+
+        <div class="pullquote">
+            The greatest opportunity for differentiation a career may ever present.
+        </div>
+
+        <div class="clearfix"></div>
+
+        <h2>Why Uncertainty Creates Opportunity</h2>
+
+        <div class="inline-image-left">
+            
+            <p class="image-caption">The leader who invests in people becomes a magnet for the best performers fleeing toxic environments</p>
+        </div>
+
+        <p>When workers feel burned out, the leader who genuinely invests in their people's well-being becomes a magnet for the best performers fleeing toxic environments. When workforce availability is the industry's greatest concern, the organization that treats railroaders with dignity solves a problem technology alone cannot fix.</p>
+
+        <p>Class I leaders themselves acknowledge 2026 will bring limited volume growth and continued macroeconomic headwinds. CN's Tracy Robinson put it directly: we're not accepting the macro reality as our fate — we're just going to have to work harder to achieve our goals.</p>
+
+        <div class="pullquote">
+            That's not optimism. It's fierce resolve — and the posture of leadership.
+        </div>
+
+        <div class="clearfix"></div>
+
+        <h2>Putting It All Together</h2>
+
+        <p>The synthesis is straightforward, even when implementation is not. Each element of the framework applies directly to what 2026 demands:</p>
+
+        <ul>
+            <li><strong>Heighten Awareness</strong> of what's really happening in your operation. The macro trends are industry-wide, but your track crews, signal maintainers, and yard workers see realities the boardroom misses. Ask them what they're seeing about the challenges ahead.</li>
+            <li><strong>Increase Clarity</strong> by establishing decision anchors that work even during uncertainty. When your people encounter unexpected conditions, can they make quick decisions without waiting for you? If not, deliver clarity to build trust and drive performance.</li>
+            <li><strong>Build Alignment</strong> around a higher purpose. Safety remains the central mission for our industry. But beyond safety — what other purpose-driven pursuit can galvanize your team so they flourish, even during uncertainty?</li>
+            <li><strong>Drive Momentum</strong> by celebrating early wins while recognizing they reveal the next challenges. Success in one area gives you the credibility and organizational confidence to tackle what comes next.</li>
+        </ul>
+
+        <p>And through each stage, lead yourself first. Know your triggers. Control your responses. Respect your capacity. A burned-out leader cannot solve a burnout crisis. A fearful leader cannot inspire confidence. A reactive leader cannot build strategic momentum.</p>
+
+        <h2>The Final Word</h2>
+
+        <p>Since hope is not a strategy, 2026 will reveal which rail leaders are prepared and proactive — and which are not.</p>
+
+        <p>The organizations that will thrive — attracting talent, maintaining safety standards, achieving results without destroying their people — will be led by those who master themselves first.</p>
+
+        <p>We cannot control the macro environment, eliminate tariff uncertainty, or instantly create skilled workers. But we can control how we respond. We can control whether we lead from fear or purpose, whether we build trust or destroy it.</p>
+
+        <!-- Assessment CTA -->
+        <div class="assessment-cta">
+            <p><strong>Is your leadership a competitive advantage during uncertainty?</strong> Take the Rail Way™ leadership assessment to find out where you stand — and what to do next.</p>
+            <a href="https://www.surveymonkey.com/r/TheRailWay_Lead" target="_blank" rel="noopener" class="assessment-btn">Take the Leadership Assessment →</a>
+        </div>
+
+        <!-- Series Navigation -->
+        <div class="series-nav">
+            <p>Leading Through Uncertainty — Full Series</p>
+            <a href="/leading-through-uncertainty">← Part 1: How Leaders Navigate Uncertainty and Come Out Stronger</a>
+            <a href="/leading-through-uncertainty-2">← Part 3: Lead Yourself First</a>
+            <a href="/leading-through-uncertainty-the-road-ahead" class="current">Part 4: The Road Ahead (Series Conclusion)</a>
+        </div>
+
+        <!-- Share Section -->
+        <div class="share-section">
+            <p>Share this article:</p>
+            <div class="share-buttons">
+                <button class="share-button share-linkedin" onclick="shareOnLinkedIn()">Share on LinkedIn</button>
+                <button class="share-button share-twitter" onclick="shareOnTwitter()">Share on Twitter</button>
+                <button class="share-button share-email" onclick="shareViaEmail()">Share via Email</button>
+            </div>
+        </div>
+
+        <!-- Author Bio -->
+        <div class="author-bio">
+            <div class="author-image">
+                
+            </div>
+            <div class="author-text">
+                <h3>About Pauline Lipkewich</h3>
+                <p>Pauline Lipkewich is Contributing Editor for Railway Age and Chief Transformation Officer at KingdomBuilding Leadership, Inc. She has been railroading since 2011 and has worked with Class I operators including CN, KCS, and NS, focusing on safety performance and operational effectiveness improvements.</p>
+                <p>She runs a boutique firm committed to helping individuals and organizations go further, faster by leveraging behaviors and culture as a key competitive advantage. Her love of leadership, heavy industry, and unlocking the potential in people is the genesis in bringing The Rail Way™ to life.</p>
+                <p><strong>Contact:</strong> <a href="mailto:pauline@therailway.us">pauline@therailway.us</a> &nbsp;|&nbsp; +1.780.991.9993</p>
+            </div>
+        </div>
+
+    </article>
+<section class="cta-section">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h3>Is Your Leadership Ready for 2026?</h3>
+            <p>See how The Rail Way™ helps rail organizations build the leadership culture that turns uncertainty into competitive advantage</p>
+            <a href="https://www.surveymonkey.com/r/TheRailWay_Lead" target="_blank" rel="noopener" class="cta-button">Take the Leadership Assessment</a>
+            <a href="https://therailway.us#consultation" class="cta-button secondary">Schedule a Consultation</a>
+        </div>
+    </section>
+<script>
+        function shareOnLinkedIn() {
+            const url = window.location.href;
+            window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url), 'share-dialog', 'width=600,height=400');
+        }
+
+        function shareOnTwitter() {
+            const title = "Leading Through Uncertainty: The Road Ahead";
+            const url = window.location.href;
+            window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(url), 'share-dialog', 'width=600,height=400');
+        }
+
+        function shareViaEmail() {
+            const subject = "Leading Through Uncertainty: The Road Ahead";
+            const body = "I thought you'd find this article from The Rail Way\u2122 insightful:\n\nLeading Through Uncertainty: The Road Ahead\n\n" + window.location.href;
+            window.location.href = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        }
+    </script>
+<div style="max-width:800px;margin:40px auto;padding:20px;text-align:center;font-family:Arial,sans-serif;border-top:1px solid #eee"><a href="/" style="color:#C4622D;font-weight:600;text-decoration:none;font-size:14px">← Back to The Rail Way</a><span style="margin:0 12px;color:#ccc">|</span><a href="/insights" style="color:#C4622D;font-weight:600;text-decoration:none;font-size:14px">All Insights</a></div>
+</body>
+</html>

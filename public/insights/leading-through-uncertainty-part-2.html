@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leading Through Uncertainty (Part 2) | The Rail Way</title>
+<style>
+.trw-nav-header{background:#2C2C2C;padding:16px 0;border-bottom:3px solid #C4622D}
+.trw-nav-header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.trw-nav-header .logo-text{font-family:Georgia,serif;font-size:18px;color:#fff;letter-spacing:.5px;text-decoration:none}
+.trw-nav-header .logo-text span{color:#C4622D;font-weight:700}
+.trw-nav-header .back-link{font-family:Arial,sans-serif;font-size:14px;color:#C4622D;text-decoration:none;font-weight:600}
+.trw-nav-header .back-link:hover{color:#e07a3a;text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="trw-nav-header"><div class="trw-nav-header-inner"><a href="/" class="logo-text">THE RAIL <span>WAY</span>™</a><a href="/" class="back-link">← Back to Main Site</a></div></div>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.7;
+            color: #333;
+            background-color: #fff;
+        }
+        
+        /* Header */
+        .article-header {
+            background-color: #2C2C2C;
+            padding: 20px 0;
+            border-bottom: 3px solid #C4622D;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .back-link {
+            color: #C4622D !important;
+            text-decoration: none;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline !important;
+        }
+
+        /* Series banner */
+        .series-banner {
+            background-color: #F5E6D3;
+            border-bottom: 2px solid #C4622D;
+            text-align: center;
+            padding: 12px 20px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #2C2C2C;
+            letter-spacing: 0.03em;
+        }
+
+        .series-banner strong {
+            color: #C4622D;
+        }
+
+        .ra-link {
+            color: #C4622D;
+            text-decoration: none;
+        }
+
+        .ra-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Hero Section */
+        .article-hero {
+            background: linear-gradient(rgba(44, 44, 44, 0.7), rgba(44, 44, 44, 0.7)), 
+                        url('https://raw.githubusercontent.com/Textak-AI/trw-assets/main/articles/series/leader-talking-tracks.jpg') center 20%/cover;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 60px 20px;
+        }
+        
+        .article-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            max-width: 900px;
+            line-height: 1.2;
+        }
+        
+        .article-subtitle {
+            font-size: 24px;
+            font-weight: 300;
+            font-style: italic;
+            color: #f0f0f0;
+        }
+        
+        /* Article Content */
+        .article-content {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 40px;
+        }
+        
+        .article-meta {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .ra-published {
+            display: inline-block;
+            background-color: #2C2C2C;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 5px 14px;
+            border-radius: 3px;
+            margin-bottom: 14px;
+        }
+        
+        .byline {
+            font-size: 18px;
+            color: #C4622D;
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: 0.05em;
+        }
+        
+        .article-date {
+            font-size: 14px;
+            color: #666;
+            font-family: Arial, sans-serif;
+        }
+        
+        .article-content p {
+            margin-bottom: 25px;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        
+        .article-content h2 {
+            font-size: 28px;
+            color: #C4622D;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            border-bottom: 2px solid #C4622D;
+            padding-bottom: 8px;
+        }
+        
+        .article-content h3 {
+            font-size: 22px;
+            color: #2C2C2C;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .article-content ul {
+            margin: 25px 0 25px 40px;
+            list-style-type: disc;
+        }
+        
+        .article-content li {
+            margin-bottom: 12px;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        
+        .pullquote {
+            background-color: #f8f8f8;
+            border-left: 5px solid #C4622D;
+            padding: 30px 40px;
+            margin: 40px 0;
+            font-size: 22px;
+            font-style: italic;
+            color: #444;
+            line-height: 1.6;
+        }
+        
+        /* Inline Images */
+        .inline-image-right {
+            float: right;
+            width: 45%;
+            margin: 0 0 30px 40px;
+        }
+        
+        .inline-image-left {
+            float: left;
+            width: 45%;
+            margin: 0 40px 30px 0;
+        }
+        
+        .inline-image-right img,
+        .inline-image-left img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .image-caption {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        sup {
+            color: #C4622D;
+            font-weight: 600;
+        }
+        
+        .sources-section {
+            background-color: #f8f8f8;
+            padding: 40px;
+            margin-top: 60px;
+            border-radius: 8px;
+            border-top: 3px solid #C4622D;
+        }
+        
+        .sources-section h3 {
+            color: #2C2C2C;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        
+        .sources-section p {
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .sources-section a {
+            color: #C4622D;
+            word-break: break-all;
+        }
+
+        /* Series Nav */
+        .series-nav {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 25px 30px;
+            margin: 40px 0;
+        }
+
+        .series-nav p {
+            font-family: Arial, sans-serif;
+            font-size: 14px !important;
+            color: #666 !important;
+            margin-bottom: 10px !important;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .series-nav a {
+            display: block;
+            font-size: 16px;
+            color: #C4622D !important;
+            text-decoration: none;
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+
+        .series-nav a:hover {
+            text-decoration: underline !important;
+        }
+
+        .series-nav .current {
+            display: block;
+            font-size: 16px;
+            color: #2C2C2C;
+            font-weight: 600;
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+        
+        /* Author Bio */
+        .author-bio {
+            background-color: #f8f8f8;
+            padding: 40px;
+            margin-top: 60px;
+            border-radius: 8px;
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        
+        .author-image {
+            flex-shrink: 0;
+        }
+        
+        .author-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .author-text h3 {
+            color: #2C2C2C;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        
+        .author-text p {
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        /* Call to Action */
+        .cta-section {
+            background-color: #2C2C2C;
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .cta-section h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #ddd;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: #C4622D;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: #a54d1e;
+        }
+        
+        .cta-button.secondary {
+            background-color: transparent;
+            border: 2px solid #C4622D;
+        }
+        
+        .cta-button.secondary:hover {
+            background-color: #C4622D;
+        }
+        
+        /* Social Share */
+        .share-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px 0;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .share-section p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .share-button {
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .share-linkedin { background: #0077b5; }
+        .share-twitter { background: #1da1f2; }
+        .share-email { background: #666; }
+        
+        .share-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .article-title { font-size: 32px; }
+            .article-subtitle { font-size: 18px; }
+            .article-content { padding: 0 20px; }
+            .article-content p { font-size: 16px; }
+            .article-content h2 { font-size: 24px; }
+            .inline-image-right,
+            .inline-image-left {
+                float: none;
+                width: 100%;
+                max-width: 100%;
+                margin: 30px 0;
+            }
+            .author-bio {
+                flex-direction: column;
+                text-align: center;
+            }
+            .pullquote {
+                font-size: 18px;
+                padding: 20px 25px;
+            }
+            .header-content { padding: 0 20px; }
+            .article-title { font-size: 28px; }
+            .article-subtitle { font-size: 17px; }
+        }
+</style>
+<div class="article-header">
+    <div class="header-content">
+        <div style="color: white; font-family: Georgia, serif;">
+            <span style="font-size: 24px; font-weight: 400;">THE RAIL</span>
+            <span style="font-size: 24px; font-weight: 700; color: #C4622D !important;"> WAY</span><span style="font-size: 10px; color: white;">™</span>
+        </div>
+        <a href="https://therailway.us" class="back-link">← Back to Main Site</a>
+    </div>
+</div>
+<div class="series-banner">
+    <strong>Leading Through Uncertainty</strong> &nbsp;|&nbsp; Part 2 of 4 &nbsp;|&nbsp; Originally published in <a class="ra-link" href="https://www.railwayage.com/" target="_blank" rel="noopener">Railway Age</a>
+</div>
+<section class="article-hero">
+    <div>
+        <h1 class="article-title">Leading Through Uncertainty (Part&nbsp;2)</h1>
+        <p class="article-subtitle">Three leadership styles that shape the rail industry—and which one builds lasting success</p>
+    </div>
+</section>
+<article class="article-content">
+
+    <!-- Author Info -->
+    <div class="article-meta">
+        <span class="ra-published">Published in Railway Age — Part 2 in a Series</span>
+        <p class="byline">PAULINE LIPKEWICH</p>
+        <p class="article-date">Contributing Editor — Chief Transformation Officer, KingdomBuilding Leadership, Inc.</p>
+    </div>
+
+    <p>There's a reason the phrase "to be railroaded" means to be coerced or forced into something against your will.<sup>[i]</sup> The term emerged in the 1870s<sup>[ii]</sup> from how railroads were built—running straight through whatever stood in their way, with speed and disregard for obstacles.<sup>[iii][iv]</sup> It was about unstoppable momentum in a single direction, regardless of the impact.</p>
+    <p>Given our industry's history and strong presence of military veterans finding meaningful work in rail,<sup>[v][vi]</sup> it's not surprising that command-and-control leadership became deeply embedded in our culture.</p>
+    <p>But here's what I've learned after decades in this sector: the leadership style that got us here won't keep us here.</p>
+    <p>After working with rail executives across North America, I've identified three leadership styles that dominate our industry. Two of them deliver short-term wins but long-term damage. One builds both results and relationships that last.</p>
+    <p>The question is: which one are you—especially during stressful times of uncertainty?</p>
+
+    <h2>Style #1: The Hammer (Command &amp; Control)</h2>
+    <div class="inline-image-right">
+        <img decoding="async" data-src="https://raw.githubusercontent.com/Textak-AI/trw-assets/main/articles/series/foreman-authority.jpg" src="https://raw.githubusercontent.com/Textak-AI/trw-assets/main/articles/series/foreman-authority.jpg" class=" lazyloaded" style="--smush-placeholder-width: 400px; --smush-placeholder-aspect-ratio: 400/600;">
+        <p class="image-caption">The Hammer gets immediate results but creates long-term damage</p>
+    </div>
+    <p>This leader sees every problem as a nail. Direct. Decisive. Demanding. In a crisis, they bark orders, expect immediate compliance, and measure success by speed of execution.</p>
+    <p>"Just get it done. I don't want excuses—I want results."</p>
+    <p>Here's what makes this approach seductive: it works. At least initially.</p>
+    <p>When a derailment shuts down a main line, the Hammer mobilizes crews instantly. When regulatory inspectors show up unannounced, the Hammer ensures every checklist is completed. When a safety incident threatens operations, the Hammer implements new protocols overnight.</p>
+    <p>But watch what happens three months later.</p>
+    <p>The crews who jumped when the Hammer shouted? They've stopped reporting near-misses. Why speak up when you know you'll get hammered for identifying problems? The safety protocols implemented overnight? They're being followed only when supervisors are watching. The new procedures? People have found workarounds that technically comply but miss the intent entirely.</p>
+    <div class="pullquote">
+        The Hammer creates an organization that is excellent at looking compliant and terrible at being safe.
+    </div>
+    <p>I've watched this leader clear a backlog in three months—and lose half their best people in six. Results are achieved, but they're not sustained. Relationships break. And when that leader leaves, the operation often collapses because it was built on fear, not ownership.</p>
+
+    <h2>Style #2: The People Pleaser</h2>
+    <div class="inline-image-left">
+        
+        <p class="image-caption">The People Pleaser avoids conflict but enables risk</p>
+    </div>
+    <p>At the opposite extreme sits the leader who desperately wants everyone to like them. They avoid difficult conversations. They soften feedback to the point of uselessness. They let performance issues slide because they don't want to "demoralize" the team.</p>
+    <p>"I don't want to be the bad guy. Let's find a solution that works for everyone."</p>
+    <p>This sounds compassionate. It's actually dangerous.</p>
+    <p>I worked with a regional railroad where the terminal manager was beloved by everyone—and the operation was bleeding accidents. When I interviewed the track crews, they told me the same story: "He's a great guy. He never gets on our case."</p>
+    <p>Translation: He never holds us accountable.</p>
+    <p>The People Pleaser allowed experienced crew members to skip required safety briefings because "they already know this stuff." They permitted shortcuts in maintenance procedures because "we're understaffed and doing our best." They accepted excuses for incomplete documentation because "these guys are working hard enough already."</p>
+    <p>Every one of those concessions felt kind in the moment. Every one created risk.</p>
+    <div class="pullquote">
+        What makes this style particularly insidious is that it masquerades as kindness. True kindness means caring enough about people to have the hard conversations that keep them safe and help them grow. Permissiveness isn't compassion—it's cowardice dressed up as concern.
+    </div>
+    <p>Here's the hard truth: when you avoid necessary conflict, you enable unnecessary risk.</p>
+    <p>The People Pleaser creates an organization where everyone is comfortable but no one is challenged. Where mediocrity becomes acceptable because excellence would require uncomfortable conversations. Where the culture slowly degrades because no one has the courage to say what needs to be said.</p>
+
+    <h2>Style #3: The Transformational Leader</h2>
+    <p>Between the Hammer and the People Pleaser lies a third path. It's harder. It requires more skill. But it's the only approach that creates both sustained results and genuine respect.</p>
+    <p>The Transformational Leader operates from a different premise entirely: I can be direct without being dismissive. I can hold high standards without destroying relationships. I can challenge people because I believe in their potential, not because I'm trying to control them.</p>
+    <div class="inline-image-right">
+        
+        <p class="image-caption">Transformational Leaders build both results and lasting relationships</p>
+    </div>
+    <p>This leader doesn't avoid conflict—they embrace productive conflict. They don't soften feedback—they make it specific, actionable, and connected to the person's development. They don't demand blind compliance—they create understanding of why standards matter.</p>
+    <p>When a safety incident occurs, the Transformational Leader doesn't start by asking "Who screwed up?" They start by asking "What in our system allowed this to happen?" That shift from blame to learning transforms everything.</p>
+    <p>I watched this style in action when a Class III railroad implemented new federal crossing safety requirements. The operations manager could have taken the Hammer approach: "New regulations. Here are the procedures. Follow them or you're fired."</p>
+    <p>Instead, she gathered the track maintenance crews and said: "These new requirements are going to slow us down initially. I need your help figuring out how we meet the safety standard without creating operational chaos. What do you see that I'm missing?"</p>
+    <p>Three things happened.</p>
+    <p>First, the crews identified implementation challenges that would have caused serious delays if addressed reactively. Second, they proposed modifications that exceeded the regulatory requirements while improving efficiency. Third—and this is the crucial part—they took ownership of the implementation because they helped design it.</p>
+    <div class="pullquote">
+        The Transformational Leader creates an organization where people are simultaneously challenged and supported. Where high standards coexist with genuine respect. Where results aren't achieved despite the culture—they're achieved because of it.
+    </div>
+
+    <h2>Which Leader Are You?</h2>
+    <p>To learn more about your style, check out <a href="https://www.16personalities.com" target="_blank" style="color: #C4622D; text-decoration: underline;">www.16personalities.com</a>. It's free, multilingual, and can help you identify if you have Hammer or People Pleasing tendencies.</p>
+    <p>Our industry's future depends on leaders who understand that you don't have to choose between being strong and being respectful. You don't have to choose between getting results and treating people right.</p>
+    <p>Part 1 in this series explored how the strongest rail leaders navigate uncertainty using four systematic stages. In Part 2, we've looked at the personal dimension—the leadership styles that either support or undermine that four-stage process.</p>
+    <p>The real transformation happens when leaders combine systematic methodology with the courage to lead differently. That's when the rail industry doesn't just survive uncertainty—it thrives through it.</p>
+
+    <!-- Series Navigation -->
+    <div class="series-nav">
+        <p>Leading Through Uncertainty — Full Series</p>
+        <a href="https://therailway.us/leaders-navigate-uncertainty/">← Part 1: How Leaders Navigate Uncertainty and Come Out Stronger</a>
+        <span class="current">Part 2: What’s Your Style?</span>
+        <a href="https://therailway.us/lead-yourself-first/">Part 3: Lead Yourself First →</a>
+        <a href="https://therailway.us/the-road-ahead/">Part 4: The Road Ahead (Series Conclusion) →</a>
+    </div>
+
+    <!-- Sources Section -->
+    <div class="sources-section">
+        <h3>Sources</h3>
+        <p><strong>[i]</strong> Staff, U. D. (2023, October). <em>Railroaded: Definition, Meaning, and Origin.</em> US Dictionary. <a href="https://usdictionary.com/idioms/railroaded/" target="_blank">https://usdictionary.com/idioms/railroaded/</a></p>
+        <p><strong>[ii]</strong> <em>Railroad - phrase meaning and origin.</em> (2025). Phrases.org.uk. <a href="https://www.phrases.org.uk/bulletin_board/23/messages/294.html" target="_blank">https://www.phrases.org.uk/bulletin_board/23/messages/294.html</a></p>
+        <p><strong>[iii]</strong> <em>Early American Railroads</em> [ushistory.org]. (2022). Ushistory.org. <a href="https://ushistory.org/Us/25b.asp" target="_blank">https://ushistory.org/Us/25b.asp</a></p>
+        <p><strong>[iv]</strong> bnagy. (2023, March 28). <em>From the Ballast: "Getting railroaded" - SMART Union.</em> SMART Union. <a href="https://www.smart-union.org/from-the-ballast-getting-railroaded/" target="_blank">https://www.smart-union.org/from-the-ballast-getting-railroaded/</a></p>
+        <p><strong>[v]</strong> <em>Transportation Puts Veterans in the Driver's Seat…</em> Bureau of Transportation Statistics. (2024). <a href="https://www.bts.gov/data-spotlight/veterans-in-transportation" target="_blank">https://www.bts.gov/data-spotlight/veterans-in-transportation</a></p>
+        <p><strong>[vi]</strong> <em>Railroad Operations</em> | US Department of Transportation. (2015). <a href="https://www.transportation.gov/careers/veterans/railroad-operations" target="_blank">https://www.transportation.gov/careers/veterans/railroad-operations</a></p>
+    </div>
+
+    <!-- Share Section -->
+    <div class="share-section">
+        <p>Share this article:</p>
+        <div class="share-buttons">
+            <button class="share-button share-linkedin" onclick="shareOnLinkedIn()">Share on LinkedIn</button>
+            <button class="share-button share-twitter" onclick="shareOnTwitter()">Share on Twitter</button>
+            <button class="share-button share-email" onclick="shareViaEmail()">Share via Email</button>
+        </div>
+    </div>
+
+    <!-- Author Bio -->
+    <div class="author-bio">
+        <div class="author-image">
+            
+        </div>
+        <div class="author-text">
+            <h3>About Pauline Lipkewich</h3>
+            <p>Pauline Lipkewich is Contributing Editor for Railway Age and Chief Transformation Officer at KingdomBuilding Leadership, Inc. She has been railroading since 2011 and has worked with Class I operators including CN, KCS, and NS, focusing on safety performance and operational effectiveness improvements.</p>
+            <p>Her work spans organizational transformation, leadership development, and culture change in the rail industry. She specializes in helping rail operations build speak-up cultures that enhance both safety and operational excellence.</p>
+            <p><strong>Contact:</strong> <a href="mailto:pauline.lipkewich@kingdombuildingleadership.com">pauline.lipkewich@kingdombuildingleadership.com</a> or +1.780.991.9993</p>
+        </div>
+    </div>
+
+</article>
+<section class="cta-section">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h3>Is Your Leadership Ready for More?</h3>
+        <p>Explore how The Rail Way™ helps rail leaders build the skills that drive real organizational change</p>
+        <a href="https://therailway.us/take-the-leadership-assessment/" class="cta-button">Take the Leadership Assessment</a>
+        <a href="https://therailway.us/book-a-consultation/" class="cta-button secondary">Book a Consultation</a>
+    </div>
+</section>
+<script>
+    function shareOnLinkedIn() {
+        const url = window.location.href;
+        window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url), 'share-dialog', 'width=600,height=400');
+    }
+    function shareOnTwitter() {
+        const title = "Leading Through Uncertainty (Part 2): What's Your Leadership Style?";
+        const url = window.location.href;
+        window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(url), 'share-dialog', 'width=600,height=400');
+    }
+    function shareViaEmail() {
+        const subject = "Leading Through Uncertainty (Part 2): What's Your Leadership Style?";
+        const body = "I thought you'd find this article from The Rail Way\u2122 insightful:\n\nLeading Through Uncertainty (Part 2): What's Your Leadership Style?\n\n" + window.location.href;
+        window.location.href = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    }
+</script>
+<div style="max-width:800px;margin:40px auto;padding:20px;text-align:center;font-family:Arial,sans-serif;border-top:1px solid #eee"><a href="/" style="color:#C4622D;font-weight:600;text-decoration:none;font-size:14px">← Back to The Rail Way</a><span style="margin:0 12px;color:#ccc">|</span><a href="/insights" style="color:#C4622D;font-weight:600;text-decoration:none;font-size:14px">All Insights</a></div>
+</body>
+</html>

@@ -18,7 +18,7 @@ export default function Footer(){
         </div>
         <div>
           <p style={{fontFamily:F.b,fontSize:11,fontWeight:700,color:"rgba(255,255,255,0.5)",textTransform:"uppercase",letterSpacing:"1px",marginBottom:12}}>Insights</p>
-          {[{t:"The Road Ahead",u:"/insights/the-road-ahead-2"},{t:"Lead Yourself First",u:"/insights/lead-yourself-first"},{t:"What's Your Style?",u:"/insights/leading-through-uncertainty-part-2"},{t:"Navigate Uncertainty",u:"/insights/leaders-navigate-uncertainty"}].map(a=>
+          {[{t:"The Road Ahead",u:"/insights/the-road-ahead"},{t:"Lead Yourself First",u:"/insights/lead-yourself-first"},{t:"What's Your Style?",u:"/insights/leading-through-uncertainty-part-2"},{t:"Navigate Uncertainty",u:"/insights/leaders-navigate-uncertainty"}].map(a=>
             <p key={a.t} style={{margin:"0 0 6px"}}><a href={a.u} style={{fontFamily:F.b,fontSize:13,color:"rgba(255,255,255,0.6)",textDecoration:"none"}}>{a.t}</a></p>
           )}
         </div>
