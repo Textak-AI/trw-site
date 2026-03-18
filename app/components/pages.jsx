@@ -78,7 +78,7 @@ export function HomeContent(){return <>
         <H2>Pauline Lipkewich — Contributing Editor</H2>
         <P s={{fontSize:17,fontStyle:"italic",color:C.black}}>"I am blessed to live in a region where heavy industry thrives. I have the gift of seeing firsthand the fruits of labor that come from calloused hands and dusty work boots."</P>
         <P>14+ years in North American rail operations. Grew Rocky Mountaineer group revenue 7x. Worked alongside CN, KCS, and other Class I operators on safety performance and operational effectiveness. Today, she's the rail industry's voice on leadership behavior and culture transformation.</P>
-        <div className="r-btn-row" style={{display:"flex",gap:12}}><Btn primary href="/about">Full Bio</Btn><Btn href="/insights">Read Her Column</Btn></div>
+        <div className="r-btn-row" style={{display:"flex",gap:12}}><Btn primary href="/about">Full Bio</Btn><Btn href="https://www.railwayage.com/author/pauline-lipkewich/" target="_blank">Read Her Column</Btn></div>
       </div>
     </div>
   </Sec>
@@ -212,7 +212,7 @@ export function AboutContent(){return <>
         <P s={{fontSize:17}}>Pauline has been railroading since 2011. She led the global group sales team for Rocky Mountaineer, growing revenues more than 7x in less than four years. She has worked alongside Class I operators at CN, KCS, and NS — targeting safety performance and operational effectiveness, seeing double and triple digit improvements within 2-3 years.</P>
         <P>She holds a Bachelor of Commerce and a Master of Arts in Leadership from the University of Guelph. As Contributing Editor at Railway Age, her column reaches rail decision-makers across North America.</P>
         <P>She founded KingdomBuilding Leadership with a core belief: when a leader gets better, everybody wins.</P>
-        <div className="r-btn-row" style={{display:"flex",gap:12,marginTop:8}}><Btn primary href="/contact">Get in Touch</Btn><Btn href="/insights">Read Her Column</Btn></div>
+        <div className="r-btn-row" style={{display:"flex",gap:12,marginTop:8}}><Btn primary href="/contact">Get in Touch</Btn><Btn href="https://www.railwayage.com/author/pauline-lipkewich/" target="_blank">Read Her Column</Btn></div>
       </div>
     </div>
   </Sec>

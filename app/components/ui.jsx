@@ -17,8 +17,9 @@ export function H3({children}){return <h3 style={{fontFamily:F.h,fontSize:20,fon
 
 export function P({children,s={}}){return <p style={{fontFamily:F.b,fontSize:16,color:C.gray,lineHeight:1.75,margin:"0 0 16px",...s}}>{children}</p>;}
 
-export function Btn({children,primary,onClick,href}){
+export function Btn({children,primary,onClick,href,target}){
   const style={padding:"12px 28px",borderRadius:5,border:"none",cursor:"pointer",fontFamily:F.b,fontSize:14,fontWeight:600,textDecoration:"none",display:"inline-block",textAlign:"center",...(primary?{background:C.rust,color:C.white}:{background:"transparent",color:C.rust,border:`1.5px solid ${C.rust}`})};
+  if(href && (href.startsWith('http') || target)) return <a href={href} target={target} rel={target==="_blank"?"noopener noreferrer":undefined} style={style}>{children}</a>;
   if(href) return <Link href={href} style={style}>{children}</Link>;
   return <button onClick={onClick} style={style}>{children}</button>;
 }
