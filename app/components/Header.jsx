@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { C, F, IMG, NAV } from "./shared";
@@ -16,6 +17,7 @@ const INSIGHT_LINKS = [
 
 export default function Header(){
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return <>
     <style>{`
@@ -28,6 +30,21 @@ export default function Header(){
       .trw-dropdown-panel .dd-item{display:block;padding:7px 20px;font-size:13px;color:#2C2C2C;text-decoration:none;line-height:1.4}
       .trw-dropdown-panel .dd-item:hover{background:#FAF7F4;color:#C4622D}
       .trw-dropdown-panel .dd-cat{display:block;font-family:'SF Mono',Consolas,monospace;font-size:10px;color:#999}
+      .trw-hamburger{display:none;background:none;border:none;padding:8px;cursor:pointer}
+      .trw-hamburger span{display:block;width:22px;height:2px;background:#2C2C2C;margin:5px 0;transition:0.3s}
+      .trw-hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+      .trw-hamburger.open span:nth-child(2){opacity:0}
+      .trw-hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+      .trw-mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;bottom:0;background:#fff;z-index:99;overflow-y:auto;padding:20px 0}
+      .trw-mobile-menu a{display:block;padding:14px 28px;font-family:'Segoe UI',Arial,sans-serif;font-size:15px;font-weight:600;color:#2C2C2C;text-decoration:none;border-bottom:1px solid #f0f0f0}
+      .trw-mobile-menu a:hover,.trw-mobile-menu a.mob-active{color:#C4622D;background:#FAF7F4}
+      .trw-mobile-menu .mob-section{padding:10px 28px 6px;font-size:11px;font-weight:700;color:rgba(0,0,0,0.35);text-transform:uppercase;letter-spacing:1px}
+      .trw-mobile-menu .mob-sub{padding-left:44px;font-size:14px;font-weight:400;color:#555}
+      .trw-mobile-menu .mob-cat{font-size:10px;color:#999;margin-left:8px;font-weight:400}
+      @media(max-width:768px){
+        .trw-hamburger{display:block}
+        .trw-mobile-menu.open{display:block}
+      }
     `}</style>
     <header style={{background:C.white,borderBottom:`1px solid ${C.grayRule}`,position:"sticky",top:0,zIndex:100}}>
       <div className="r-header" style={{maxWidth:960,margin:"0 auto",padding:"0 28px",display:"flex",alignItems:"center",justifyContent:"space-between",height:56}}>
@@ -59,7 +76,26 @@ export default function Header(){
             return <Link key={n.id} href={n.href} style={linkStyle}>{n.l}</Link>;
           })}
         </nav>
+        <button className={`trw-hamburger${menuOpen?" open":""}`} onClick={()=>setMenuOpen(!menuOpen)} aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </header>
+    <div className={`trw-mobile-menu${menuOpen?" open":""}`}>
+      {NAV.map(n=>{
+        const active = (n.href==="/" && pathname==="/") || (n.href!=="/" && pathname.startsWith(n.href));
+        if (n.id === "insights") {
+          return <div key={n.id}>
+            <Link href={n.href} className={active?"mob-active":""} onClick={()=>setMenuOpen(false)}>{n.l}</Link>
+            {INSIGHT_LINKS.map(a=>
+              <Link key={a.href} href={a.href} className="mob-sub" onClick={()=>setMenuOpen(false)}>
+                {a.l}<span className="mob-cat">{a.cat}</span>
+              </Link>
+            )}
+          </div>;
+        }
+        return <Link key={n.id} href={n.href} className={active?"mob-active":""} onClick={()=>setMenuOpen(false)}>{n.l}</Link>;
+      })}
+    </div>
   </>;
 }

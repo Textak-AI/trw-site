@@ -30,9 +30,43 @@
 .site-nav .si-dd-panel a.si-item{display:block;padding:7px 20px;font-family:'Segoe UI',Arial,sans-serif;font-size:13px;font-weight:400;color:#2C2C2C;text-decoration:none;line-height:1.4}
 .site-nav .si-dd-panel a.si-item:hover{background:#FAF7F4;color:#C4622D}
 .site-nav .si-dd-panel .si-cat{display:block;font-family:'SF Mono',Consolas,monospace;font-size:10px;font-weight:400;color:#999}
+
+.site-hamburger{display:none;background:none;border:none;padding:8px;cursor:pointer}
+.site-hamburger span{display:block;width:22px;height:2px;background:#2C2C2C;margin:5px 0;transition:0.3s}
+.site-hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.site-hamburger.open span:nth-child(2){opacity:0}
+.site-hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.site-mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;bottom:0;background:#fff;z-index:99;overflow-y:auto;padding:20px 0}
+.site-mobile-menu a{display:block;padding:14px 28px;font-family:'Segoe UI',Arial,sans-serif;font-size:15px;font-weight:600;color:#2C2C2C;text-decoration:none;border-bottom:1px solid #f0f0f0}
+.site-mobile-menu a:hover{color:#C4622D;background:#FAF7F4}
+.site-mobile-menu .mob-section{padding:10px 28px 6px;font-size:11px;font-weight:700;color:rgba(0,0,0,0.35);text-transform:uppercase;letter-spacing:1px}
+.site-mobile-menu .mob-sub{padding-left:44px;font-size:14px;font-weight:400;color:#555}
+.site-mobile-menu .mob-cat{font-size:10px;color:#999;margin-left:8px;font-weight:400}
+@media(max-width:768px){.site-hamburger{display:block}.site-nav-links{display:none !important}.site-mobile-menu.open{display:block}}
 </style>
 </head>
-<body style="margin:0"><nav class="site-nav"><div class="site-nav-inner"><a href="/"><img src="https://raw.githubusercontent.com/Textak-AI/trw-assets/main/brand/rail-way-logo.png" alt="The Rail Way"></a><div class="site-nav-links"><a href="/">Home</a><a href="/speak-up-culture">Speak Up Culture</a><a href="/our-process">Our Process</a><a href="/class-ii-iii">Class II &amp; III</a><div class="si-dd"><a href="/insights">Insights <span style="font-size:10px;opacity:0.5">&#9662;</span></a><div class="si-dd-menu"><div class="si-dd-panel"><a href="/insights" class="si-head">All Insights</a><a href="/insights/the-road-ahead" class="si-item">The Road Ahead<span class="si-cat">Series Part 4</span></a><a href="/insights/lead-yourself-first" class="si-item">Lead Yourself First<span class="si-cat">Series Part 3</span></a><a href="/insights/leading-through-uncertainty-part-2" class="si-item">What's Your Style?<span class="si-cat">Series Part 2</span></a><a href="/insights/leaders-navigate-uncertainty" class="si-item">Navigate Uncertainty<span class="si-cat">Series Part 1</span></a><a href="/insights/rail-safety-human-factors" class="si-item">Rail Safety by the Numbers<span class="si-cat">Data &amp; Analysis</span></a><a href="/insights/speak-up-culture-rail-safety" class="si-item">Speak Up Culture<span class="si-cat">Speak Up Culture</span></a><a href="/insights/transformation-vs-training" class="si-item">Transformation vs. Training<span class="si-cat">Culture Change</span></a><a href="/insights/roi-safety-culture" class="si-item">The ROI of Safety Culture<span class="si-cat">ROI &amp; Data</span></a></div></div></div><a href="/about">About</a><a href="/legacies">Legacies</a><a href="/contact">Contact</a></div></div></nav>
+<body style="margin:0"><nav class="site-nav"><div class="site-nav-inner"><a href="/"><img src="https://raw.githubusercontent.com/Textak-AI/trw-assets/main/brand/rail-way-logo.png" alt="The Rail Way"></a><div class="site-nav-links"><a href="/">Home</a><a href="/speak-up-culture">Speak Up Culture</a><a href="/our-process">Our Process</a><a href="/class-ii-iii">Class II &amp; III</a><div class="si-dd"><a href="/insights">Insights <span style="font-size:10px;opacity:0.5">&#9662;</span></a><div class="si-dd-menu"><div class="si-dd-panel"><a href="/insights" class="si-head">All Insights</a><a href="/insights/the-road-ahead" class="si-item">The Road Ahead<span class="si-cat">Series Part 4</span></a><a href="/insights/lead-yourself-first" class="si-item">Lead Yourself First<span class="si-cat">Series Part 3</span></a><a href="/insights/leading-through-uncertainty-part-2" class="si-item">What's Your Style?<span class="si-cat">Series Part 2</span></a><a href="/insights/leaders-navigate-uncertainty" class="si-item">Navigate Uncertainty<span class="si-cat">Series Part 1</span></a><a href="/insights/rail-safety-human-factors" class="si-item">Rail Safety by the Numbers<span class="si-cat">Data &amp; Analysis</span></a><a href="/insights/speak-up-culture-rail-safety" class="si-item">Speak Up Culture<span class="si-cat">Speak Up Culture</span></a><a href="/insights/transformation-vs-training" class="si-item">Transformation vs. Training<span class="si-cat">Culture Change</span></a><a href="/insights/roi-safety-culture" class="si-item">The ROI of Safety Culture<span class="si-cat">ROI &amp; Data</span></a></div>
+<button class="site-hamburger" onclick="var m=document.querySelector('.site-mobile-menu');var b=this;if(m.classList.contains('open')){m.classList.remove('open');b.classList.remove('open')}else{m.classList.add('open');b.classList.add('open')}" aria-label="Menu"><span></span><span></span><span></span></button>
+</div></div><a href="/about">About</a><a href="/legacies">Legacies</a><a href="/contact">Contact</a></div></div></nav>
+<div class="site-mobile-menu">
+<a href="/">Home</a>
+<a href="/speak-up-culture">Speak Up Culture</a>
+<a href="/our-process">Our Process</a>
+<a href="/class-ii-iii">Class II &amp; III</a>
+<a href="/insights">Insights</a>
+<a href="/insights/the-road-ahead" class="mob-sub">The Road Ahead<span class="mob-cat">Series Part 4</span></a>
+<a href="/insights/lead-yourself-first" class="mob-sub">Lead Yourself First<span class="mob-cat">Series Part 3</span></a>
+<a href="/insights/leading-through-uncertainty-part-2" class="mob-sub">What's Your Style?<span class="mob-cat">Series Part 2</span></a>
+<a href="/insights/leaders-navigate-uncertainty" class="mob-sub">Navigate Uncertainty<span class="mob-cat">Series Part 1</span></a>
+<a href="/insights/rail-safety-human-factors" class="mob-sub">Rail Safety by the Numbers<span class="mob-cat">Data &amp; Analysis</span></a>
+<a href="/insights/speak-up-culture-rail-safety" class="mob-sub">Speak Up Culture<span class="mob-cat">Speak Up Culture</span></a>
+<a href="/insights/transformation-vs-training" class="mob-sub">Transformation vs. Training<span class="mob-cat">Culture Change</span></a>
+<a href="/insights/roi-safety-culture" class="mob-sub">The ROI of Safety Culture<span class="mob-cat">ROI &amp; Data</span></a>
+<a href="/about">About</a>
+<a href="/legacies">Legacies</a>
+<a href="/contact">Contact</a>
+</div>
+
 
 <!-- ARTICLE: Why Transformation Beats Training Every Time -->
 <!-- Slug: /transformation-vs-training/ -->
