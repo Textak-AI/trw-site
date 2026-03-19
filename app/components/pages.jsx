@@ -8,11 +8,11 @@ export function HomeContent(){return <>
   <section style={{position:"relative",minHeight:480,overflow:"hidden"}}>
     <div style={{position:"absolute",inset:0}}><Img src={IMG.fieldLeadership} alt="Railroad tracks stretching to the horizon" className="r-img-hero" style={{borderRadius:0,filter:"brightness(0.3)",objectPosition:"85% 35%"}}/></div>
     <div style={{position:"absolute",left:0,top:0,bottom:0,width:6,background:`linear-gradient(180deg,${C.rust},transparent)`,zIndex:2}}/>
-    <div style={{position:"relative",zIndex:2,maxWidth:500,padding:"60px 28px 72px",marginLeft:"max(28px, calc((100vw - 960px) / 2 + 28px))"}}>
+    <div style={{position:"relative",zIndex:2,maxWidth:960,margin:"0 auto",padding:"60px 28px 72px"}}>
       <Eye>The Rail Way™ — From the Boardroom to the Ballast Line</Eye>
-      <h1 className="r-h1" style={{fontFamily:F.h,fontSize:42,fontWeight:700,color:C.white,margin:"0 0 140px",lineHeight:1.15,maxWidth:640}}>Railroad Safety Culture <span style={{color:C.rust}}>Transformation</span></h1>
-      <p style={{fontFamily:F.b,fontSize:18,color:"rgba(255,255,255,0.7)",margin:"0 0 12px",lineHeight:1.65,maxWidth:520}}>70–90% of organizational transformations fail. Yours doesn't have to.</p>
-      <p style={{fontFamily:F.b,fontSize:16,color:"rgba(255,255,255,0.55)",margin:"0 0 32px",lineHeight:1.65,maxWidth:520}}>Build a Speak Up Culture where safety concerns don't wait for an accident. Not just training. Not just consulting. A cultural residency that creates lasting change.</p>
+      <h1 className="r-h1" style={{fontFamily:F.h,fontSize:42,fontWeight:700,color:C.white,margin:"0 0 20px",lineHeight:1.15,maxWidth:420}}>Railroad Safety Culture <span style={{color:C.rust}}>Transformation</span></h1>
+      <p style={{fontFamily:F.b,fontSize:18,color:"rgba(255,255,255,0.7)",margin:"0 0 12px",lineHeight:1.65,maxWidth:400}}>70–90% of organizational transformations fail. Yours doesn't have to.</p>
+      <p style={{fontFamily:F.b,fontSize:16,color:"rgba(255,255,255,0.55)",margin:"0 0 32px",lineHeight:1.65,maxWidth:400}}>Build a Speak Up Culture where safety concerns don't wait for an accident. Not just training. Not just consulting. A cultural residency that creates lasting change.</p>
       <div className="r-btn-row" style={{display:"flex",gap:14}}><Btn primary onClick={()=>document.getElementById('pulse-check')?.scrollIntoView({behavior:'smooth'})}>Take the Free Pulse Check</Btn><Btn href="/speak-up-culture">What Is Speak Up Culture?</Btn></div>
     </div>
   </section>
