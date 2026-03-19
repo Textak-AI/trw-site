@@ -6,7 +6,7 @@ import { Img, Sec, Eye, H1, H2, H3, P, Btn, FAQ, Stat, Bc } from "./ui";
 /* ══════ HOME ══════ */
 export function HomeContent(){return <>
   <section style={{position:"relative",minHeight:480,overflow:"hidden"}}>
-    <div style={{position:"absolute",inset:0}}><Img src={IMG.fieldLeadership} alt="Railroad tracks stretching to the horizon" className="r-img-hero" style={{borderRadius:0,filter:"brightness(0.3)",objectPosition:"70% 35%"}}/></div>
+    <div style={{position:"absolute",inset:0}}><Img src={IMG.fieldLeadership} alt="Railroad tracks stretching to the horizon" className="r-img-hero" style={{borderRadius:0,filter:"brightness(0.3)",objectPosition:"25% 35%"}}/></div>
     <div style={{position:"absolute",left:0,top:0,bottom:0,width:6,background:`linear-gradient(180deg,${C.rust},transparent)`,zIndex:2}}/>
     <div style={{position:"relative",zIndex:2,maxWidth:960,margin:"0 auto",padding:"80px 28px 72px"}}>
       <Eye>The Rail Way™ — From the Boardroom to the Ballast Line</Eye>
