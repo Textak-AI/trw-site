@@ -22,10 +22,8 @@ img { max-width: 100%; }
   .r-hide-tablet { display: none !important; }
   .r-h1 { font-size: 28px !important; }
   .r-h2 { font-size: 22px !important; }
-  .r-nav { gap: 8px !important; overflow-x: auto; flex-wrap: nowrap; width: 100%; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-  .r-nav::-webkit-scrollbar { display: none; }
-  .r-nav > span { white-space: nowrap; font-size: 11.5px !important; }
-  .r-header { height: auto !important; padding: 10px 16px !important; flex-wrap: wrap; gap: 8px !important; }
+  .r-nav { display: none !important; }
+  .r-header { height: 56px !important; padding: 0 16px !important; }
   .r-stat-row { flex-direction: column !important; gap: 12px !important; }
   .r-stat-row > div { flex: none !important; }
   .r-footer-grid { grid-template-columns: 1fr 1fr !important; }
