@@ -331,6 +331,12 @@ export function LegaciesContent(){return <>
         <P s={{fontSize:14}}>CSX Corporation announced changes to its executive leadership team as part of ongoing organizational evolution. These leadership transitions reflect the rail industry's continued focus on operational performance and strategic growth.</P>
         <a href="https://www.csx.com/index.cfm/about-us/media/press-releases/csx-announces-leadership-changes-to-its-executive-team/" target="_blank" rel="noopener noreferrer" style={{fontFamily:F.b,fontSize:13,color:C.rust,textDecoration:"none",fontWeight:600}}>Read on CSX.com →</a>
       </div>
+      <div style={{background:C.cream,borderRadius:8,padding:24,borderTop:`3px solid ${C.rust}`}}>
+        <p style={{fontFamily:F.b,fontSize:10,color:C.rust,textTransform:"uppercase",letterSpacing:"1.2px",margin:"0 0 8px"}}>Industry Recognition — MAR 19, 2026</p>
+        <H3>Goode, McClellan, Brosnan Inducted into National Railroad Hall of Fame</H3>
+        <P s={{fontSize:14}}>Three iconic railroaders were inducted into the National Railroad Hall of Fame during a ceremony in Roanoke, Virginia. The inductees were recognized for decades of contributions to railroad strategy, operations, and industry leadership.</P>
+        <a href="https://www.railwayage.com/freight/class-i/goode-mcclellan-brosnan-inducted-into-national-railroad-hall-of-fame/" target="_blank" rel="noopener noreferrer" style={{fontFamily:F.b,fontSize:13,color:C.rust,textDecoration:"none",fontWeight:600}}>Read on Railway Age →</a>
+      </div>
     </div>
   </Sec>
 
