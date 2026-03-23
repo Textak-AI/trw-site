@@ -599,7 +599,7 @@ function TRWSiteEditor(){
         </div>
       </div>
 
-      <div style={{flex:1,overflow:"auto",padding:0,background:C.white}}>
+      <div style={{flex:1,overflow:"auto",padding:0,background:"#fff"}}>
         {!activeArticle && page?.sections.map((sec,idx)=><div key={sec.id}>
           {/* Section header */}
           <div onClick={()=>setActiveSection(activeSection===sec.id?null:sec.id)} style={{padding:"10px 16px",background:activeSection===sec.id?C.cream:C.white,borderBottom:`1px solid ${C.rule}`,cursor:"pointer",display:"flex",alignItems:"center",gap:8}}>
