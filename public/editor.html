@@ -566,7 +566,7 @@ function TRWSiteEditor(){
         <button onClick={()=>setView("articles")} style={{flex:1,padding:"10px",background:view==="articles"?"rgba(196,98,45,0.2)":"transparent",border:"none",color:view==="articles"?C.rust:"rgba(255,255,255,0.5)",fontFamily:F.b,fontSize:11,fontWeight:600,cursor:"pointer",borderBottom:view==="articles"?`2px solid ${C.rust}`:"2px solid transparent"}}>Articles</button>
       </div>
 
-      <div style={{flex:1,overflow:"auto",padding:"8px 0"}}>
+      <div style={{flex:1,overflow:"auto",background:"#fff",padding:"8px 0"}}>
         {view==="pages" ? pages.map(p=>
           <button key={p.id} onClick={()=>{setActivePage(p.id);setActiveSection(null);setActiveArticle(null);}} style={{width:"100%",padding:"10px 16px",background:activePage===p.id?"rgba(196,98,45,0.15)":"transparent",border:"none",color:activePage===p.id?C.rust:"rgba(255,255,255,0.7)",fontFamily:F.b,fontSize:12,fontWeight:activePage===p.id?600:400,cursor:"pointer",textAlign:"left",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
             <span><Ico>{p.icon}</Ico>{p.title}</span>
