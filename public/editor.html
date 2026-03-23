@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Rail Way - Site Editor</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}body{overflow:hidden}#root{height:100vh}</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+<script type="text/babel" data-type="module">
+const { useState, useEffect, useRef, useCallback } = React;
+
+/* ═══════════════════════════════════════════
+   THE RAIL WAY™ — Site Editor
+   Elementor-style visual page management
+   Source: github.com/Textak-AI/trw-site
+   ═══════════════════════════════════════════ */
+
+const CDN = "https://cdn.jsdelivr.net/gh/Textak-AI/trw-assets@main/";
+const I = {
+  logo: CDN+"brand/rail-way-logo.png",
+  logoW: CDN+"brand/rail-way-logo-white.png",
+  field: CDN+"articles/field-leadership.jpg",
+  team: CDN+"operations/team-training.jpg",
+  safety: CDN+"operations/safety-culture.jpg",
+  yard: CDN+"operations/yard-training.jpg",
+  pauline: CDN+"team/pauline-headshot.jpg",
+  paulineAlt: CDN+"team/pauline-alt.jpg",
+  paulineSpk: CDN+"team/pauline-speaking.jpg",
+  brenda: CDN+"team/brenda-huizinga.jpg",
+  michael: CDN+"team/michael-powell.jpg",
+  railway: CDN+"operations/railway-training.jpg",
+  raAge: CDN+"homepage/railway-age-sidebar.jpg",
+  freight: CDN+"articles/freight-train.jpg",
+  road: CDN+"articles/road-ahead.jpg",
+  leader: CDN+"articles/leader-talking.jpg",
+};
+
+const C = {rust:"#C4622D",black:"#2C2C2C",deep:"#1A1A1A",gray:"#666",grayLt:"#999",rule:"#E0E0E0",cream:"#FAF7F4",white:"#FFF"};
+const F = {h:"Georgia,serif",b:"'Segoe UI',Arial,sans-serif"};
+
+// ═══ SECTION TYPES ═══
+const SECTION_TYPES = {
+  hero: {label:"Hero Banner", icon:"◆", color:"#C4622D"},
+  stats: {label:"Stats Row", icon:"◈", color:"#2E86C1"},
+  text: {label:"Text + Image", icon:"◉", color:"#27AE60"},
+  cards: {label:"Card Grid", icon:"◫", color:"#8E44AD"},
+  cta: {label:"CTA Banner", icon:"▶", color:"#E67E22"},
+  faq: {label:"FAQ Section", icon:"?", color:"#16A085"},
+  team: {label:"Team Grid", icon:"◎", color:"#2C3E50"},
+  timeline: {label:"Timeline Steps", icon:"→", color:"#C0392B"},
+  quote: {label:"Quote Block", icon:""", color:"#7D3C98"},
+  articles: {label:"Article Grid", icon:"▤", color:"#2980B9"},
+  form: {label:"Contact Form", icon:"✎", color:"#E74C3C"},
+  embed: {label:"Survey Embed", icon:"□", color:"#F39C12"},
+  memorial: {label:"Memorial", icon:"✦", color:"#34495E"},
+  news: {label:"News Item", icon:"⚡", color:"#E67E22"},
+};
+
+// ═══ ALL PAGES WITH REAL CONTENT ═══
+const PAGES = [
+  {id:"home",title:"Home",path:"/",icon:"⌂",sections:[
+    {id:"h1",type:"hero",label:"Hero Banner",data:{eyebrow:"The Rail Way™ — From the Boardroom to the Ballast Line",headline:"Railroad Safety Culture",accent:"Transformation",sub:"70–90% of organizational transformations fail. Yours doesn't have to.",body:"Build a Speak Up Culture where safety concerns don't wait for an accident. Not just training. Not just consulting. A cultural residency that creates lasting change.",img:"field",imgPos:"85% 35%",btn1:"Take the Free Pulse Check",btn2:"What Is Speak Up Culture?"}},
+    {id:"h2",type:"stats",label:"Stats Bar",data:{stats:[{v:"214%",l:"ROI from safety culture programs",s:"BCG Research, 2023"},{v:"4x",l:"Higher employee retention with psychological safety",s:"BCG Study"},{v:"565/yr",l:"Average roadway worker injuries (2018–2023)",s:"FRA Safety Reports"}]}},
+    {id:"h3",type:"cards",label:"Industry Recognition",data:{eyebrow:"Industry Recognition",heading:"Building Generational Railroaders — and Industry Leaders",cards:[{title:"John Orr — Railroader of the Year",desc:"Railway Age recognized NS's John Orr for championing the cultural shifts that improved safety metrics across the network."},{title:"Diane Barnett — Railway Woman of the Year",desc:"The first woman in NS history to lead a major division — recognized by Railway Age for breaking barriers in operations leadership."}]}},
+    {id:"h4",type:"text",label:"What We Do",data:{eyebrow:"Safety Culture Transformation",heading:"How We Transform Railroad Safety Culture",body:"The Rail Way works alongside your leadership team — from the boardroom to the ballast line — to create measurable, sustainable safety culture transformation. This isn't training. It's a cultural residency.",img:"paulineSpk"}},
+    {id:"h5",type:"text",label:"Pauline Feature",data:{eyebrow:"Contributing Editor, Railway Age",heading:"Pauline Lipkewich",body:"\"I am blessed to live in a region where heavy industry thrives. I have the gift of seeing firsthand the fruits of labor that come from calloused hands and dusty work boots.\" Grew Rocky Mountaineer group revenue 7x.",img:"pauline",btn1:"Full Bio",btn2:"Read Her Column"}},
+    {id:"h6",type:"articles",label:"Latest Articles",data:{heading:"Insights from the Rail Way"}},
+    {id:"h7",type:"team",label:"Team Grid",data:{heading:"Our Team",members:[{name:"Pauline Lipkewich",role:"Founder & Chief Transformation Officer",img:"pauline"},{name:"Brenda Huizinga",role:"Director of Operations",img:"brenda"},{name:"Michael Powell",role:"Senior Consultant",img:"michael"}]}},
+    {id:"h8",type:"embed",label:"Pulse Check Survey",data:{heading:"Free Safety Culture Pulse Check",sub:"Take 2 minutes to benchmark your railroad's safety culture."}},
+    {id:"h9",type:"faq",label:"FAQ Section",data:{heading:"Common Questions",faqs:[{q:"What's the difference between training and transformation?",a:"Training delivers information. Transformation changes behavior, systems, and culture."},{q:"How long does a typical engagement last?",a:"Most engagements run 12–18 months, with measurable behavior shifts visible in 90–180 days."},{q:"Is this only for large railroads?",a:"The Rail Way was built for Class II and III operators. Smaller railroads often see faster results."}]}},
+    {id:"h10",type:"cta",label:"CTA Banner",data:{heading:"Ready to Transform Your Safety Culture?",sub:"Start with a confidential conversation about where your railroad is — and where it could be.",btn:"Schedule a Consultation"}},
+  ]},
+  {id:"speakup",title:"Speak Up Culture",path:"/speak-up-culture",icon:"◈",sections:[
+    {id:"s1",type:"text",label:"Introduction",data:{eyebrow:"Speak Up Culture for Railroads",heading:"What Is Speak Up Culture — and Why Railroads Need It Now",body:"Speak Up Culture is an organizational environment where every railroader — from track crews to the C-suite — feels safe raising safety concerns, reporting near-misses, and challenging unsafe conditions without fear of retaliation.",img:"paulineSpk"}},
+    {id:"s2",type:"cards",label:"Why It Matters",data:{heading:"Why Speak Up Culture Matters",cards:[{title:"The Cost of Silence",desc:"When a roadway worker sees an unsafe condition but doesn't report it, the risk stays invisible until it becomes an incident. 96 roadway workers have been killed since 1997."},{title:"The Alternative",desc:"Organizations with strong Speak Up Cultures catch hazards upstream. One FRA C3RS pilot site reported nearly a 70% reduction in certain accident types."}]}},
+    {id:"s3",type:"timeline",label:"How We Build It",data:{heading:"How We Build It",steps:[{n:"1",t:"Assess the Real Culture",d:"Not the culture in your policy handbook — the one your crews experience every shift."},{n:"2",t:"Transform Leader Behaviors",d:"We work directly with supervisors to model communication patterns that make speaking up feel safe."},{n:"3",t:"Build Internal Faculty",d:"We train your people to sustain the transformation using our white-labeled materials."}]}},
+    {id:"s4",type:"faq",label:"FAQ",data:{heading:"Speak Up Culture FAQ",faqs:[{q:"How is this different from FRA's C3RS program?",a:"C3RS is a specific confidential reporting system. Speak Up Culture is the broader environment that determines whether workers actually use reporting systems."},{q:"How long does it take?",a:"Meaningful behavior change is typically visible within 90–180 days. Sustainable transformation requires 12–18 months."},{q:"Can smaller railroads afford this?",a:"The Rail Way was built for Class II and III operators. Smaller railroads often see faster culture change."}]}},
+  ]},
+  {id:"process",title:"Our Process",path:"/our-process",icon:"→",sections:[
+    {id:"p1",type:"hero",label:"Process Hero",data:{eyebrow:"Our Proven Process",heading:"How Safety Culture Transformation Works",sub:"Four stages. Measurable outcomes. Lasting change.",img:"safety",imgPos:"center"}},
+    {id:"p2",type:"timeline",label:"Four Stages",data:{heading:"The Four-Stage Cycle",steps:[{n:"1",t:"Heighten Awareness",d:"Diagnostic assessment of current safety culture. Frontline interviews. Leadership alignment."},{n:"2",t:"Increase Clarity",d:"Define the gap between stated values and lived experience. Build shared language."},{n:"3",t:"Build Alignment",d:"Leadership modeling. Supervisor coaching. Communication system redesign."},{n:"4",t:"Drive Momentum",d:"Sustain change through internal faculty development and measurement systems."}]}},
+    {id:"p3",type:"cards",label:"Training vs Transformation",data:{heading:"Training vs. Transformation",cards:[{title:"Training",desc:"Delivers information. Checks compliance boxes. Fades after 30 days."},{title:"Transformation",desc:"Changes behavior, systems, and culture. Builds internal capability. Lasts."}]}},
+  ]},
+  {id:"about",title:"About",path:"/about",icon:"◎",sections:[
+    {id:"a1",type:"text",label:"Pauline Bio",data:{eyebrow:"About",heading:"About Pauline Lipkewich — Founder, The Rail Way™",body:"Pauline has been railroading since 2011. She led the global group sales team for Rocky Mountaineer, growing revenues more than 7x in less than four years. She has worked alongside Class I operators at CN, KCS, and NS — targeting safety performance and operational effectiveness, seeing double and triple digit improvements within 2-3 years.",img:"pauline",btn1:"Get in Touch",btn2:"Read Her Column"}},
+    {id:"a2",type:"quote",label:"Approach",data:{heading:"Pauline's Approach",quote:"This isn't happening to you. It's happening with you.",body:"Transformation happens with the organization, not to it. Her approach is built on respect for the people doing the work."}},
+  ]},
+  {id:"insights",title:"Insights",path:"/insights",icon:"▤",sections:[
+    {id:"i1",type:"articles",label:"Article Grid",data:{heading:"Industry Insights — Rail Safety Culture & Leadership",sub:"Expert perspectives on rail leadership, safety culture, and operational excellence."}},
+  ]},
+  {id:"classii",title:"Class II & III",path:"/class-ii-iii",icon:"◫",sections:[
+    {id:"c1",type:"hero",label:"Class II Hero",data:{eyebrow:"For Regional & Short-Line Operators",heading:"Safety Culture Optimization for Class II & III Railroads",sub:"Proven blueprint with Class I's, right-sized to deliver exponential results for short line and regional carriers.",img:"road",imgPos:"center"}},
+    {id:"c2",type:"cards",label:"Why Faster Results",data:{heading:"Why Smaller Railroads See Faster Results",cards:[{title:"Leadership Proximity",desc:"Executives closer to frontline. Behavioral modeling has direct impact."},{title:"Operational Agility",desc:"Decisions in days, not quarters. No enterprise bureaucracy."},{title:"Community Identity",desc:"'Railroad family' isn't a metaphor — it's the operational reality."}]}},
+  ]},
+  {id:"contact",title:"Contact",path:"/contact",icon:"✎",sections:[
+    {id:"ct1",type:"form",label:"Contact Form",data:{heading:"Start a Conversation About Your Safety Culture",sub:"Confidential consultation about your railroad's safety culture transformation.",endpoint:"manlnepr"}},
+  ]},
+  {id:"legacies",title:"Legacies",path:"/legacies",icon:"✦",sections:[
+    {id:"l1",type:"text",label:"Introduction",data:{eyebrow:"Honoring Rail Industry Leaders",heading:"Legacies — Honoring Those Who Built the Rail Industry",body:"The rail industry is built by people who give their careers — and sometimes their lives — to keeping freight and passengers moving safely."}},
+    {id:"l2",type:"memorial",label:"Jesse Chalich",data:{name:"Jesse James Chalich",title:"President & COO, Northern Plains Railroad & Northern Plains Rail Services",dates:"September 21, 1976 — March 11, 2026",body:"Jesse James Chalich, 49, passed away unexpectedly on March 11, 2026. A 4th generation railroader, Jesse's connection to the industry wasn't just professional — it was in his blood."}},
+    {id:"l3",type:"news",label:"People in the News",data:{items:[{date:"FEB 03, 2026",title:"CSX Announces Leadership Changes",desc:"CSX Corporation announced changes to its executive leadership team."},{date:"MAR 19, 2026",title:"Goode, McClellan, Brosnan Inducted into Railroad Hall of Fame",desc:"Three iconic railroaders inducted during a ceremony in Roanoke, Virginia."}]}},
+    {id:"l4",type:"cta",label:"Submit a Legacy",data:{heading:"Know Someone We Should Honor?",sub:"Help us recognize the people who shaped the rail industry.",btn:"Submit a Legacy"}},
+  ]},
+];
+
+const ARTICLES = [
+  {id:"art1",title:"The Road Ahead",path:"/insights/the-road-ahead",type:"Series Part 4",date:"Feb 2026"},
+  {id:"art2",title:"Lead Yourself First",path:"/insights/lead-yourself-first",type:"Series Part 3",date:"Jan 2026"},
+  {id:"art3",title:"What's Your Style?",path:"/insights/leading-through-uncertainty-part-2",type:"Series Part 2",date:"Oct 2025"},
+  {id:"art4",title:"Navigate Uncertainty",path:"/insights/leaders-navigate-uncertainty",type:"Series Part 1",date:"Aug 2025"},
+  {id:"art5",title:"Rail Safety by the Numbers",path:"/insights/rail-safety-human-factors",type:"Data & Analysis",date:"2025"},
+  {id:"art6",title:"Speak Up Culture",path:"/insights/speak-up-culture-rail-safety",type:"Speak Up Culture",date:"2026"},
+  {id:"art7",title:"Transformation vs. Training",path:"/insights/transformation-vs-training",type:"Culture Change",date:"2026"},
+  {id:"art8",title:"ROI of Safety Culture",path:"/insights/roi-safety-culture",type:"ROI & Data",date:"2026"},
+];
+
+// ═══ UI COMPONENTS ═══
+const Ico = ({children,color})=><span style={{fontSize:14,color:color||C.rust,marginRight:6}}>{children}</span>;
+const Label = ({children})=><div style={{fontFamily:F.b,fontSize:10,fontWeight:700,color:C.grayLt,textTransform:"uppercase",letterSpacing:"1px",marginBottom:6}}>{children}</div>;
+const Input = ({label,value,onChange,multi,small})=>{
+  const s = {width:"100%",padding:small?"4px 8px":"8px 10px",border:`1px solid ${C.rule}`,borderRadius:4,fontFamily:F.b,fontSize:small?11:12,color:C.black,background:C.white,resize:"vertical",outline:"none"};
+  return <div style={{marginBottom:8}}>
+    {label && <label style={{fontFamily:F.b,fontSize:10,color:C.gray,display:"block",marginBottom:3}}>{label}</label>}
+    {multi ? <textarea rows={3} style={s} value={value||""} onChange={e=>onChange(e.target.value)}/> : <input style={s} value={value||""} onChange={e=>onChange(e.target.value)}/>}
+  </div>;
+};
+
+// ═══ SECTION FIELD EDITORS ═══
+function SectionFields({section, onChange}){
+  const d = section.data;
+  const set = (key,val) => onChange({...section, data:{...d, [key]:val}});
+  const t = section.type;
+
+  if(t==="hero") return <>
+    <Input label="Eyebrow" value={d.eyebrow} onChange={v=>set("eyebrow",v)}/>
+    <Input label="Headline" value={d.headline} onChange={v=>set("headline",v)}/>
+    {d.accent!==undefined && <Input label="Accent Word" value={d.accent} onChange={v=>set("accent",v)}/>}
+    <Input label="Subtitle" value={d.sub} onChange={v=>set("sub",v)} multi/>
+    {d.body && <Input label="Body" value={d.body} onChange={v=>set("body",v)} multi/>}
+    <Input label="Image Position" value={d.imgPos} onChange={v=>set("imgPos",v)} small/>
+    {d.btn1 && <Input label="Button 1" value={d.btn1} onChange={v=>set("btn1",v)} small/>}
+    {d.btn2 && <Input label="Button 2" value={d.btn2} onChange={v=>set("btn2",v)} small/>}
+  </>;
+
+  if(t==="stats") return <>
+    {(d.stats||[]).map((st,i)=><div key={i} style={{background:C.cream,borderRadius:6,padding:8,marginBottom:6}}>
+      <Input label="Value" value={st.v} onChange={v=>{const s=[...d.stats];s[i]={...s[i],v};set("stats",s);}} small/>
+      <Input label="Label" value={st.l} onChange={v=>{const s=[...d.stats];s[i]={...s[i],l:v};set("stats",s);}} small/>
+      <Input label="Source" value={st.s} onChange={v=>{const s=[...d.stats];s[i]={...s[i],s:v};set("stats",s);}} small/>
+    </div>)}
+  </>;
+
+  if(t==="text") return <>
+    {d.eyebrow!==undefined && <Input label="Eyebrow" value={d.eyebrow} onChange={v=>set("eyebrow",v)}/>}
+    <Input label="Heading" value={d.heading} onChange={v=>set("heading",v)}/>
+    <Input label="Body" value={d.body} onChange={v=>set("body",v)} multi/>
+    {d.btn1 && <Input label="Button 1" value={d.btn1} onChange={v=>set("btn1",v)} small/>}
+    {d.btn2 && <Input label="Button 2" value={d.btn2} onChange={v=>set("btn2",v)} small/>}
+  </>;
+
+  if(t==="cards") return <>
+    {d.eyebrow!==undefined && <Input label="Eyebrow" value={d.eyebrow} onChange={v=>set("eyebrow",v)}/>}
+    <Input label="Heading" value={d.heading} onChange={v=>set("heading",v)}/>
+    {(d.cards||[]).map((c,i)=><div key={i} style={{background:C.cream,borderRadius:6,padding:8,marginBottom:6,borderLeft:`3px solid ${C.rust}`}}>
+      <Input label="Title" value={c.title} onChange={v=>{const cards=[...d.cards];cards[i]={...cards[i],title:v};set("cards",cards);}} small/>
+      <Input label="Description" value={c.desc} onChange={v=>{const cards=[...d.cards];cards[i]={...cards[i],desc:v};set("cards",cards);}} multi/>
+    </div>)}
+  </>;
+
+  if(t==="timeline") return <>
+    <Input label="Heading" value={d.heading} onChange={v=>set("heading",v)}/>
+    {(d.steps||[]).map((s,i)=><div key={i} style={{background:C.cream,borderRadius:6,padding:8,marginBottom:6,borderLeft:`3px solid ${C.rust}`}}>
+      <Input label="Step Title" value={s.t} onChange={v=>{const steps=[...d.steps];steps[i]={...steps[i],t:v};set("steps",steps);}} small/>
+      <Input label="Description" value={s.d} onChange={v=>{const steps=[...d.steps];steps[i]={...steps[i],d:v};set("steps",steps);}} multi/>
+    </div>)}
+  </>;
+
+  if(t==="faq") return <>
+    <Input label="Heading" value={d.heading} onChange={v=>set("heading",v)}/>
+    {(d.faqs||[]).map((f,i)=><div key={i} style={{background:C.cream,borderRadius:6,padding:8,marginBottom:6}}>
+      <Input label="Question" value={f.q} onChange={v=>{const faqs=[...d.faqs];faqs[i]={...faqs[i],q:v};set("faqs",faqs);}}/>
+      <Input label="Answer" value={f.a} onChange={v=>{const faqs=[...d.faqs];faqs[i]={...faqs[i],a:v};set("faqs",faqs);}} multi/>
+    </div>)}
+  </>;
+
+  if(t==="cta") return <>
+    <Input label="Heading" value={d.heading} onChange={v=>set("heading",v)}/>
+    <Input label="Subtitle" value={d.sub} onChange={v=>set("sub",v)}/>
+    <Input label="Button" value={d.btn} onChange={v=>set("btn",v)} small/>
+  </>;
+
+  if(t==="quote") return <>
+    <Input label="Heading" value={d.heading} onChange={v=>set("heading",v)}/>
+    <Input label="Quote" value={d.quote} onChange={v=>set("quote",v)} multi/>
+    <Input label="Body" value={d.body} onChange={v=>set("body",v)} multi/>
+  </>;
+
+  if(t==="memorial") return <>
+    <Input label="Name" value={d.name} onChange={v=>set("name",v)}/>
+    <Input label="Title/Role" value={d.title} onChange={v=>set("title",v)}/>
+    <Input label="Dates" value={d.dates} onChange={v=>set("dates",v)} small/>
+    <Input label="Memorial Text" value={d.body} onChange={v=>set("body",v)} multi/>
+  </>;
+
+  if(t==="news") return <>
+    {(d.items||[]).map((item,i)=><div key={i} style={{background:C.cream,borderRadius:6,padding:8,marginBottom:6}}>
+      <Input label="Date" value={item.date} onChange={v=>{const items=[...d.items];items[i]={...items[i],date:v};set("items",items);}} small/>
+      <Input label="Title" value={item.title} onChange={v=>{const items=[...d.items];items[i]={...items[i],title:v};set("items",items);}}/>
+      <Input label="Description" value={item.desc} onChange={v=>{const items=[...d.items];items[i]={...items[i],desc:v};set("items",items);}} multi/>
+    </div>)}
+  </>;
+
+  return <Input label="Heading" value={d.heading||""} onChange={v=>set("heading",v)}/>;
+}
+
+// ═══ PREVIEW RENDERERS ═══
+function PreviewSection({section}){
+  const d = section.data;
+  const t = section.type;
+
+  if(t==="hero") return <div style={{position:"relative",minHeight:280,overflow:"hidden",background:C.deep}}>
+    <img src={I[d.img]||I.field} alt="" style={{position:"absolute",inset:0,width:"100%",height:"100%",objectFit:"cover",filter:"brightness(0.3)",objectPosition:d.imgPos||"center"}}/>
+    <div style={{position:"relative",zIndex:1,maxWidth:500,padding:"40px 24px 48px"}}>
+      <p style={{fontFamily:F.b,fontSize:9,fontWeight:700,color:C.rust,textTransform:"uppercase",letterSpacing:"1.5px",margin:"0 0 8px"}}>{d.eyebrow}</p>
+      <h2 style={{fontFamily:F.h,fontSize:28,fontWeight:700,color:C.white,margin:"0 0 12px",lineHeight:1.15}}>{d.headline} {d.accent && <span style={{color:C.rust}}>{d.accent}</span>}</h2>
+      <p style={{fontFamily:F.b,fontSize:13,color:"rgba(255,255,255,0.7)",margin:"0 0 8px",lineHeight:1.5}}>{d.sub}</p>
+      {d.body && <p style={{fontFamily:F.b,fontSize:11,color:"rgba(255,255,255,0.5)",margin:"0 0 16px",lineHeight:1.5}}>{d.body}</p>}
+      <div style={{display:"flex",gap:8}}>{d.btn1 && <span style={{padding:"8px 16px",background:C.rust,color:C.white,borderRadius:4,fontFamily:F.b,fontSize:11,fontWeight:600}}>{d.btn1}</span>}{d.btn2 && <span style={{padding:"8px 16px",border:`1px solid ${C.rust}`,color:C.rust,borderRadius:4,fontFamily:F.b,fontSize:11,fontWeight:600}}>{d.btn2}</span>}</div>
+    </div>
+  </div>;
+
+  if(t==="stats") return <div style={{background:C.cream,padding:"20px 24px"}}>
+    <div style={{display:"flex",gap:16,justifyContent:"center"}}>{(d.stats||[]).map((s,i)=>
+      <div key={i} style={{background:C.white,borderRadius:6,padding:16,borderLeft:`3px solid ${C.rust}`,flex:1,textAlign:"center"}}>
+        <div style={{fontFamily:F.h,fontSize:24,fontWeight:700,color:C.rust}}>{s.v}</div>
+        <div style={{fontFamily:F.b,fontSize:11,color:C.black,lineHeight:1.3,margin:"4px 0"}}>{s.l}</div>
+        <div style={{fontFamily:F.b,fontSize:9,color:C.grayLt}}>Source: {s.s}</div>
+      </div>
+    )}</div>
+  </div>;
+
+  if(t==="text") return <div style={{padding:"28px 24px"}}>
+    {d.eyebrow && <p style={{fontFamily:F.b,fontSize:9,fontWeight:700,color:C.rust,textTransform:"uppercase",letterSpacing:"1.5px",margin:"0 0 6px"}}>{d.eyebrow}</p>}
+    <h2 style={{fontFamily:F.h,fontSize:22,fontWeight:700,color:C.black,margin:"0 0 12px"}}>{d.heading}</h2>
+    <div style={{display:"flex",gap:20}}>
+      <p style={{fontFamily:F.b,fontSize:12,color:C.gray,lineHeight:1.7,flex:1}}>{d.body}</p>
+      {d.img && <img src={I[d.img]} alt="" style={{width:140,height:140,objectFit:"cover",borderRadius:6,flexShrink:0}}/>}
+    </div>
+    {(d.btn1||d.btn2) && <div style={{display:"flex",gap:8,marginTop:12}}>{d.btn1 && <span style={{padding:"7px 14px",background:C.rust,color:C.white,borderRadius:4,fontFamily:F.b,fontSize:10,fontWeight:600}}>{d.btn1}</span>}{d.btn2 && <span style={{padding:"7px 14px",border:`1px solid ${C.rust}`,color:C.rust,borderRadius:4,fontFamily:F.b,fontSize:10,fontWeight:600}}>{d.btn2}</span>}</div>}
+  </div>;
+
+  if(t==="cards") return <div style={{padding:"28px 24px"}}>
+    {d.eyebrow && <p style={{fontFamily:F.b,fontSize:9,fontWeight:700,color:C.rust,textTransform:"uppercase",letterSpacing:"1.5px",margin:"0 0 6px"}}>{d.eyebrow}</p>}
+    {d.heading && <h2 style={{fontFamily:F.h,fontSize:22,fontWeight:700,color:C.black,margin:"0 0 14px"}}>{d.heading}</h2>}
+    <div style={{display:"grid",gridTemplateColumns:`repeat(${Math.min((d.cards||[]).length,3)},1fr)`,gap:12}}>
+      {(d.cards||[]).map((c,i)=><div key={i} style={{background:C.cream,borderRadius:6,padding:14,borderTop:`3px solid ${C.rust}`}}>
+        <h3 style={{fontFamily:F.h,fontSize:13,fontWeight:700,margin:"0 0 6px"}}>{c.title}</h3>
+        <p style={{fontFamily:F.b,fontSize:11,color:C.gray,lineHeight:1.5,margin:0}}>{c.desc}</p>
+      </div>)}
+    </div>
+  </div>;
+
+  if(t==="timeline") return <div style={{padding:"28px 24px"}}>
+    <h2 style={{fontFamily:F.h,fontSize:22,fontWeight:700,color:C.black,margin:"0 0 14px"}}>{d.heading}</h2>
+    {(d.steps||[]).map((s,i)=><div key={i} style={{display:"flex",gap:12,marginBottom:12}}>
+      <div style={{width:28,height:28,borderRadius:14,background:C.rust,color:C.white,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:F.h,fontSize:12,fontWeight:700,flexShrink:0}}>{s.n||i+1}</div>
+      <div><h3 style={{fontFamily:F.h,fontSize:13,fontWeight:700,margin:"0 0 3px"}}>{s.t}</h3><p style={{fontFamily:F.b,fontSize:11,color:C.gray,margin:0,lineHeight:1.5}}>{s.d}</p></div>
+    </div>)}
+  </div>;
+
+  if(t==="faq") return <div style={{padding:"28px 24px"}}>
+    <h2 style={{fontFamily:F.h,fontSize:22,fontWeight:700,color:C.black,margin:"0 0 14px"}}>{d.heading}</h2>
+    {(d.faqs||[]).map((f,i)=><div key={i} style={{borderBottom:`1px solid ${C.rule}`,padding:"10px 0"}}>
+      <h3 style={{fontFamily:F.h,fontSize:13,fontWeight:700,color:C.black,margin:0}}>{f.q}</h3>
+      <p style={{fontFamily:F.b,fontSize:11,color:C.gray,margin:"6px 0 0",lineHeight:1.5}}>{f.a}</p>
+    </div>)}
+  </div>;
+
+  if(t==="cta") return <div style={{position:"relative",minHeight:120,overflow:"hidden",background:C.deep}}>
+    <img src={I.railway} alt="" style={{position:"absolute",inset:0,width:"100%",height:"100%",objectFit:"cover",filter:"brightness(0.25)"}}/>
+    <div style={{position:"relative",zIndex:1,padding:"32px 24px",textAlign:"center"}}>
+      <h2 style={{fontFamily:F.h,fontSize:20,color:C.white,margin:"0 0 8px"}}>{d.heading}</h2>
+      <p style={{fontFamily:F.b,fontSize:12,color:"rgba(255,255,255,0.6)",margin:"0 0 14px"}}>{d.sub}</p>
+      <span style={{padding:"8px 20px",background:C.rust,color:C.white,borderRadius:4,fontFamily:F.b,fontSize:11,fontWeight:600}}>{d.btn}</span>
+    </div>
+  </div>;
+
+  if(t==="quote") return <div style={{padding:"28px 24px",background:C.cream}}>
+    <h2 style={{fontFamily:F.h,fontSize:22,fontWeight:700,color:C.black,margin:"0 0 12px"}}>{d.heading}</h2>
+    <blockquote style={{fontFamily:F.h,fontSize:16,fontStyle:"italic",color:C.black,borderLeft:`3px solid ${C.rust}`,padding:"8px 0 8px 16px",margin:"0 0 12px"}}>"{d.quote}"</blockquote>
+    <p style={{fontFamily:F.b,fontSize:12,color:C.gray,lineHeight:1.6}}>{d.body}</p>
+  </div>;
+
+  if(t==="memorial") return <div style={{padding:"28px 24px",background:C.cream}}>
+    <div style={{background:C.white,borderRadius:8,padding:20,borderLeft:`4px solid ${C.rust}`}}>
+      <h3 style={{fontFamily:F.h,fontSize:18,color:C.black,margin:"0 0 3px"}}>{d.name}</h3>
+      <p style={{fontFamily:F.b,fontSize:12,color:C.rust,fontWeight:600,margin:"0 0 3px"}}>{d.title}</p>
+      <p style={{fontFamily:F.b,fontSize:11,color:C.grayLt,margin:"0 0 12px"}}>{d.dates}</p>
+      <p style={{fontFamily:F.b,fontSize:12,color:C.gray,lineHeight:1.6}}>{d.body}</p>
+    </div>
+  </div>;
+
+  if(t==="news") return <div style={{padding:"28px 24px"}}>
+    {(d.items||[]).map((item,i)=><div key={i} style={{background:C.cream,borderRadius:6,padding:14,borderTop:`3px solid ${C.rust}`,marginBottom:10}}>
+      <p style={{fontFamily:F.b,fontSize:9,color:C.rust,textTransform:"uppercase",letterSpacing:"1px",margin:"0 0 6px"}}>{item.date}</p>
+      <h3 style={{fontFamily:F.h,fontSize:14,fontWeight:700,margin:"0 0 4px"}}>{item.title}</h3>
+      <p style={{fontFamily:F.b,fontSize:11,color:C.gray,margin:0,lineHeight:1.5}}>{item.desc}</p>
+    </div>)}
+  </div>;
+
+  if(t==="articles") return <div style={{padding:"28px 24px"}}>
+    <h2 style={{fontFamily:F.h,fontSize:22,fontWeight:700,color:C.black,margin:"0 0 14px"}}>{d.heading}</h2>
+    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
+      {ARTICLES.slice(0,4).map((a,i)=><div key={i} style={{background:C.cream,borderRadius:6,padding:10}}>
+        <p style={{fontFamily:F.b,fontSize:9,color:C.rust,textTransform:"uppercase",margin:"0 0 4px"}}>{a.type}</p>
+        <h3 style={{fontFamily:F.h,fontSize:12,fontWeight:700,margin:0,lineHeight:1.3}}>{a.title}</h3>
+      </div>)}
+    </div>
+  </div>;
+
+  if(t==="form") return <div style={{padding:"28px 24px"}}>
+    <h2 style={{fontFamily:F.h,fontSize:22,fontWeight:700,color:C.black,margin:"0 0 6px"}}>{d.heading}</h2>
+    <p style={{fontFamily:F.b,fontSize:12,color:C.gray,margin:"0 0 14px"}}>{d.sub}</p>
+    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+      {["First Name","Last Name","Email","Phone","Company","Job Title"].map(f=><div key={f} style={{background:"#f5f5f5",borderRadius:4,padding:"8px 10px",fontFamily:F.b,fontSize:10,color:C.grayLt}}>{f}</div>)}
+    </div>
+  </div>;
+
+  if(t==="embed") return <div style={{padding:"28px 24px",background:C.cream,textAlign:"center"}}>
+    <h2 style={{fontFamily:F.h,fontSize:22,fontWeight:700,color:C.black,margin:"0 0 6px"}}>{d.heading}</h2>
+    <p style={{fontFamily:F.b,fontSize:12,color:C.gray}}>{d.sub}</p>
+    <div style={{background:C.white,borderRadius:6,padding:20,marginTop:12,border:`1px dashed ${C.rule}`,fontFamily:F.b,fontSize:11,color:C.grayLt}}>SurveyMonkey Embed</div>
+  </div>;
+
+  if(t==="team") return <div style={{padding:"28px 24px"}}>
+    <h2 style={{fontFamily:F.h,fontSize:22,fontWeight:700,color:C.black,margin:"0 0 14px"}}>{d.heading}</h2>
+    <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:12}}>
+      {(d.members||[]).map((m,i)=><div key={i} style={{textAlign:"center"}}>
+        <img src={I[m.img]} alt={m.name} style={{width:"100%",height:100,objectFit:"cover",borderRadius:6,marginBottom:6}}/>
+        <h3 style={{fontFamily:F.h,fontSize:12,fontWeight:700,margin:"0 0 2px"}}>{m.name}</h3>
+        <p style={{fontFamily:F.b,fontSize:9,color:C.gray,margin:0}}>{m.role}</p>
+      </div>)}
+    </div>
+  </div>;
+
+  return <div style={{padding:20,fontFamily:F.b,fontSize:11,color:C.grayLt,textAlign:"center"}}>[{section.type}] {section.label}</div>;
+}
+
+// ═══ ADD SECTION PALETTE ═══
+function AddSectionPalette({onAdd, onClose}){
+  return <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.5)",zIndex:1000,display:"flex",alignItems:"center",justifyContent:"center"}} onClick={onClose}>
+    <div style={{background:C.white,borderRadius:12,padding:24,maxWidth:500,width:"90%",maxHeight:"70vh",overflow:"auto"}} onClick={e=>e.stopPropagation()}>
+      <h3 style={{fontFamily:F.h,fontSize:18,margin:"0 0 16px"}}>Add Section</h3>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+        {Object.entries(SECTION_TYPES).map(([key,meta])=>
+          <button key={key} onClick={()=>onAdd(key)} style={{background:C.white,border:`1px solid ${C.rule}`,borderRadius:8,padding:"12px",cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:8}}>
+            <span style={{width:28,height:28,borderRadius:6,background:meta.color+"18",color:meta.color,display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,fontSize:14}}>{meta.icon}</span>
+            <span style={{fontFamily:F.b,fontSize:12,fontWeight:600,color:C.black}}>{meta.label}</span>
+          </button>
+        )}
+      </div>
+    </div>
+  </div>;
+}
+
+// ═══ MAIN APP ═══
+function TRWSiteEditor(){
+  const [pages, setPages] = useState(PAGES);
+  const [activePage, setActivePage] = useState("home");
+  const [activeSection, setActiveSection] = useState(null);
+  const [view, setView] = useState("pages"); // pages | articles
+  const [showPalette, setShowPalette] = useState(false);
+  const [paletteInsertIdx, setPaletteInsertIdx] = useState(-1);
+  const [saved, setSaved] = useState(false);
+  const previewRef = useRef(null);
+
+  const page = pages.find(p=>p.id===activePage);
+
+  const updateSection = useCallback((sectionId, updated) => {
+    setPages(prev => prev.map(p => p.id===activePage ? {...p, sections: p.sections.map(s => s.id===sectionId ? updated : s)} : p));
+  }, [activePage]);
+
+  const moveSection = (idx, dir) => {
+    setPages(prev => prev.map(p => {
+      if(p.id!==activePage) return p;
+      const s = [...p.sections];
+      const newIdx = idx + dir;
+      if(newIdx < 0 || newIdx >= s.length) return p;
+      [s[idx], s[newIdx]] = [s[newIdx], s[idx]];
+      return {...p, sections: s};
+    }));
+  };
+
+  const deleteSection = (idx) => {
+    setPages(prev => prev.map(p => p.id===activePage ? {...p, sections: p.sections.filter((_,i)=>i!==idx)} : p));
+    setActiveSection(null);
+  };
+
+  const addSection = (type) => {
+    const meta = SECTION_TYPES[type];
+    const newSec = {id:"new_"+Date.now(),type,label:meta.label,data:{heading:"New "+meta.label}};
+    setPages(prev => prev.map(p => {
+      if(p.id!==activePage) return p;
+      const s = [...p.sections];
+      s.splice(paletteInsertIdx+1, 0, newSec);
+      return {...p, sections: s};
+    }));
+    setShowPalette(false);
+    setActiveSection(newSec.id);
+  };
+
+  const handleSave = () => { setSaved(true); setTimeout(()=>setSaved(false), 2000); };
+
+  return <div style={{display:"flex",height:"100vh",background:"#f0f0f0",fontFamily:F.b,overflow:"hidden"}}>
+
+    {/* ═══ LEFT SIDEBAR ═══ */}
+    <div style={{width:220,background:C.deep,color:C.white,display:"flex",flexDirection:"column",flexShrink:0}}>
+      <div style={{padding:"16px 16px 12px",borderBottom:"1px solid rgba(255,255,255,0.1)"}}>
+        <img src={I.logo} alt="TRW" style={{height:28,filter:"brightness(10)",marginBottom:8}}/>
+        <div style={{fontSize:9,color:"rgba(255,255,255,0.4)",letterSpacing:"1px",textTransform:"uppercase"}}>Site Editor</div>
+      </div>
+
+      <div style={{display:"flex",borderBottom:"1px solid rgba(255,255,255,0.1)"}}>
+        <button onClick={()=>setView("pages")} style={{flex:1,padding:"10px",background:view==="pages"?"rgba(196,98,45,0.2)":"transparent",border:"none",color:view==="pages"?C.rust:"rgba(255,255,255,0.5)",fontFamily:F.b,fontSize:11,fontWeight:600,cursor:"pointer",borderBottom:view==="pages"?`2px solid ${C.rust}`:"2px solid transparent"}}>Pages</button>
+        <button onClick={()=>setView("articles")} style={{flex:1,padding:"10px",background:view==="articles"?"rgba(196,98,45,0.2)":"transparent",border:"none",color:view==="articles"?C.rust:"rgba(255,255,255,0.5)",fontFamily:F.b,fontSize:11,fontWeight:600,cursor:"pointer",borderBottom:view==="articles"?`2px solid ${C.rust}`:"2px solid transparent"}}>Articles</button>
+      </div>
+
+      <div style={{flex:1,overflow:"auto",padding:"8px 0"}}>
+        {view==="pages" ? pages.map(p=>
+          <button key={p.id} onClick={()=>{setActivePage(p.id);setActiveSection(null);}} style={{width:"100%",padding:"10px 16px",background:activePage===p.id?"rgba(196,98,45,0.15)":"transparent",border:"none",color:activePage===p.id?C.rust:"rgba(255,255,255,0.7)",fontFamily:F.b,fontSize:12,fontWeight:activePage===p.id?600:400,cursor:"pointer",textAlign:"left",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+            <span><Ico>{p.icon}</Ico>{p.title}</span>
+            <span style={{fontSize:10,color:"rgba(255,255,255,0.3)"}}>{p.sections.length}</span>
+          </button>
+        ) : ARTICLES.map(a=>
+          <button key={a.id} style={{width:"100%",padding:"10px 16px",background:"transparent",border:"none",color:"rgba(255,255,255,0.7)",fontFamily:F.b,fontSize:12,cursor:"pointer",textAlign:"left"}}>
+            <div>{a.title}</div>
+            <div style={{fontSize:9,color:"rgba(255,255,255,0.3)"}}>{a.type} · {a.date}</div>
+          </button>
+        )}
+      </div>
+
+      <div style={{padding:12,borderTop:"1px solid rgba(255,255,255,0.1)"}}>
+        <button onClick={handleSave} style={{width:"100%",padding:"10px",background:saved?"#27AE60":C.rust,border:"none",borderRadius:6,color:C.white,fontFamily:F.b,fontSize:12,fontWeight:600,cursor:"pointer"}}>
+          {saved ? "✓ Saved" : "Save Changes"}
+        </button>
+        <a href="https://therailway.us" target="_blank" rel="noopener" style={{display:"block",textAlign:"center",marginTop:8,fontFamily:F.b,fontSize:10,color:"rgba(255,255,255,0.4)",textDecoration:"none"}}>View Live Site →</a>
+      </div>
+    </div>
+
+    {/* ═══ EDITOR PANEL ═══ */}
+    <div style={{width:320,background:C.white,borderRight:`1px solid ${C.rule}`,display:"flex",flexDirection:"column",flexShrink:0}}>
+      <div style={{padding:"14px 16px",borderBottom:`1px solid ${C.rule}`,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+        <div>
+          <h2 style={{fontFamily:F.h,fontSize:16,margin:0,color:C.black}}>{page?.title}</h2>
+          <p style={{fontFamily:F.b,fontSize:10,color:C.grayLt,margin:0}}>{page?.path} · {page?.sections.length} sections</p>
+        </div>
+      </div>
+
+      <div style={{flex:1,overflow:"auto",padding:0}}>
+        {page?.sections.map((sec,idx)=><div key={sec.id}>
+          {/* Section header */}
+          <div onClick={()=>setActiveSection(activeSection===sec.id?null:sec.id)} style={{padding:"10px 16px",background:activeSection===sec.id?C.cream:C.white,borderBottom:`1px solid ${C.rule}`,cursor:"pointer",display:"flex",alignItems:"center",gap:8}}>
+            <span style={{width:20,height:20,borderRadius:4,background:(SECTION_TYPES[sec.type]?.color||C.rust)+"18",color:SECTION_TYPES[sec.type]?.color||C.rust,display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,flexShrink:0}}>{SECTION_TYPES[sec.type]?.icon||"·"}</span>
+            <div style={{flex:1}}>
+              <div style={{fontFamily:F.b,fontSize:12,fontWeight:600,color:C.black}}>{sec.label}</div>
+              <div style={{fontFamily:F.b,fontSize:9,color:C.grayLt}}>{SECTION_TYPES[sec.type]?.label}</div>
+            </div>
+            <div style={{display:"flex",gap:2}}>
+              <button onClick={e=>{e.stopPropagation();moveSection(idx,-1);}} style={{background:"none",border:"none",cursor:"pointer",fontSize:10,color:C.grayLt,padding:2}} title="Move up">▲</button>
+              <button onClick={e=>{e.stopPropagation();moveSection(idx,1);}} style={{background:"none",border:"none",cursor:"pointer",fontSize:10,color:C.grayLt,padding:2}} title="Move down">▼</button>
+              <button onClick={e=>{e.stopPropagation();deleteSection(idx);}} style={{background:"none",border:"none",cursor:"pointer",fontSize:10,color:"#e74c3c",padding:2}} title="Delete">✕</button>
+            </div>
+          </div>
+          {/* Section fields */}
+          {activeSection===sec.id && <div style={{padding:"12px 16px",background:C.cream,borderBottom:`1px solid ${C.rule}`}}>
+            <SectionFields section={sec} onChange={updated=>updateSection(sec.id,updated)}/>
+          </div>}
+          {/* Add section button between sections */}
+          <div style={{textAlign:"center",padding:"2px 0"}}>
+            <button onClick={()=>{setPaletteInsertIdx(idx);setShowPalette(true);}} style={{background:"none",border:"none",cursor:"pointer",fontFamily:F.b,fontSize:9,color:C.grayLt,padding:"2px 8px"}} title="Add section here">+ add section</button>
+          </div>
+        </div>)}
+      </div>
+    </div>
+
+    {/* ═══ PREVIEW PANEL ═══ */}
+    <div style={{flex:1,overflow:"auto",background:"#e8e8e8",display:"flex",justifyContent:"center"}} ref={previewRef}>
+      <div style={{width:"100%",maxWidth:700,background:C.white,minHeight:"100%",boxShadow:"0 0 40px rgba(0,0,0,0.1)"}}>
+        {/* Mini header */}
+        <div style={{background:C.white,borderBottom:`1px solid ${C.rule}`,padding:"8px 24px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+          <img src={I.logo} alt="TRW" style={{height:28}}/>
+          <div style={{display:"flex",gap:12}}>
+            {["Home","Speak Up Culture","Our Process","Class II & III","Insights","About","Legacies","Contact"].map(n=>
+              <span key={n} style={{fontFamily:F.b,fontSize:9,color:page?.title===n?C.rust:C.grayLt,fontWeight:600}}>{n}</span>
+            )}
+          </div>
+        </div>
+        {/* Sections */}
+        {page?.sections.map(sec=>
+          <div key={sec.id} onClick={()=>setActiveSection(sec.id)} style={{cursor:"pointer",outline:activeSection===sec.id?`2px solid ${C.rust}`:"2px solid transparent",outlineOffset:-2,transition:"outline 0.15s"}}>
+            <PreviewSection section={sec}/>
+          </div>
+        )}
+        {/* Mini footer */}
+        <div style={{background:C.deep,padding:"20px 24px"}}>
+          <img src={I.logoW} alt="" style={{height:20,filter:"brightness(1.2)",marginBottom:8}}/>
+          <p style={{fontFamily:F.b,fontSize:9,color:"rgba(255,255,255,0.3)"}}>© 2026 KingdomBuilding Leadership, Inc.</p>
+        </div>
+      </div>
+    </div>
+
+    {/* ═══ ADD SECTION PALETTE ═══ */}
+    {showPalette && <AddSectionPalette onAdd={addSection} onClose={()=>setShowPalette(false)}/>}
+  </div>;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(TRWSiteEditor));
+</script>
+</body>
+</html>
