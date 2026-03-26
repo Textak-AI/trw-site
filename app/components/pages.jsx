@@ -321,17 +321,22 @@ export function LegaciesContent(){return <>
       </div>
 
       {/* ── MAR 11, 2026 — Jesse Chalich Memorial ── */}
-      <div style={{background:C.white,borderRadius:10,padding:28,borderLeft:`4px solid ${C.rust}`}}>
-        <p style={{fontFamily:F.b,fontSize:10,color:"#34495E",textTransform:"uppercase",letterSpacing:"1.2px",margin:"0 0 8px"}}>In Memoriam — MAR 11, 2026</p>
-        <h3 style={{fontFamily:F.h,fontSize:22,color:C.black,margin:"0 0 4px"}}>Jesse James Chalich</h3>
-        <p style={{fontFamily:F.b,fontSize:14,color:C.rust,margin:"0 0 4px",fontWeight:600}}>President & COO, Northern Plains Railroad & Northern Plains Rail Services</p>
-        <p style={{fontFamily:F.b,fontSize:13,color:C.grayLt,margin:"0 0 16px"}}>September 21, 1976 — March 11, 2026</p>
+      <details style={{background:C.white,borderRadius:10,borderLeft:`4px solid ${C.rust}`}}>
+        <summary style={{padding:"24px 28px",cursor:"pointer",listStyle:"none"}}>
+          <p style={{fontFamily:F.b,fontSize:10,color:"#34495E",textTransform:"uppercase",letterSpacing:"1.2px",margin:"0 0 8px"}}>In Memoriam — MAR 11, 2026</p>
+          <h3 style={{fontFamily:F.h,fontSize:22,color:C.black,margin:"0 0 4px"}}>Jesse James Chalich</h3>
+          <p style={{fontFamily:F.b,fontSize:14,color:C.rust,margin:"0 0 4px",fontWeight:600}}>President & COO, Northern Plains Railroad & Northern Plains Rail Services</p>
+          <p style={{fontFamily:F.b,fontSize:13,color:C.grayLt,margin:"0 0 4px"}}>September 21, 1976 — March 11, 2026</p>
+          <p style={{fontFamily:F.b,fontSize:13,color:C.rust,margin:0}}>Read tribute ▾</p>
+        </summary>
+        <div style={{padding:"0 28px 28px"}}>
         <P>Jesse James Chalich, 49, passed away unexpectedly on March 11, 2026. A 4th generation railroader, Jesse's connection to the industry wasn't just professional — it was in his blood. His grandfather, father, and uncle all worked in the Maintenance of Way department at the SOO Line. That heritage shaped a career defined by deep respect for the work and the people who do it.</P>
         <P>Jesse started as a conductor/engineer on Northern Plains Railroad in 1997, the year the company was founded in central North Dakota. His natural ability to connect with people was evident from the start. He moved through customer service, marketing, and executive leadership, helping guide the company as it grew from forty employees to more than two hundred. He rose to President and Chief Operating Officer of the Northern Plains Rail companies — a role he led with humility, pride, and dedication.</P>
         <P>Under Jesse's leadership, Northern Plains maintained exceptional employee morale and a culture that supported employees in putting safety and family first. He furthered his industry knowledge through the Railway Management Program at Michigan State University, and in 2014, Progressive Railroading named him one of the rail industry's "20 Rising Stars." He served on the board of the Lake Superior Railroad Museum and the American Association of Railroad Superintendents.</P>
         <P>Those who knew Jesse describe a consummate, natural leader — a best friend to many, including his children, with innate compassion and an uncanny ability to tell a story that made even the most ordinary moments hilarious. He was a true north compass with intuition and insights that always exceeded his years, and an absolute trusted advisor in both life and at work.</P>
         <P s={{margin:0,fontStyle:"italic",color:C.black}}>Jesse leaves behind a legacy that will continue far beyond the horizon. He is survived by his wife Julie, their four children — Jaden, Morgan, Ethan, and Maggie — and grandson Beckett.</P>
-      </div>
+        </div>
+      </details>
 
       {/* ── FEB 03, 2026 — CSX Leadership ── */}
       <div style={{background:C.white,borderRadius:8,padding:24,borderTop:`3px solid ${C.rust}`}}>
