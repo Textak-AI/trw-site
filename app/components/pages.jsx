@@ -104,11 +104,11 @@ export function HomeContent(){return <>
   </Sec>
 
   <Sec bg={C.cream}>
-    <Eye>The KBL Team</Eye>
+    <Eye>Our Team</Eye>
     <H2>Meet the Team Behind The Rail Way™</H2>
     <div className="r-grid-3" style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:24,marginTop:16}}>
       {[
-        {img:IMG.paulineAlt,name:"Pauline Lipkewich",role:"Founder & CEO",desc:"14+ years transforming cultures in heavy industry. Contributing Editor, Railway Age.",op:"center 28%"},
+        {img:IMG.paulineAlt,name:"Pauline Lipkewich",role:"Managing Director",desc:"14+ years transforming cultures in heavy industry. Contributing Editor, Railway Age.",op:"center 28%"},
         {img:IMG.brenda,name:"Brenda Huizinga",role:"Performance Coaching",desc:"Enhancing mindsets, behaviors and competencies that drive organizational culture and results.",op:"center 32%"},
         {img:IMG.michael,name:"Michael Powell",role:"Business Optimization",desc:"Proven models driving profitable growth, operational effectiveness, and safety improvements.",op:"center 22%"},
       ].map((t,i)=><div key={i} style={{background:C.white,borderRadius:8,overflow:"hidden"}}>
@@ -209,7 +209,7 @@ export function AboutContent(){return <>
         </div>
       </div>
       <div style={{flex:1,minWidth:300}}>
-        <P s={{fontSize:17}}>Pauline has been railroading since 2011. She led the global group sales team for Rocky Mountaineer, growing revenues more than 7x in less than four years. She has worked alongside Class I operators at CN, KCS, and NS — targeting safety performance and operational effectiveness, seeing double and triple digit improvements within 2-3 years.</P>
+        <P s={{fontSize:17}}>Pauline has been working with railroads since 2011. She led the global group sales team for Rocky Mountaineer, growing revenues more than 7x in less than four years. She has worked alongside Class I operators at CN, KCS, and NS with a focus on safety performance and operational effectiveness, seeing double and triple digit improvements within 2-3 years.</P>
         <P>She holds a Bachelor of Commerce and a Master of Arts in Leadership from the University of Guelph. As Contributing Editor at Railway Age, her column reaches rail decision-makers across North America.</P>
         <P>She founded KingdomBuilding Leadership with a core belief: when a leader gets better, everybody wins.</P>
         <div className="r-btn-row" style={{display:"flex",gap:12,marginTop:8}}><Btn primary href="/contact">Get in Touch</Btn><Btn href="https://www.railwayage.com/author/pauline-lipkewich/" target="_blank">Read Her Column</Btn></div>
@@ -311,6 +311,22 @@ export function LegaciesContent(){return <>
 
   <Sec bg={C.cream}>
     <div style={{display:"flex",flexDirection:"column",gap:20}}>
+
+      {/* ── MAR 20, 2026 — Sasser / Michael Kelly ── */}
+<div style={{background:C.white,borderRadius:8,padding:24,borderTop:`3px solid ${C.rust}`}}>
+  <p style={{fontFamily:F.b,fontSize:10,color:C.rust,textTransform:"uppercase",letterSpacing:"1.2px",margin:"0 0 8px"}}>Leadership Change — MAR 20, 2026</p>
+  <H3>Sasser, Inc. Names Michael Kelly as President of Chicago Freight Car and CF Rail Services</H3>
+  <P s={{fontSize:14}}>Sasser, Inc. announced that Michael Kelly has been named President of its Rail division, which includes Chicago Freight Car and CF Rail Services. Kelly succeeds Thomas Clark, who is retiring after a distinguished career in the rail industry.</P>
+  <a href="https://www.railwayage.com/news/people-news-sasser-port-of-long-beach/" target="_blank" rel="noopener noreferrer" style={{fontFamily:F.b,fontSize:13,color:C.rust,textDecoration:"none",fontWeight:600}}>Read on Railway Age →</a>
+</div>
+
+      {/* ── MAR 20, 2026 — Sasser / Michael Kelly ── */}
+      <div style={{background:C.white,borderRadius:8,padding:24,borderTop:`3px solid ${C.rust}`}}>
+        <p style={{fontFamily:F.b,fontSize:10,color:C.rust,textTransform:"uppercase",letterSpacing:"1.2px",margin:"0 0 8px"}}>Leadership Change — MAR 20, 2026</p>
+        <H3>Sasser, Inc. Names Michael Kelly as President of Chicago Freight Car and CF Rail Services</H3>
+        <P s={{fontSize:14}}>Sasser, Inc. announced that Michael Kelly has been named President of its Rail division, which includes Chicago Freight Car and CF Rail Services. Kelly succeeds Thomas Clark, who is retiring after a distinguished career in the rail industry.</P>
+        <a href="https://www.railwayage.com/news/people-news-sasser-port-of-long-beach/" target="_blank" rel="noopener noreferrer" style={{fontFamily:F.b,fontSize:13,color:C.rust,textDecoration:"none",fontWeight:600}}>Read on Railway Age →</a>
+      </div>
 
       {/* ── MAR 19, 2026 — Hall of Fame ── */}
       <div style={{background:C.white,borderRadius:8,padding:24,borderTop:`3px solid ${C.rust}`}}>
