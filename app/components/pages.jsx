@@ -312,6 +312,14 @@ export function LegaciesContent(){return <>
   <Sec bg={C.cream}>
     <div style={{display:"flex",flexDirection:"column",gap:20}}>
 
+      {/* ── MAR 20, 2026 — Sasser / Michael Kelly ── */}
+      <div style={{background:C.white,borderRadius:8,padding:24,borderTop:`3px solid ${C.rust}`}}>
+        <p style={{fontFamily:F.b,fontSize:10,color:C.rust,textTransform:"uppercase",letterSpacing:"1.2px",margin:"0 0 8px"}}>Leadership Change — MAR 20, 2026</p>
+        <H3>Sasser, Inc. Names Michael Kelly as President of Chicago Freight Car and CF Rail Services</H3>
+        <P s={{fontSize:14}}>Sasser, Inc. announced that Michael Kelly has been named President of its Rail division, which includes Chicago Freight Car and CF Rail Services. Kelly succeeds Thomas Clark, who is retiring after a distinguished career in the rail industry.</P>
+        <a href="https://www.railwayage.com/news/people-news-sasser-port-of-long-beach/" target="_blank" rel="noopener noreferrer" style={{fontFamily:F.b,fontSize:13,color:C.rust,textDecoration:"none",fontWeight:600}}>Read on Railway Age →</a>
+      </div>
+
       {/* ── MAR 19, 2026 — Hall of Fame ── */}
       <div style={{background:C.white,borderRadius:8,padding:24,borderTop:`3px solid ${C.rust}`}}>
         <p style={{fontFamily:F.b,fontSize:10,color:C.rust,textTransform:"uppercase",letterSpacing:"1.2px",margin:"0 0 8px"}}>Industry Recognition — MAR 19, 2026</p>
