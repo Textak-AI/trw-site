@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { C, F, IMG, NAV } from "./shared";
 
 const INSIGHT_LINKS = [
+  {l:"Coaching from the Caboose",href:"/insights/coaching-from-the-caboose",cat:"Coaching"},
   {l:"The Road Ahead",href:"/insights/the-road-ahead",cat:"Series Part 4"},
   {l:"Lead Yourself First",href:"/insights/lead-yourself-first",cat:"Series Part 3"},
   {l:"What's Your Style?",href:"/insights/leading-through-uncertainty-part-2",cat:"Series Part 2"},
