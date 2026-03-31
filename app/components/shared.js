@@ -18,6 +18,7 @@ export const IMG = {
   fieldLeadership: U+"articles/field-leadership.jpg",
   roadAhead: U+"articles/road-ahead.jpg",
   leaderTalking: U+"articles/leader-talking.jpg",
+  coachingCaboose: U+"articles/leading-from-the-caboose.jpg",
 };
 
 export const C = {rust:"#C4622D",brown:"#3D2B1F",black:"#2C2C2C",blackDeep:"#1A1A1A",gray:"#666",grayLt:"#999",grayRule:"#E0E0E0",cream:"#FAF7F4",white:"#FFF",navy:"#2C3E50",tint:"rgba(196,98,45,0.08)"};
