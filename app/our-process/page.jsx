@@ -1,5 +1,6 @@
 import { PAGES } from "../components/shared";
 import { ProcessContent } from "../components/pages";
+import content from "../../data/content.json";
 
 export const metadata = {
   title: PAGES.process.title,
@@ -7,5 +8,5 @@ export const metadata = {
 };
 
 export default function ProcessPage() {
-  return <ProcessContent />;
+  return <ProcessContent data={content.process} />;
 }

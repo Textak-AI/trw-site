@@ -1,5 +1,6 @@
 import { PAGES } from "./components/shared";
 import { HomeContent } from "./components/pages";
+import content from "../data/content.json";
 
 export const metadata = {
   title: PAGES.home.title,
@@ -7,5 +8,5 @@ export const metadata = {
 };
 
 export default function HomePage() {
-  return <HomeContent />;
+  return <HomeContent data={content.home} />;
 }

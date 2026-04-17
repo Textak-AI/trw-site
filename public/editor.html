@@ -3,8 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Rail Way - Site Editor</title>
-<style>*{margin:0;padding:0;box-sizing:border-box}body{overflow:hidden}#root{height:100vh}</style>
+<title>The Rail Way — Site Editor</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{overflow:hidden;background:#F4F4F1}
+  #root{height:100vh}
+  input,textarea,select,button{font-family:inherit}
+  textarea{resize:vertical}
+  .scrollbar-thin::-webkit-scrollbar{width:8px}
+  .scrollbar-thin::-webkit-scrollbar-thumb{background:#ccc;border-radius:4px}
+  .scrollbar-thin::-webkit-scrollbar-track{background:transparent}
+</style>
 </head>
 <body>
 <div id="root"></div>
@@ -12,795 +21,810 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
 <script type="text/babel" data-type="module">
-const { useState, useEffect, useRef, useCallback } = React;
+const { useState, useEffect, useRef, useCallback, useMemo } = React;
 
-/* ═══════════════════════════════════════════
-   THE RAIL WAY™ — Site Editor
-   Elementor-style visual page management
-   Source: github.com/Textak-AI/trw-site
-   ═══════════════════════════════════════════ */
+/* ═════════════════════════════════════════════
+   THE RAIL WAY™ — Site Editor v2
+   Source of truth: /data/content.json
+   Publishes via /api/publish → commits to GitHub → Vercel rebuilds.
+   Designed for Ella: simple forms, no structural editing.
+   ───────────────────────────────────────────── */
 
 const CDN = "https://cdn.jsdelivr.net/gh/Textak-AI/trw-assets@main/";
-const I = {
-  logo: CDN+"brand/rail-way-logo.png",
-  logoW: CDN+"brand/rail-way-logo-white.png",
-  field: CDN+"articles/field-leadership.jpg",
-  team: CDN+"operations/team-training.jpg",
-  safety: CDN+"operations/safety-culture.jpg",
-  yard: CDN+"operations/yard-training.jpg",
-  pauline: CDN+"team/pauline-headshot.jpg",
-  paulineAlt: CDN+"team/pauline-alt.jpg",
-  paulineSpk: CDN+"team/pauline-speaking.jpg",
-  brenda: CDN+"team/brenda-huizinga.jpg",
-  michael: CDN+"team/michael-powell.jpg",
-  railway: CDN+"operations/railway-training.jpg",
-  raAge: CDN+"homepage/railway-age-sidebar.jpg",
-  freight: CDN+"articles/freight-train.jpg",
-  road: CDN+"articles/road-ahead.jpg",
-  leader: CDN+"articles/leader-talking.jpg",
+const LOGO_WHITE = CDN + "brand/rail-way-logo-white.png";
+const LOGO_BLACK = CDN + "brand/rail-way-logo.png";
+
+const C = {
+  rust: "#C4622D", rustSoft: "#E8A479",
+  black: "#2C2C2C", deep: "#1A1A1A",
+  gray: "#5A5A5A", grayLt: "#888", rule: "#E5E2DD",
+  cream: "#FAF7F4", white: "#FFF",
+  bg: "#F4F4F1",
+  danger: "#CC4444", success: "#2D8F5E"
+};
+const F = { h: "Georgia,serif", b: "'Segoe UI',Arial,sans-serif" };
+
+// ═══ HUMAN-FRIENDLY LABELS ═══
+// Maps internal key names to what Ella actually sees in the UI.
+const LABELS = {
+  pages: {
+    home: "Home Page",
+    speakup: "Speak Up Culture",
+    process: "Our Process",
+    about: "About Pauline",
+    insights: "Insights",
+    classii: "Class II & III",
+    contact: "Contact",
+    legacies: "Legacies",
+    events: "Events"
+  },
+  sections: {
+    hero: "Hero / Top Banner",
+    stats: "Stats Row",
+    recognition: "Industry Recognition",
+    whatWeDo: "What We Do",
+    paulineFeature: "Pauline Feature",
+    seriesGrid: "Article Series Grid",
+    team: "Team Grid",
+    pulseCheck: "Pulse Check Section",
+    faq: "FAQ",
+    cta: "CTA Banner",
+    intro: "Intro",
+    whyItMatters: "Why It Matters",
+    howWeBuild: "How We Build It",
+    stages: "Process Stages",
+    comparison: "Training vs. Transformation",
+    credentials: "Credentials Sidebar",
+    bio: "Bio",
+    approach: "Approach",
+    articles: "Article List",
+    why: "Why Smaller Railroads",
+    form: "Contact Form",
+    audience: "Who This Is For",
+    entries: "Legacy Entries",
+    submit: "Submit a Legacy Banner",
+    events: "Events List"
+  },
+  fields: {
+    eyebrow: "Eyebrow (small tag above headline)",
+    headline: "Main Headline",
+    headlineAccent: "Headline Accent (orange colored word)",
+    heading: "Heading",
+    sub: "Subheading",
+    body: "Body Text",
+    body1: "First Paragraph",
+    body2: "Second Paragraph",
+    p1: "Paragraph 1", p2: "Paragraph 2", p3: "Paragraph 3",
+    quote: "Quote",
+    bio: "Bio",
+    intro: "Intro Text",
+    description: "Description",
+    disclaimer: "Disclaimer",
+    subtext: "Subtext",
+    btnPrimaryLabel: "Primary Button Label",
+    btnPrimaryHref: "Primary Button URL",
+    btnSecondaryLabel: "Secondary Button Label",
+    btnSecondaryHref: "Secondary Button URL",
+    btnLabel: "Button Label",
+    btnHref: "Button URL",
+    viewAllLabel: "View All Link Label",
+    viewAllHref: "View All Link URL",
+    footerText: "Footer Text",
+    footerLinkLabel: "Footer Link Label",
+    footerLinkHref: "Footer Link URL",
+    heroImageAlt: "Hero Image Alt Text (for screen readers)",
+    imageAlt: "Image Alt Text",
+    bgImageAlt: "Background Image Alt Text",
+    iframeSrc: "Survey URL (SurveyMonkey link)",
+    iframeTitle: "Survey Title",
+    submitLabel: "Submit Button Label",
+    sendingLabel: "Sending Button Label",
+    lifespan: "Lifespan (e.g., 'Sept 21, 1976 — March 11, 2026')",
+    expandLabel: "Expand Link Label",
+    role: "Role / Title",
+    tribute: "Tribute Paragraphs",
+    tributeItalic: "Tribute Closing (italic)",
+    dateLabel: "Date Label (displayed)",
+    category: "Category",
+    date: "Date (YYYY-MM-DD)",
+    linkLabel: "External Link Label",
+    linkHref: "External Link URL",
+    dateBadgeDay: "Date Badge Day",
+    dateBadgeMonth: "Date Badge Month",
+    meta: "Meta Text (location/format)",
+    host: "Host Text",
+    name: "Name",
+    title: "Title",
+    desc: "Description",
+    t: "Title",
+    d: "Description",
+    n: "Number/Label",
+    q: "Question",
+    a: "Answer",
+    s: "Source / Label",
+    v: "Value",
+    l: "Label",
+    src: "Source Citation",
+    c: "Category",
+    url: "URL",
+    r: "Role",
+    items: "Items",
+    steps: "Steps",
+    cards: "Cards",
+    members: "Team Members",
+    roles: "Roles",
+    articles: "Articles",
+    events: "Events",
+    entries: "Entries",
+    award: "Award Name",
+    source: "Publication Source",
+    email: "Email",
+    phone: "Phone",
+    label: "Label",
+    objectPosition: "Image Focus Position (e.g., 'center 28%')",
+    imgKey: "Image Key (advanced)",
+    type: "Entry Type",
+    thankYou: "Thank You Message",
+    directContact: "Direct Contact Info",
+    costOfSilence: "The Cost of Silence",
+    alternative: "The Alternative",
+    traditional: "Traditional Training",
+    residency: "Cultural Residency"
+  }
 };
 
-const C = {rust:"#C4622D",black:"#2C2C2C",deep:"#1A1A1A",gray:"#666",grayLt:"#999",rule:"#E0E0E0",cream:"#FAF7F4",white:"#FFF"};
-const F = {h:"Georgia,serif",b:"'Segoe UI',Arial,sans-serif"};
+const labelFor = (type, key) => {
+  if (type === "page") return LABELS.pages[key] || key;
+  if (type === "section") return LABELS.sections[key] || toTitle(key);
+  return LABELS.fields[key] || toTitle(key);
+};
 
+const toTitle = (s) => s.replace(/([A-Z])/g, " $1").replace(/^./, (c) => c.toUpperCase()).trim();
 
+// Fields that should never appear in the editor for any role (purely structural)
+const HIDDEN_FIELDS = new Set(["imgKey", "type"]);
+
+// Fields only admins can see/edit
+const isAdminOnly = (key) => key.startsWith("_adminOnly_");
+
+// Long-form fields that should get textareas instead of text inputs
+const isLongText = (key, value) => {
+  if (typeof value !== "string") return false;
+  if (value.length > 100) return true;
+  if (["body", "body1", "body2", "p1", "p2", "p3", "intro", "description",
+       "quote", "desc", "tributeItalic", "d", "a", "sub", "subtext",
+       "disclaimer", "bio"].includes(key)) return true;
+  return false;
+};
 
 // ═══ AUTH & API ═══
 const API = {
   async login(email, password) {
-    const res = await fetch("/api/auth", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({email, password}) });
+    const res = await fetch("/api/auth", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
     return res.json();
   },
   async logout() {
-    await fetch("/api/auth", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({action: "logout"}) });
+    await fetch("/api/auth", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "logout" })
+    });
   },
   async checkAuth() {
     const res = await fetch("/api/auth");
     return res.json();
   },
-  async publish(type, data, message) {
-    const res = await fetch("/api/publish", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({type, data, message}) });
+  async publish(content, message) {
+    const res = await fetch("/api/publish", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ type: "content", data: content, message })
+    });
     return res.json();
   },
-  async getPending() {
-    const res = await fetch("/api/pending");
+  async loadContent() {
+    // Cache-bust so we always get the freshest JSON after a publish
+    const res = await fetch("/data/content.json?t=" + Date.now());
+    if (!res.ok) throw new Error("Failed to load content");
     return res.json();
-  },
-  async submitChange(changeData) {
-    const res = await fetch("/api/pending", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({action: "submit", changeData}) });
-    return res.json();
-  },
-  async approveChange(changeId) {
-    const res = await fetch("/api/pending", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({action: "approve", changeId}) });
-    return res.json();
-  },
-  async rejectChange(changeId) {
-    const res = await fetch("/api/pending", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({action: "reject", changeId}) });
-    return res.json();
-  },
-  async updateSettings(requireApproval) {
-    const res = await fetch("/api/pending", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({action: "settings", requireApproval}) });
-    return res.json();
-  },
+  }
 };
 
 // ═══ LOGIN SCREEN ═══
-function LoginScreen({onLogin}) {
+function LoginScreen({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async () => {
-    setLoading(true); setError("");
-    const res = await API.login(email, password);
+  const handleSubmit = async (e) => {
+    e?.preventDefault();
+    setLoading(true);
+    setError("");
+    try {
+      const res = await API.login(email, password);
+      if (res.error) setError(res.error);
+      else onLogin(res);
+    } catch (err) {
+      setError("Connection problem. Try again.");
+    }
     setLoading(false);
-    if (res.ok) { onLogin(res); }
-    else { setError(res.error || "Login failed"); }
   };
 
-  return <div style={{position:"fixed",inset:0,background:"#1A1A1A",zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center"}}>
-    <div style={{textAlign:"center",width:320}}>
-      <img src={I.logo} alt="TRW" style={{height:40,marginBottom:24,filter:"brightness(10)"}}/>
-      <div style={{fontFamily:"Georgia,serif",fontSize:14,color:"rgba(255,255,255,0.5)",marginBottom:24}}>Site Editor</div>
-      <input value={email} onChange={e=>setEmail(e.target.value)} placeholder="Email" type="email" style={{display:"block",width:"100%",padding:"10px 16px",border:"1px solid #444",borderRadius:6,background:"#2C2C2C",color:"#fff",fontSize:14,outline:"none",fontFamily:"'Segoe UI',Arial,sans-serif",marginBottom:10}} onKeyDown={e=>e.key==="Enter"&&handleLogin()}/>
-      <input value={password} onChange={e=>setPassword(e.target.value)} placeholder="Password" type="password" style={{display:"block",width:"100%",padding:"10px 16px",border:"1px solid #444",borderRadius:6,background:"#2C2C2C",color:"#fff",fontSize:14,outline:"none",fontFamily:"'Segoe UI',Arial,sans-serif",marginBottom:10}} onKeyDown={e=>e.key==="Enter"&&handleLogin()}/>
-      {error && <div style={{color:"#C4622D",fontSize:12,marginBottom:10,fontFamily:"'Segoe UI',Arial,sans-serif"}}>{error}</div>}
-      <button onClick={handleLogin} disabled={loading} style={{width:"100%",padding:"10px 28px",background:"#C4622D",color:"#fff",border:"none",borderRadius:6,cursor:"pointer",fontFamily:"'Segoe UI',Arial,sans-serif",fontSize:14,fontWeight:600,opacity:loading?0.6:1}}>{loading ? "Signing in..." : "Sign In"}</button>
+  return (
+    <div style={{
+      position: "fixed", inset: 0, background: C.deep,
+      display: "flex", alignItems: "center", justifyContent: "center",
+      fontFamily: F.b
+    }}>
+      <form onSubmit={handleSubmit} style={{
+        width: 360, padding: 40, background: "rgba(255,255,255,0.03)",
+        borderRadius: 12, border: "1px solid rgba(255,255,255,0.08)"
+      }}>
+        <img src={LOGO_WHITE} alt="TRW" style={{ height: 32, marginBottom: 20, filter: "brightness(10)" }} />
+        <div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", letterSpacing: 1.5, textTransform: "uppercase", marginBottom: 28 }}>
+          Site Editor
+        </div>
+
+        <label style={{ fontSize: 11, color: "rgba(255,255,255,0.5)", display: "block", marginBottom: 6 }}>Email</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={{ width: "100%", padding: "10px 12px", background: "#2C2C2C", border: "1px solid #444", borderRadius: 6, color: "#fff", fontSize: 14, marginBottom: 16 }}
+          required
+        />
+
+        <label style={{ fontSize: 11, color: "rgba(255,255,255,0.5)", display: "block", marginBottom: 6 }}>Password</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          style={{ width: "100%", padding: "10px 12px", background: "#2C2C2C", border: "1px solid #444", borderRadius: 6, color: "#fff", fontSize: 14, marginBottom: 20 }}
+          required
+        />
+
+        {error && <div style={{ color: C.rustSoft, fontSize: 12, marginBottom: 12 }}>{error}</div>}
+
+        <button
+          type="submit"
+          disabled={loading}
+          style={{
+            width: "100%", padding: "11px 0", background: C.rust, color: "#fff",
+            border: "none", borderRadius: 6, fontSize: 14, fontWeight: 600,
+            cursor: loading ? "wait" : "pointer", opacity: loading ? 0.6 : 1
+          }}
+        >
+          {loading ? "Signing in..." : "Sign In"}
+        </button>
+      </form>
     </div>
-  </div>;
+  );
 }
 
-// ═══ SECTION TYPES ═══
-const SECTION_TYPES = {
-  hero: {label:"Hero Banner", icon:"◆", color:"#C4622D"},
-  stats: {label:"Stats Row", icon:"◈", color:"#2E86C1"},
-  text: {label:"Text + Image", icon:"◉", color:"#27AE60"},
-  cards: {label:"Card Grid", icon:"◫", color:"#8E44AD"},
-  cta: {label:"CTA Banner", icon:"▶", color:"#E67E22"},
-  faq: {label:"FAQ Section", icon:"?", color:"#16A085"},
-  team: {label:"Team Grid", icon:"◎", color:"#2C3E50"},
-  timeline: {label:"Timeline Steps", icon:"→", color:"#C0392B"},
-  quote: {label:"Quote Block", icon:"Q", color:"#7D3C98"},
-  articles: {label:"Article Grid", icon:"▤", color:"#2980B9"},
-  form: {label:"Contact Form", icon:"✎", color:"#E74C3C"},
-  embed: {label:"Survey Embed", icon:"□", color:"#F39C12"},
-  legacy_card: {label:"Legacy Card", icon:"✦", color:"#34495E"},
-};
+// ═══ PRIMITIVE FIELD COMPONENTS ═══
 
-// ═══ ALL PAGES WITH REAL CONTENT ═══
-const PAGES = [
-  {id:"home",title:"Home",path:"/",icon:"⌂",sections:[
-    {id:"h1",type:"hero",label:"Hero Banner",data:{eyebrow:"The Rail Way™ — From the Boardroom to the Ballast Line",headline:"Railroad Safety Culture",accent:"Transformation",sub:"70–90% of organizational transformations fail. Yours doesn't have to.",body:"Build a Speak Up Culture where safety concerns don't wait for an accident. Not just training. Not just consulting. A cultural residency that creates lasting change.",img:"field",imgPos:"85% 35%",btn1:"Take the Free Pulse Check",btn2:"What Is Speak Up Culture?"}},
-    {id:"h2",type:"stats",label:"Stats Bar",data:{stats:[{v:"214%",l:"ROI from safety culture programs",s:"BCG Research, 2023"},{v:"4x",l:"Higher employee retention with psychological safety",s:"BCG Study"},{v:"565/yr",l:"Average roadway worker injuries (2018–2023)",s:"FRA Safety Reports"}]}},
-    {id:"h3",type:"cards",label:"Industry Recognition",data:{eyebrow:"Industry Recognition",heading:"Building Generational Railroaders — and Industry Leaders",cards:[{title:"John Orr — Railroader of the Year",desc:"Railway Age recognized NS's John Orr for championing the cultural shifts that improved safety metrics across the network."},{title:"Diane Barnett — Railway Woman of the Year",desc:"The first woman in NS history to lead a major division — recognized by Railway Age for breaking barriers in operations leadership."}]}},
-    {id:"h4",type:"text",label:"What We Do",data:{eyebrow:"Safety Culture Transformation",heading:"How We Transform Railroad Safety Culture",body:"The Rail Way works alongside your leadership team — from the boardroom to the ballast line — to create measurable, sustainable safety culture transformation. This isn't training. It's a cultural residency.",img:"paulineSpk"}},
-    {id:"h5",type:"text",label:"Pauline Feature",data:{eyebrow:"Contributing Editor, Railway Age",heading:"Pauline Lipkewich",body:"\"I am blessed to live in a region where heavy industry thrives. I have the gift of seeing firsthand the fruits of labor that come from calloused hands and dusty work boots.\" Grew Rocky Mountaineer group revenue 7x.",img:"pauline",btn1:"Full Bio",btn2:"Read Her Column"}},
-    {id:"h6",type:"articles",label:"Latest Articles",data:{heading:"Insights from the Rail Way"}},
-    {id:"h7",type:"team",label:"Team Grid",data:{heading:"Our Team",members:[{name:"Pauline Lipkewich",role:"Founder & Chief Transformation Officer",img:"pauline"},{name:"Brenda Huizinga",role:"Director of Operations",img:"brenda"},{name:"Michael Powell",role:"Senior Consultant",img:"michael"}]}},
-    {id:"h8",type:"embed",label:"Pulse Check Survey",data:{heading:"Free Safety Culture Pulse Check",sub:"Take 2 minutes to benchmark your railroad's safety culture."}},
-    {id:"h9",type:"faq",label:"FAQ Section",data:{heading:"Common Questions",faqs:[{q:"What's the difference between training and transformation?",a:"Training delivers information. Transformation changes behavior, systems, and culture."},{q:"How long does a typical engagement last?",a:"Most engagements run 12–18 months, with measurable behavior shifts visible in 90–180 days."},{q:"Is this only for large railroads?",a:"The Rail Way was built for Class II and III operators. Smaller railroads often see faster results."}]}},
-    {id:"h10",type:"cta",label:"CTA Banner",data:{heading:"Ready to Transform Your Safety Culture?",sub:"Start with a confidential conversation about where your railroad is — and where it could be.",btn:"Schedule a Consultation"}},
-  ]},
-  {id:"speakup",title:"Speak Up Culture",path:"/speak-up-culture",icon:"◈",sections:[
-    {id:"s1",type:"text",label:"Introduction",data:{eyebrow:"Speak Up Culture for Railroads",heading:"What Is Speak Up Culture — and Why Railroads Need It Now",body:"Speak Up Culture is an organizational environment where every railroader — from track crews to the C-suite — feels safe raising safety concerns, reporting near-misses, and challenging unsafe conditions without fear of retaliation.",img:"paulineSpk"}},
-    {id:"s2",type:"cards",label:"Why It Matters",data:{heading:"Why Speak Up Culture Matters",cards:[{title:"The Cost of Silence",desc:"When a roadway worker sees an unsafe condition but doesn't report it, the risk stays invisible until it becomes an incident. 96 roadway workers have been killed since 1997."},{title:"The Alternative",desc:"Organizations with strong Speak Up Cultures catch hazards upstream. One FRA C3RS pilot site reported nearly a 70% reduction in certain accident types."}]}},
-    {id:"s3",type:"timeline",label:"How We Build It",data:{heading:"How We Build It",steps:[{n:"1",t:"Assess the Real Culture",d:"Not the culture in your policy handbook — the one your crews experience every shift."},{n:"2",t:"Transform Leader Behaviors",d:"We work directly with supervisors to model communication patterns that make speaking up feel safe."},{n:"3",t:"Build Internal Faculty",d:"We train your people to sustain the transformation using our white-labeled materials."}]}},
-    {id:"s4",type:"faq",label:"FAQ",data:{heading:"Speak Up Culture FAQ",faqs:[{q:"How is this different from FRA's C3RS program?",a:"C3RS is a specific confidential reporting system. Speak Up Culture is the broader environment that determines whether workers actually use reporting systems."},{q:"How long does it take?",a:"Meaningful behavior change is typically visible within 90–180 days. Sustainable transformation requires 12–18 months."},{q:"Can smaller railroads afford this?",a:"The Rail Way was built for Class II and III operators. Smaller railroads often see faster culture change."}]}},
-  ]},
-  {id:"process",title:"Our Process",path:"/our-process",icon:"→",sections:[
-    {id:"p1",type:"hero",label:"Process Hero",data:{eyebrow:"Our Proven Process",heading:"How Safety Culture Transformation Works",sub:"Four stages. Measurable outcomes. Lasting change.",img:"safety",imgPos:"center"}},
-    {id:"p2",type:"timeline",label:"Four Stages",data:{heading:"The Four-Stage Cycle",steps:[{n:"1",t:"Heighten Awareness",d:"Diagnostic assessment of current safety culture. Frontline interviews. Leadership alignment."},{n:"2",t:"Increase Clarity",d:"Define the gap between stated values and lived experience. Build shared language."},{n:"3",t:"Build Alignment",d:"Leadership modeling. Supervisor coaching. Communication system redesign."},{n:"4",t:"Drive Momentum",d:"Sustain change through internal faculty development and measurement systems."}]}},
-    {id:"p3",type:"cards",label:"Training vs Transformation",data:{heading:"Training vs. Transformation",cards:[{title:"Training",desc:"Delivers information. Checks compliance boxes. Fades after 30 days."},{title:"Transformation",desc:"Changes behavior, systems, and culture. Builds internal capability. Lasts."}]}},
-  ]},
-  {id:"about",title:"About",path:"/about",icon:"◎",sections:[
-    {id:"a1",type:"text",label:"Pauline Bio",data:{eyebrow:"About",heading:"About Pauline Lipkewich — Founder, The Rail Way™",body:"Pauline has been railroading since 2011. She led the global group sales team for Rocky Mountaineer, growing revenues more than 7x in less than four years. She has worked alongside Class I operators at CN, KCS, and NS — targeting safety performance and operational effectiveness, seeing double and triple digit improvements within 2-3 years.",img:"pauline",btn1:"Get in Touch",btn2:"Read Her Column"}},
-    {id:"a2",type:"quote",label:"Approach",data:{heading:"Pauline's Approach",quote:"This isn't happening to you. It's happening with you.",body:"Transformation happens with the organization, not to it. Her approach is built on respect for the people doing the work."}},
-  ]},
-  {id:"insights",title:"Insights",path:"/insights",icon:"▤",sections:[
-    {id:"i1",type:"articles",label:"Article Grid",data:{heading:"Industry Insights — Rail Safety Culture & Leadership",sub:"Expert perspectives on rail leadership, safety culture, and operational excellence."}},
-  ]},
-  {id:"classii",title:"Class II & III",path:"/class-ii-iii",icon:"◫",sections:[
-    {id:"c1",type:"hero",label:"Class II Hero",data:{eyebrow:"For Regional & Short-Line Operators",heading:"Safety Culture Optimization for Class II & III Railroads",sub:"Proven blueprint with Class I's, right-sized to deliver exponential results for short line and regional carriers.",img:"road",imgPos:"center"}},
-    {id:"c2",type:"cards",label:"Why Faster Results",data:{heading:"Why Smaller Railroads See Faster Results",cards:[{title:"Leadership Proximity",desc:"Executives closer to frontline. Behavioral modeling has direct impact."},{title:"Operational Agility",desc:"Decisions in days, not quarters. No enterprise bureaucracy."},{title:"Community Identity",desc:"'Railroad family' isn't a metaphor — it's the operational reality."}]}},
-  ]},
-  {id:"contact",title:"Contact",path:"/contact",icon:"✎",sections:[
-    {id:"ct1",type:"form",label:"Contact Form",data:{heading:"Start a Conversation About Your Safety Culture",sub:"Confidential consultation about your railroad's safety culture transformation.",endpoint:"manlnepr"}},
-  ]},
-  {id:"legacies",title:"Legacies",path:"/legacies",icon:"✦",sections:[
-    {id:"l1",type:"text",label:"Introduction",data:{eyebrow:"Honoring Rail Industry Leaders",heading:"Legacies — Honoring Those Who Built the Rail Industry",body:"The rail industry is built by people who give their careers — and sometimes their lives — to keeping freight and passengers moving safely."}},
-    {id:"l5",type:"legacy_card",label:"Railroad Hall of Fame",data:{date:"2026-03-19",dateLabel:"MAR 19, 2026",category:"Industry Recognition",title:"Goode, McClellan, Brosnan Inducted into Railroad Hall of Fame",body:"Three iconic railroaders were inducted into the National Railroad Hall of Fame during a ceremony in Roanoke, Virginia."}},
-    {id:"l2",type:"legacy_card",label:"Jesse Chalich",data:{date:"2026-03-11",dateLabel:"MAR 11, 2026",category:"In Memoriam",title:"Jesse James Chalich",body:"Jesse James Chalich, 49, passed away unexpectedly on March 11, 2026. A 4th generation railroader and President & COO of Northern Plains Railroad. Progressive Railroading named him one of the industry's 20 Rising Stars in 2014.",subtitle:"September 21, 1976 \u2014 March 11, 2026"}},
-    {id:"l3",type:"legacy_card",label:"CSX Leadership Changes",data:{date:"2026-02-03",dateLabel:"FEB 03, 2026",category:"Leadership Change",title:"CSX Announces Leadership Changes to Its Executive Team",body:"CSX Corporation announced changes to its executive leadership team as part of ongoing organizational evolution."}},
-    {id:"l4",type:"cta",label:"Submit a Legacy",data:{heading:"Know Someone We Should Honor?",sub:"Help us recognize the people who shaped the rail industry.",btn:"Submit a Legacy"}},
-  ]},
-];
+function TextField({ label, value, onChange, multiline, required, hint }) {
+  const Tag = multiline ? "textarea" : "input";
+  return (
+    <div style={{ marginBottom: 16 }}>
+      <label style={{ display: "block", fontSize: 11, color: C.gray, textTransform: "uppercase", letterSpacing: 0.6, marginBottom: 6, fontWeight: 600 }}>
+        {label}
+        {required && <span style={{ color: C.danger, marginLeft: 4 }}>*</span>}
+      </label>
+      <Tag
+        value={value ?? ""}
+        onChange={(e) => onChange(e.target.value)}
+        rows={multiline ? Math.max(3, Math.min(8, Math.ceil((value?.length || 0) / 70))) : undefined}
+        style={{
+          width: "100%",
+          padding: "10px 12px",
+          border: "1px solid " + C.rule,
+          borderRadius: 6,
+          fontSize: 14,
+          color: C.black,
+          background: C.white,
+          fontFamily: multiline ? F.b : F.b,
+          lineHeight: multiline ? 1.5 : 1.3
+        }}
+      />
+      {hint && <div style={{ fontSize: 11, color: C.grayLt, marginTop: 4 }}>{hint}</div>}
+    </div>
+  );
+}
 
-const ARTICLES = [
-  {id:"art1",title:"The Road Ahead",path:"/insights/the-road-ahead",type:"Series Part 4",date:"Feb 2026"},
-  {id:"art2",title:"Lead Yourself First",path:"/insights/lead-yourself-first",type:"Series Part 3",date:"Jan 2026"},
-  {id:"art3",title:"What's Your Style?",path:"/insights/leading-through-uncertainty-part-2",type:"Series Part 2",date:"Oct 2025"},
-  {id:"art4",title:"Navigate Uncertainty",path:"/insights/leaders-navigate-uncertainty",type:"Series Part 1",date:"Aug 2025"},
-  {id:"art5",title:"Rail Safety by the Numbers",path:"/insights/rail-safety-human-factors",type:"Data & Analysis",date:"2025"},
-  {id:"art6",title:"Speak Up Culture",path:"/insights/speak-up-culture-rail-safety",type:"Speak Up Culture",date:"2026"},
-  {id:"art7",title:"Transformation vs. Training",path:"/insights/transformation-vs-training",type:"Culture Change",date:"2026"},
-  {id:"art8",title:"ROI of Safety Culture",path:"/insights/roi-safety-culture",type:"ROI & Data",date:"2026"},
-];
+// Renders any value recursively: scalars → inputs, objects → nested fieldset, arrays → repeatable
+function FieldRenderer({ keyName, value, path, onChange, userRole, depth = 0 }) {
+  if (HIDDEN_FIELDS.has(keyName)) return null;
+  if (isAdminOnly(keyName) && userRole !== "admin") return null;
 
-
-// Article block types
-const ART_BLOCK_TYPES = {
-  art_header: {label:"Header Meta", icon:"H", color:"#C4622D"},
-  art_body: {label:"Body Section", icon:"P", color:"#27AE60"},
-  art_callout: {label:"Stat Callout", icon:"!", color:"#E67E22"},
-  art_assessment: {label:"Assessment", icon:"?", color:"#2E86C1"},
-  art_sources: {label:"Sources", icon:"#", color:"#8E44AD"},
-  art_image: {label:"Inline Image", icon:"I", color:"#E67E22"},
-  art_bio: {label:"Author Bio", icon:"@", color:"#34495E"},
-};
-
-const ARTICLES_DATA = ARTICLES.map(a => ({...a, blocks:[
-  {id:a.id+"_h",type:"art_header",label:"Header",data:{category:a.type,readTime:"8 min read",sources:"FRA, BCG, DOT OIG"}},
-  {id:a.id+"_b1",type:"art_body",label:"Introduction",data:{heading:"",body:"Opening section."}},
-  {id:a.id+"_b2",type:"art_body",label:"Body Section",data:{heading:"Section Heading",body:"Body text."}},
-  {id:a.id+"_c1",type:"art_callout",label:"Key Stat",data:{text:"Key statistic or callout."}},
-  {id:a.id+"_a1",type:"art_assessment",label:"Assessment",data:{name:a.title+" Assessment",questions:["Question 1","Question 2","Question 3"],endpoint:"xnjbobyn"}},
-  {id:a.id+"_s1",type:"art_sources",label:"Sources",data:{sources:["Source 1","Source 2"]}},
-  {id:a.id+"_bio",type:"art_bio",label:"Author Bio",data:{author:"Charlie",bio:"The Rail Way editorial team."}},
-]}));
-
-function ArticleFields({block, onChange}){
-  const d = block.data;
-  const set = (key,val) => onChange({...block, data:{...d, [key]:val}});
-  const t = block.type;
-  if(t==="art_header") return <><Input label="Category" value={d.category} onChange={v=>set("category",v)} small/><Input label="Reading Time" value={d.readTime} onChange={v=>set("readTime",v)} small/><Input label="Sources" value={d.sources} onChange={v=>set("sources",v)} small/></>;
-  if(t==="art_body") return <><Input label="Heading (H2)" value={d.heading} onChange={v=>set("heading",v)}/><Input label="Body" value={d.body} onChange={v=>set("body",v)} multi/></>;
-  if(t==="art_callout") return <Input label="Callout Text" value={d.text} onChange={v=>set("text",v)} multi/>;
-  if(t==="art_assessment") return <><Input label="Assessment Name" value={d.name} onChange={v=>set("name",v)}/>{(d.questions||[]).map((q,i)=><Input key={i} label={"Q"+(i+1)} value={q} onChange={v=>{const qs=[...d.questions];qs[i]=v;set("questions",qs);}} small/>)}<button onClick={()=>set("questions",[...(d.questions||[]),"New question"])} style={{background:"none",border:"1px dashed #E0E0E0",borderRadius:4,padding:"4px 10px",fontFamily:"'Segoe UI',Arial,sans-serif",fontSize:10,color:"#999",cursor:"pointer",width:"100%"}}>+ Add Question</button></>;
-  if(t==="art_sources") return <>{(d.sources||[]).map((s,i)=><Input key={i} label={"Source "+(i+1)} value={s} onChange={v=>{const ss=[...d.sources];ss[i]=v;set("sources",ss);}} small/>)}<button onClick={()=>set("sources",[...(d.sources||[]),"New source"])} style={{background:"none",border:"1px dashed #E0E0E0",borderRadius:4,padding:"4px 10px",fontFamily:"'Segoe UI',Arial,sans-serif",fontSize:10,color:"#999",cursor:"pointer",width:"100%"}}>+ Add Source</button></>;
-  if(t==="art_image") {
-    const handleFile = (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (ev) => set("url", ev.target.result);
-      reader.readAsDataURL(file);
-    };
-    const handleDrop = (e) => {
-      e.preventDefault();
-      e.currentTarget.style.borderColor = "#E0E0E0";
-      const file = e.dataTransfer.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (ev) => set("url", ev.target.result);
-      reader.readAsDataURL(file);
-    };
-    const handleFocalClick = (e) => {
-      const rect = e.currentTarget.getBoundingClientRect();
-      const x = Math.round(((e.clientX - rect.left) / rect.width) * 100);
-      const y = Math.round(((e.clientY - rect.top) / rect.height) * 100);
-      set("position", x + "% " + y + "%");
-    };
-    return <>
-      <div style={{marginBottom:8}}>
-        <label style={{fontFamily:"'Segoe UI',Arial,sans-serif",fontSize:10,color:"#666",display:"block",marginBottom:3}}>Layout</label>
-        <select value={d.layout||"right"} onChange={e=>set("layout",e.target.value)} style={{width:"100%",padding:"6px 8px",border:"1px solid #E0E0E0",borderRadius:4,fontFamily:"'Segoe UI',Arial,sans-serif",fontSize:11,color:"#2C2C2C",background:"#fff"}}>
-          <option value="right">Float Right (text wraps left)</option>
-          <option value="left">Float Left (text wraps right)</option>
-          <option value="full">Full Width</option>
-          <option value="hero">Hero Banner (dark overlay)</option>
-        </select>
-      </div>
-      <div onDrop={handleDrop} onDragOver={e=>{e.preventDefault();e.currentTarget.style.borderColor="#C4622D"}} onDragLeave={e=>{e.currentTarget.style.borderColor="#E0E0E0"}} style={{border:"2px dashed #E0E0E0",borderRadius:6,padding:12,textAlign:"center",marginBottom:8,transition:"border-color 0.2s",cursor:"pointer"}} onClick={()=>document.getElementById("img-upload-"+block.id)?.click()}>
-        {d.url ? <div style={{position:"relative"}}>
-          <div onClick={handleFocalClick} style={{position:"relative",cursor:"crosshair",borderRadius:4,overflow:"hidden"}}>
-            <img src={d.url} alt={d.alt||""} style={{width:"100%",maxHeight:160,objectFit:"cover",display:"block",objectPosition:d.position||"center"}}/>
-            {d.position && <div style={{position:"absolute",left:d.position.split(" ")[0],top:d.position.split(" ")[1],width:16,height:16,borderRadius:8,border:"2px solid #fff",background:"rgba(196,98,45,0.7)",transform:"translate(-50%,-50%)",pointerEvents:"none",boxShadow:"0 0 4px rgba(0,0,0,0.5)"}}></div>}
-          </div>
-          <div style={{marginTop:4,fontFamily:"'Segoe UI',Arial,sans-serif",fontSize:9,color:"#999",display:"flex",justifyContent:"space-between"}}>
-            <span>Click image to set focal point</span>
-            <span>{d.position||"center"}</span>
-          </div>
-        </div> : <>
-          <div style={{fontFamily:"'Segoe UI',Arial,sans-serif",fontSize:20,color:"#ccc",marginBottom:4}}>+</div>
-          <div style={{fontFamily:"'Segoe UI',Arial,sans-serif",fontSize:11,color:"#999"}}>Drop image here or click to upload</div>
-        </>}
-        <input id={"img-upload-"+block.id} type="file" accept="image/*" onChange={handleFile} style={{display:"none"}}/>
-      </div>
-      <Input label="Or paste image URL" value={d.url && !d.url.startsWith("data:") ? d.url : ""} onChange={v=>set("url",v)} small/>
-      <Input label="Alt Text" value={d.alt} onChange={v=>set("alt",v)} small/>
-      <Input label="Caption (optional)" value={d.caption} onChange={v=>set("caption",v)} small/>
-    </>;
+  // Array of items
+  if (Array.isArray(value)) {
+    return <ArrayField keyName={keyName} items={value} path={path} onChange={onChange} userRole={userRole} depth={depth} />;
   }
-  if(t==="art_bio") return <><Input label="Author" value={d.author} onChange={v=>set("author",v)} small/><Input label="Bio" value={d.bio} onChange={v=>set("bio",v)} multi/></>;
-  return <Input label="Content" value={d.text||""} onChange={v=>set("text",v)} multi/>;
-}
 
-function ArticlePreviewBlock({block}){
-  const d = block.data; const t = block.type;
-  if(t==="art_header") return <div style={{padding:"16px 24px",borderBottom:"1px solid #E0E0E0"}}><p style={{fontFamily:"'Segoe UI',Arial,sans-serif",fontSize:10,color:"#666",margin:0}}>{d.category} | {d.readTime} | Sources: {d.sources}</p></div>;
-  if(t==="art_body") return <div style={{padding:"14px 24px"}}>{d.heading && <h2 style={{fontFamily:"Georgia,serif",fontSize:20,fontWeight:700,color:"#2C2C2C",margin:"0 0 8px",borderBottom:"2px solid #C4622D",paddingBottom:8,display:"inline-block"}}>{d.heading}</h2>}<p style={{fontFamily:"Georgia,serif",fontSize:13,color:"#666",lineHeight:1.8,margin:d.heading?"8px 0 0":0}}>{d.body}</p></div>;
-  if(t==="art_callout") return <div style={{margin:"10px 24px",background:"#FAF7F4",borderLeft:"4px solid #C4622D",padding:"16px 20px"}}><p style={{fontFamily:"Georgia,serif",fontSize:14,color:"#2C2C2C",lineHeight:1.6,margin:0,fontWeight:700}}>{d.text}</p></div>;
-  if(t==="art_assessment") return <div style={{margin:"10px 24px",background:"#FAF7F4",border:"2px solid #C4622D",borderRadius:8,padding:16}}><h3 style={{fontFamily:"Georgia,serif",fontSize:16,color:"#C4622D",margin:"0 0 10px"}}>{d.name}</h3>{(d.questions||[]).map((q,i)=><div key={i} style={{display:"flex",gap:6,padding:"6px 0",borderBottom:"1px solid #E0E0E0",fontFamily:"'Segoe UI',Arial,sans-serif",fontSize:11,color:"#666"}}><input type="checkbox" disabled/>{q}</div>)}<button disabled style={{marginTop:12,padding:"8px 20px",background:"#C4622D",color:"#fff",border:"none",borderRadius:4,fontFamily:"'Segoe UI',Arial,sans-serif",fontSize:12,fontWeight:600}}>Calculate My Score</button></div>;
-  if(t==="art_sources") return <div style={{padding:"14px 24px",borderTop:"1px solid #E0E0E0"}}><h3 style={{fontFamily:"Georgia,serif",fontSize:14,fontWeight:700,margin:"0 0 6px"}}>Sources</h3>{(d.sources||[]).map((s,i)=><p key={i} style={{fontFamily:"'Segoe UI',Arial,sans-serif",fontSize:10,color:"#999",margin:"2px 0"}}>{i+1}. {s}</p>)}</div>;
-  if(t==="art_image") {
-    if(d.layout==="hero") return <div style={{background:"linear-gradient(rgba(44,44,44,0.72),rgba(44,44,44,0.72))",backgroundImage:d.url?"url("+d.url+")":"none",backgroundSize:"cover",backgroundPosition:"center",minHeight:200,display:"flex",alignItems:"center",justifyContent:"center",padding:"40px 24px"}}>{d.caption && <p style={{fontFamily:"Georgia,serif",fontSize:18,color:"#fff",fontWeight:700,textAlign:"center",margin:0}}>{d.caption}</p>}</div>;
-    if(d.layout==="full") return <div style={{padding:"14px 24px"}}><img src={d.url} alt={d.alt||""} style={{width:"100%",height:"auto",borderRadius:8,boxShadow:"0 4px 10px rgba(0,0,0,0.1)",objectPosition:d.position||"center"}}/>{d.caption && <p style={{fontFamily:"'Segoe UI',Arial,sans-serif",fontSize:10,color:"#999",margin:"6px 0 0",fontStyle:"italic",textAlign:"center"}}>{d.caption}</p>}</div>;
-    return <div style={{padding:"14px 24px",overflow:"hidden"}}><div style={{float:d.layout==="left"?"left":"right",width:"45%",margin:d.layout==="left"?"0 24px 16px 0":"0 0 16px 24px"}}><img src={d.url} alt={d.alt||""} style={{width:"100%",height:"auto",borderRadius:8,boxShadow:"0 4px 10px rgba(0,0,0,0.1)",objectPosition:d.position||"center"}}/>{d.caption && <p style={{fontFamily:"'Segoe UI',Arial,sans-serif",fontSize:10,color:"#999",margin:"6px 0 0",fontStyle:"italic"}}>{d.caption}</p>}</div><p style={{fontFamily:"Georgia,serif",fontSize:13,color:"#666",lineHeight:1.8,margin:0}}>(Body text wraps around this image)</p><div style={{clear:"both"}}></div></div>;
+  // Nested object
+  if (value !== null && typeof value === "object") {
+    return <ObjectField keyName={keyName} obj={value} path={path} onChange={onChange} userRole={userRole} depth={depth} />;
   }
-  if(t==="art_bio") return <div style={{padding:"14px 24px",borderTop:"1px solid #E0E0E0",display:"flex",gap:12,alignItems:"center"}}><div style={{width:40,height:40,borderRadius:20,background:"#FAF7F4",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"Georgia,serif",fontSize:16,color:"#C4622D",fontWeight:700,flexShrink:0}}>{(d.author||"C")[0]}</div><div><h4 style={{fontFamily:"Georgia,serif",fontSize:13,margin:0}}>By {d.author}</h4><p style={{fontFamily:"'Segoe UI',Arial,sans-serif",fontSize:10,color:"#666",margin:0}}>{d.bio}</p></div></div>;
-  return <div style={{padding:16,fontSize:11,color:"#999"}}>[{block.type}]</div>;
+
+  // Scalar (string/number/boolean)
+  const label = labelFor("field", keyName);
+  const multiline = isLongText(keyName, value);
+
+  return (
+    <TextField
+      label={label + (isAdminOnly(keyName) ? " 🔒" : "")}
+      value={value}
+      onChange={(v) => onChange(path, v)}
+      multiline={multiline}
+    />
+  );
 }
 
-// ═══ UI COMPONENTS ═══
-const Ico = ({children,color})=><span style={{fontSize:14,color:color||C.rust,marginRight:6}}>{children}</span>;
-const Label = ({children})=><div style={{fontFamily:F.b,fontSize:10,fontWeight:700,color:C.grayLt,textTransform:"uppercase",letterSpacing:"1px",marginBottom:6}}>{children}</div>;
-const Input = ({label,value,onChange,multi,small})=>{
-  const s = {width:"100%",padding:small?"4px 8px":"8px 10px",border:`1px solid ${C.rule}`,borderRadius:4,fontFamily:F.b,fontSize:small?11:12,color:C.black,background:C.white,resize:"vertical",outline:"none"};
-  return <div style={{marginBottom:8}}>
-    {label && <label style={{fontFamily:F.b,fontSize:10,color:C.gray,display:"block",marginBottom:3}}>{label}</label>}
-    {multi ? <textarea rows={3} style={s} value={value||""} onChange={e=>onChange(e.target.value)}/> : <input style={s} value={value||""} onChange={e=>onChange(e.target.value)}/>}
-  </div>;
-};
+function ObjectField({ keyName, obj, path, onChange, userRole, depth }) {
+  const [expanded, setExpanded] = useState(depth < 1);
+  const displayLabel = labelFor(depth === 0 ? "section" : "field", keyName);
+  const childKeys = Object.keys(obj).filter(k => {
+    if (HIDDEN_FIELDS.has(k)) return false;
+    if (isAdminOnly(k) && userRole !== "admin") return false;
+    return true;
+  });
 
-// ═══ SECTION FIELD EDITORS ═══
-function SectionFields({section, onChange}){
-  const d = section.data;
-  const set = (key,val) => onChange({...section, data:{...d, [key]:val}});
-  const t = section.type;
+  if (childKeys.length === 0) return null;
 
-  if(t==="hero") return <>
-    <Input label="Eyebrow" value={d.eyebrow} onChange={v=>set("eyebrow",v)}/>
-    <Input label="Headline" value={d.headline} onChange={v=>set("headline",v)}/>
-    {d.accent!==undefined && <Input label="Accent Word" value={d.accent} onChange={v=>set("accent",v)}/>}
-    <Input label="Subtitle" value={d.sub} onChange={v=>set("sub",v)} multi/>
-    {d.body && <Input label="Body" value={d.body} onChange={v=>set("body",v)} multi/>}
-    <Input label="Image Position" value={d.imgPos} onChange={v=>set("imgPos",v)} small/>
-    {d.btn1 && <Input label="Button 1" value={d.btn1} onChange={v=>set("btn1",v)} small/>}
-    {d.btn2 && <Input label="Button 2" value={d.btn2} onChange={v=>set("btn2",v)} small/>}
-  </>;
+  return (
+    <div style={{
+      background: depth === 0 ? C.white : "transparent",
+      border: depth === 0 ? "1px solid " + C.rule : "none",
+      borderRadius: depth === 0 ? 8 : 0,
+      marginBottom: depth === 0 ? 16 : 12,
+      padding: depth === 0 ? 0 : "0 0 0 12px",
+      borderLeft: depth > 0 ? "2px solid " + C.rule : undefined
+    }}>
+      {depth === 0 ? (
+        <button
+          type="button"
+          onClick={() => setExpanded(!expanded)}
+          style={{
+            width: "100%", textAlign: "left", padding: "14px 20px",
+            background: expanded ? C.cream : C.white, border: "none",
+            borderBottom: expanded ? "1px solid " + C.rule : "none",
+            borderRadius: expanded ? "8px 8px 0 0" : 8,
+            cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center"
+          }}
+        >
+          <span style={{ fontFamily: F.h, fontSize: 15, fontWeight: 700, color: C.black }}>
+            {displayLabel}
+          </span>
+          <span style={{ fontSize: 14, color: C.grayLt }}>{expanded ? "▾" : "▸"}</span>
+        </button>
+      ) : (
+        <div style={{ fontSize: 11, color: C.gray, textTransform: "uppercase", letterSpacing: 0.6, fontWeight: 600, marginBottom: 10, marginTop: 4 }}>
+          {displayLabel}{isAdminOnly(keyName) ? " 🔒" : ""}
+        </div>
+      )}
 
-  if(t==="stats") return <>
-    {(d.stats||[]).map((st,i)=><div key={i} style={{background:C.cream,borderRadius:6,padding:8,marginBottom:6}}>
-      <Input label="Value" value={st.v} onChange={v=>{const s=[...d.stats];s[i]={...s[i],v};set("stats",s);}} small/>
-      <Input label="Label" value={st.l} onChange={v=>{const s=[...d.stats];s[i]={...s[i],l:v};set("stats",s);}} small/>
-      <Input label="Source" value={st.s} onChange={v=>{const s=[...d.stats];s[i]={...s[i],s:v};set("stats",s);}} small/>
-    </div>)}
-  </>;
-
-  if(t==="text") return <>
-    {d.eyebrow!==undefined && <Input label="Eyebrow" value={d.eyebrow} onChange={v=>set("eyebrow",v)}/>}
-    <Input label="Heading" value={d.heading} onChange={v=>set("heading",v)}/>
-    <Input label="Body" value={d.body} onChange={v=>set("body",v)} multi/>
-    {d.btn1 && <Input label="Button 1" value={d.btn1} onChange={v=>set("btn1",v)} small/>}
-    {d.btn2 && <Input label="Button 2" value={d.btn2} onChange={v=>set("btn2",v)} small/>}
-  </>;
-
-  if(t==="cards") return <>
-    {d.eyebrow!==undefined && <Input label="Eyebrow" value={d.eyebrow} onChange={v=>set("eyebrow",v)}/>}
-    <Input label="Heading" value={d.heading} onChange={v=>set("heading",v)}/>
-    {(d.cards||[]).map((c,i)=><div key={i} style={{background:C.cream,borderRadius:6,padding:8,marginBottom:6,borderLeft:`3px solid ${C.rust}`}}>
-      <Input label="Title" value={c.title} onChange={v=>{const cards=[...d.cards];cards[i]={...cards[i],title:v};set("cards",cards);}} small/>
-      <Input label="Description" value={c.desc} onChange={v=>{const cards=[...d.cards];cards[i]={...cards[i],desc:v};set("cards",cards);}} multi/>
-    </div>)}
-  </>;
-
-  if(t==="timeline") return <>
-    <Input label="Heading" value={d.heading} onChange={v=>set("heading",v)}/>
-    {(d.steps||[]).map((s,i)=><div key={i} style={{background:C.cream,borderRadius:6,padding:8,marginBottom:6,borderLeft:`3px solid ${C.rust}`}}>
-      <Input label="Step Title" value={s.t} onChange={v=>{const steps=[...d.steps];steps[i]={...steps[i],t:v};set("steps",steps);}} small/>
-      <Input label="Description" value={s.d} onChange={v=>{const steps=[...d.steps];steps[i]={...steps[i],d:v};set("steps",steps);}} multi/>
-    </div>)}
-  </>;
-
-  if(t==="faq") return <>
-    <Input label="Heading" value={d.heading} onChange={v=>set("heading",v)}/>
-    {(d.faqs||[]).map((f,i)=><div key={i} style={{background:C.cream,borderRadius:6,padding:8,marginBottom:6}}>
-      <Input label="Question" value={f.q} onChange={v=>{const faqs=[...d.faqs];faqs[i]={...faqs[i],q:v};set("faqs",faqs);}}/>
-      <Input label="Answer" value={f.a} onChange={v=>{const faqs=[...d.faqs];faqs[i]={...faqs[i],a:v};set("faqs",faqs);}} multi/>
-    </div>)}
-  </>;
-
-  if(t==="cta") return <>
-    <Input label="Heading" value={d.heading} onChange={v=>set("heading",v)}/>
-    <Input label="Subtitle" value={d.sub} onChange={v=>set("sub",v)}/>
-    <Input label="Button" value={d.btn} onChange={v=>set("btn",v)} small/>
-  </>;
-
-  if(t==="quote") return <>
-    <Input label="Heading" value={d.heading} onChange={v=>set("heading",v)}/>
-    <Input label="Quote" value={d.quote} onChange={v=>set("quote",v)} multi/>
-    <Input label="Body" value={d.body} onChange={v=>set("body",v)} multi/>
-  </>;
-
-  if(t==="legacy_card") return <>
-    <Input label="Date (YYYY-MM-DD)" value={d.date} onChange={v=>set("date",v)} small/>
-    <Input label="Date Label" value={d.dateLabel} onChange={v=>set("dateLabel",v)} small/>
-    <Input label="Category" value={d.category} onChange={v=>set("category",v)} small/>
-    <Input label="Title" value={d.title} onChange={v=>set("title",v)}/>
-    <Input label="Body" value={d.body} onChange={v=>set("body",v)} multi/>
-  </>;
-
-
-  return <Input label="Heading" value={d.heading||""} onChange={v=>set("heading",v)}/>;
+      {expanded && (
+        <div style={{ padding: depth === 0 ? "16px 20px 4px" : 0 }}>
+          {childKeys.map(k => (
+            <FieldRenderer
+              key={k}
+              keyName={k}
+              value={obj[k]}
+              path={[...path, k]}
+              onChange={onChange}
+              userRole={userRole}
+              depth={depth + 1}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }
 
-// ═══ PREVIEW RENDERERS ═══
-function PreviewSection({section}){
-  const d = section.data;
-  const t = section.type;
+function ArrayField({ keyName, items, path, onChange, userRole, depth }) {
+  const [openIdx, setOpenIdx] = useState(0);
+  const label = labelFor(depth === 0 ? "section" : "field", keyName);
 
-  if(t==="hero") return <div style={{position:"relative",minHeight:280,overflow:"hidden",background:C.deep}}>
-    <img src={I[d.img]||I.field} alt="" style={{position:"absolute",inset:0,width:"100%",height:"100%",objectFit:"cover",filter:"brightness(0.3)",objectPosition:d.imgPos||"center"}}/>
-    <div style={{position:"relative",zIndex:1,maxWidth:500,padding:"40px 24px 48px"}}>
-      <p style={{fontFamily:F.b,fontSize:9,fontWeight:700,color:C.rust,textTransform:"uppercase",letterSpacing:"1.5px",margin:"0 0 8px"}}>{d.eyebrow}</p>
-      <h2 style={{fontFamily:F.h,fontSize:28,fontWeight:700,color:C.white,margin:"0 0 12px",lineHeight:1.15}}>{d.headline} {d.accent && <span style={{color:C.rust}}>{d.accent}</span>}</h2>
-      <p style={{fontFamily:F.b,fontSize:13,color:"rgba(255,255,255,0.7)",margin:"0 0 8px",lineHeight:1.5}}>{d.sub}</p>
-      {d.body && <p style={{fontFamily:F.b,fontSize:11,color:"rgba(255,255,255,0.5)",margin:"0 0 16px",lineHeight:1.5}}>{d.body}</p>}
-      <div style={{display:"flex",gap:8}}>{d.btn1 && <span style={{padding:"8px 16px",background:C.rust,color:C.white,borderRadius:4,fontFamily:F.b,fontSize:11,fontWeight:600}}>{d.btn1}</span>}{d.btn2 && <span style={{padding:"8px 16px",border:`1px solid ${C.rust}`,color:C.rust,borderRadius:4,fontFamily:F.b,fontSize:11,fontWeight:600}}>{d.btn2}</span>}</div>
-    </div>
-  </div>;
+  // Heuristic for "title" of each item in the array
+  const itemTitle = (item, i) => {
+    if (typeof item === "string") return `Item ${i + 1}: ${item.substring(0, 40)}`;
+    if (item?.name) return item.name;
+    if (item?.heading) return item.heading;
+    if (item?.title) return item.title;
+    if (item?.t) return item.t;
+    if (item?.q) return item.q.substring(0, 60);
+    if (item?.n) return `${item.n} — ${item.t || ''}`;
+    if (item?.v) return `${item.v} ${item.l ? '— ' + item.l.substring(0, 40) : ''}`;
+    if (item?.award) return item.award;
+    if (item?.dateLabel) return `${item.dateLabel} — ${item.heading || ''}`;
+    if (item?.dateBadgeMonth) return `${item.dateBadgeDay} ${item.dateBadgeMonth} — ${item.heading || ''}`;
+    if (item?.r) return item.r;
+    return `Item ${i + 1}`;
+  };
 
-  if(t==="stats") return <div style={{background:C.cream,padding:"20px 24px"}}>
-    <div style={{display:"flex",gap:16,justifyContent:"center"}}>{(d.stats||[]).map((s,i)=>
-      <div key={i} style={{background:C.white,borderRadius:6,padding:16,borderLeft:`3px solid ${C.rust}`,flex:1,textAlign:"center"}}>
-        <div style={{fontFamily:F.h,fontSize:24,fontWeight:700,color:C.rust}}>{s.v}</div>
-        <div style={{fontFamily:F.b,fontSize:11,color:C.black,lineHeight:1.3,margin:"4px 0"}}>{s.l}</div>
-        <div style={{fontFamily:F.b,fontSize:9,color:C.grayLt}}>Source: {s.s}</div>
-      </div>
-    )}</div>
-  </div>;
+  const setItem = (idx, updated) => {
+    const newArr = [...items];
+    newArr[idx] = updated;
+    onChange(path, newArr);
+  };
 
-  if(t==="text") return <div style={{padding:"28px 24px"}}>
-    {d.eyebrow && <p style={{fontFamily:F.b,fontSize:9,fontWeight:700,color:C.rust,textTransform:"uppercase",letterSpacing:"1.5px",margin:"0 0 6px"}}>{d.eyebrow}</p>}
-    <h2 style={{fontFamily:F.h,fontSize:22,fontWeight:700,color:C.black,margin:"0 0 12px"}}>{d.heading}</h2>
-    <div style={{display:"flex",gap:20}}>
-      <p style={{fontFamily:F.b,fontSize:12,color:C.gray,lineHeight:1.7,flex:1}}>{d.body}</p>
-      {d.img && <img src={I[d.img]} alt="" style={{width:140,height:140,objectFit:"cover",borderRadius:6,flexShrink:0}}/>}
-    </div>
-    {(d.btn1||d.btn2) && <div style={{display:"flex",gap:8,marginTop:12}}>{d.btn1 && <span style={{padding:"7px 14px",background:C.rust,color:C.white,borderRadius:4,fontFamily:F.b,fontSize:10,fontWeight:600}}>{d.btn1}</span>}{d.btn2 && <span style={{padding:"7px 14px",border:`1px solid ${C.rust}`,color:C.rust,borderRadius:4,fontFamily:F.b,fontSize:10,fontWeight:600}}>{d.btn2}</span>}</div>}
-  </div>;
+  const addItem = () => {
+    if (items.length === 0) {
+      onChange(path, [""]);
+      return;
+    }
+    const template = typeof items[0] === "string"
+      ? ""
+      : Object.fromEntries(Object.keys(items[0]).map(k => [k, ""]));
+    onChange(path, [...items, template]);
+    setOpenIdx(items.length);
+  };
 
-  if(t==="cards") return <div style={{padding:"28px 24px"}}>
-    {d.eyebrow && <p style={{fontFamily:F.b,fontSize:9,fontWeight:700,color:C.rust,textTransform:"uppercase",letterSpacing:"1.5px",margin:"0 0 6px"}}>{d.eyebrow}</p>}
-    {d.heading && <h2 style={{fontFamily:F.h,fontSize:22,fontWeight:700,color:C.black,margin:"0 0 14px"}}>{d.heading}</h2>}
-    <div style={{display:"grid",gridTemplateColumns:`repeat(${Math.min((d.cards||[]).length,3)},1fr)`,gap:12}}>
-      {(d.cards||[]).map((c,i)=><div key={i} style={{background:C.cream,borderRadius:6,padding:14,borderTop:`3px solid ${C.rust}`}}>
-        <h3 style={{fontFamily:F.h,fontSize:13,fontWeight:700,margin:"0 0 6px"}}>{c.title}</h3>
-        <p style={{fontFamily:F.b,fontSize:11,color:C.gray,lineHeight:1.5,margin:0}}>{c.desc}</p>
-      </div>)}
-    </div>
-  </div>;
+  const removeItem = (idx) => {
+    if (!confirm("Remove this item? This cannot be undone until you publish again.")) return;
+    const newArr = items.filter((_, i) => i !== idx);
+    onChange(path, newArr);
+    if (openIdx >= newArr.length) setOpenIdx(Math.max(0, newArr.length - 1));
+  };
 
-  if(t==="timeline") return <div style={{padding:"28px 24px"}}>
-    <h2 style={{fontFamily:F.h,fontSize:22,fontWeight:700,color:C.black,margin:"0 0 14px"}}>{d.heading}</h2>
-    {(d.steps||[]).map((s,i)=><div key={i} style={{display:"flex",gap:12,marginBottom:12}}>
-      <div style={{width:28,height:28,borderRadius:14,background:C.rust,color:C.white,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:F.h,fontSize:12,fontWeight:700,flexShrink:0}}>{s.n||i+1}</div>
-      <div><h3 style={{fontFamily:F.h,fontSize:13,fontWeight:700,margin:"0 0 3px"}}>{s.t}</h3><p style={{fontFamily:F.b,fontSize:11,color:C.gray,margin:0,lineHeight:1.5}}>{s.d}</p></div>
-    </div>)}
-  </div>;
+  const moveItem = (idx, direction) => {
+    const newArr = [...items];
+    const swap = idx + direction;
+    if (swap < 0 || swap >= newArr.length) return;
+    [newArr[idx], newArr[swap]] = [newArr[swap], newArr[idx]];
+    onChange(path, newArr);
+    setOpenIdx(swap);
+  };
 
-  if(t==="faq") return <div style={{padding:"28px 24px"}}>
-    <h2 style={{fontFamily:F.h,fontSize:22,fontWeight:700,color:C.black,margin:"0 0 14px"}}>{d.heading}</h2>
-    {(d.faqs||[]).map((f,i)=><div key={i} style={{borderBottom:`1px solid ${C.rule}`,padding:"10px 0"}}>
-      <h3 style={{fontFamily:F.h,fontSize:13,fontWeight:700,color:C.black,margin:0}}>{f.q}</h3>
-      <p style={{fontFamily:F.b,fontSize:11,color:C.gray,margin:"6px 0 0",lineHeight:1.5}}>{f.a}</p>
-    </div>)}
-  </div>;
+  return (
+    <div style={{
+      background: depth === 0 ? C.white : "transparent",
+      border: depth === 0 ? "1px solid " + C.rule : "none",
+      borderRadius: depth === 0 ? 8 : 0,
+      marginBottom: depth === 0 ? 16 : 12,
+      padding: depth === 0 ? 0 : "0 0 0 12px",
+      borderLeft: depth > 0 ? "2px solid " + C.rule : undefined
+    }}>
+      {depth === 0 ? (
+        <div style={{
+          padding: "14px 20px",
+          background: C.cream, borderBottom: "1px solid " + C.rule,
+          borderRadius: "8px 8px 0 0",
+          display: "flex", justifyContent: "space-between", alignItems: "center"
+        }}>
+          <span style={{ fontFamily: F.h, fontSize: 15, fontWeight: 700, color: C.black }}>
+            {label} <span style={{ color: C.grayLt, fontWeight: 400, fontSize: 13 }}>({items.length})</span>
+          </span>
+        </div>
+      ) : (
+        <div style={{ fontSize: 11, color: C.gray, textTransform: "uppercase", letterSpacing: 0.6, fontWeight: 600, marginBottom: 10, marginTop: 4 }}>
+          {label} <span style={{ fontWeight: 400, color: C.grayLt, textTransform: "none", letterSpacing: 0 }}>({items.length})</span>
+        </div>
+      )}
 
-  if(t==="cta") return <div style={{position:"relative",minHeight:120,overflow:"hidden",background:C.deep}}>
-    <img src={I.railway} alt="" style={{position:"absolute",inset:0,width:"100%",height:"100%",objectFit:"cover",filter:"brightness(0.25)"}}/>
-    <div style={{position:"relative",zIndex:1,padding:"32px 24px",textAlign:"center"}}>
-      <h2 style={{fontFamily:F.h,fontSize:20,color:C.white,margin:"0 0 8px"}}>{d.heading}</h2>
-      <p style={{fontFamily:F.b,fontSize:12,color:"rgba(255,255,255,0.6)",margin:"0 0 14px"}}>{d.sub}</p>
-      <span style={{padding:"8px 20px",background:C.rust,color:C.white,borderRadius:4,fontFamily:F.b,fontSize:11,fontWeight:600}}>{d.btn}</span>
-    </div>
-  </div>;
+      <div style={{ padding: depth === 0 ? "12px 20px 16px" : 0 }}>
+        {items.map((item, idx) => (
+          <div key={idx} style={{ border: "1px solid " + C.rule, borderRadius: 6, marginBottom: 8, background: C.white }}>
+            <button
+              type="button"
+              onClick={() => setOpenIdx(openIdx === idx ? -1 : idx)}
+              style={{
+                width: "100%", textAlign: "left", padding: "10px 12px",
+                background: openIdx === idx ? C.cream : C.white, border: "none",
+                borderBottom: openIdx === idx ? "1px solid " + C.rule : "none",
+                display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer",
+                borderRadius: openIdx === idx ? "6px 6px 0 0" : 6
+              }}
+            >
+              <span style={{ fontSize: 13, fontWeight: 600, color: C.black, flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", paddingRight: 8 }}>
+                {itemTitle(item, idx)}
+              </span>
+              <span style={{ fontSize: 12, color: C.grayLt }}>{openIdx === idx ? "▾" : "▸"}</span>
+            </button>
 
-  if(t==="quote") return <div style={{padding:"28px 24px",background:C.cream}}>
-    <h2 style={{fontFamily:F.h,fontSize:22,fontWeight:700,color:C.black,margin:"0 0 12px"}}>{d.heading}</h2>
-    <blockquote style={{fontFamily:F.h,fontSize:16,fontStyle:"italic",color:C.black,borderLeft:`3px solid ${C.rust}`,padding:"8px 0 8px 16px",margin:"0 0 12px"}}>"{d.quote}"</blockquote>
-    <p style={{fontFamily:F.b,fontSize:12,color:C.gray,lineHeight:1.6}}>{d.body}</p>
-  </div>;
+            {openIdx === idx && (
+              <div style={{ padding: 12 }}>
+                {typeof item === "string" ? (
+                  <TextField
+                    label="Value"
+                    value={item}
+                    onChange={(v) => setItem(idx, v)}
+                    multiline={item.length > 60}
+                  />
+                ) : (
+                  Object.keys(item).filter(k => !HIDDEN_FIELDS.has(k) && (!isAdminOnly(k) || userRole === "admin")).map(k => (
+                    <FieldRenderer
+                      key={k}
+                      keyName={k}
+                      value={item[k]}
+                      path={[...path, idx, k]}
+                      onChange={onChange}
+                      userRole={userRole}
+                      depth={depth + 2}
+                    />
+                  ))
+                )}
 
-  if(t==="legacy_card") return <div style={{padding:"12px 24px"}}>
-    <div style={{background:C.cream,borderRadius:8,padding:18,borderTop:`3px solid ${C.rust}`}}>
-      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
-        <span style={{fontFamily:F.b,fontSize:9,color:C.rust,textTransform:"uppercase",letterSpacing:"1px",fontWeight:700}}>{d.category}</span>
-        <span style={{fontFamily:F.b,fontSize:9,color:C.grayLt}}>{d.dateLabel}</span>
-      </div>
-      <h3 style={{fontFamily:F.h,fontSize:15,fontWeight:700,margin:"0 0 4px",lineHeight:1.3}}>{d.title}</h3>
-      {d.subtitle && <p style={{fontFamily:F.b,fontSize:11,color:C.grayLt,margin:"0 0 8px",fontStyle:"italic"}}>{d.subtitle}</p>}
-      <p style={{fontFamily:F.b,fontSize:11,color:C.gray,margin:0,lineHeight:1.6}}>{d.body}</p>
-    </div>
-  </div>;
+                <div style={{ display: "flex", gap: 8, paddingTop: 8, borderTop: "1px solid " + C.rule, marginTop: 10 }}>
+                  <button type="button" onClick={() => moveItem(idx, -1)} disabled={idx === 0} style={sbtn(idx !== 0)}>↑ Up</button>
+                  <button type="button" onClick={() => moveItem(idx, 1)} disabled={idx === items.length - 1} style={sbtn(idx !== items.length - 1)}>↓ Down</button>
+                  <button type="button" onClick={() => removeItem(idx)} style={{ ...sbtn(true), color: C.danger, marginLeft: "auto" }}>Remove</button>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
 
-
-  if(t==="articles") return <div style={{padding:"28px 24px"}}>
-    <h2 style={{fontFamily:F.h,fontSize:22,fontWeight:700,color:C.black,margin:"0 0 14px"}}>{d.heading}</h2>
-    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
-      {ARTICLES.slice(0,4).map((a,i)=><div key={i} style={{background:C.cream,borderRadius:6,padding:10}}>
-        <p style={{fontFamily:F.b,fontSize:9,color:C.rust,textTransform:"uppercase",margin:"0 0 4px"}}>{a.type}</p>
-        <h3 style={{fontFamily:F.h,fontSize:12,fontWeight:700,margin:0,lineHeight:1.3}}>{a.title}</h3>
-      </div>)}
-    </div>
-  </div>;
-
-  if(t==="form") return <div style={{padding:"28px 24px"}}>
-    <h2 style={{fontFamily:F.h,fontSize:22,fontWeight:700,color:C.black,margin:"0 0 6px"}}>{d.heading}</h2>
-    <p style={{fontFamily:F.b,fontSize:12,color:C.gray,margin:"0 0 14px"}}>{d.sub}</p>
-    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
-      {["First Name","Last Name","Email","Phone","Company","Job Title"].map(f=><div key={f} style={{background:"#f5f5f5",borderRadius:4,padding:"8px 10px",fontFamily:F.b,fontSize:10,color:C.grayLt}}>{f}</div>)}
-    </div>
-  </div>;
-
-  if(t==="embed") return <div style={{padding:"28px 24px",background:C.cream,textAlign:"center"}}>
-    <h2 style={{fontFamily:F.h,fontSize:22,fontWeight:700,color:C.black,margin:"0 0 6px"}}>{d.heading}</h2>
-    <p style={{fontFamily:F.b,fontSize:12,color:C.gray}}>{d.sub}</p>
-    <div style={{background:C.white,borderRadius:6,padding:20,marginTop:12,border:`1px dashed ${C.rule}`,fontFamily:F.b,fontSize:11,color:C.grayLt}}>SurveyMonkey Embed</div>
-  </div>;
-
-  if(t==="team") return <div style={{padding:"28px 24px"}}>
-    <h2 style={{fontFamily:F.h,fontSize:22,fontWeight:700,color:C.black,margin:"0 0 14px"}}>{d.heading}</h2>
-    <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:12}}>
-      {(d.members||[]).map((m,i)=><div key={i} style={{textAlign:"center"}}>
-        <img src={I[m.img]} alt={m.name} style={{width:"100%",height:100,objectFit:"cover",borderRadius:6,marginBottom:6}}/>
-        <h3 style={{fontFamily:F.h,fontSize:12,fontWeight:700,margin:"0 0 2px"}}>{m.name}</h3>
-        <p style={{fontFamily:F.b,fontSize:9,color:C.gray,margin:0}}>{m.role}</p>
-      </div>)}
-    </div>
-  </div>;
-
-  return <div style={{padding:20,fontFamily:F.b,fontSize:11,color:C.grayLt,textAlign:"center"}}>[{section.type}] {section.label}</div>;
-}
-
-// ═══ ADD SECTION PALETTE ═══
-function AddSectionPalette({onAdd, onClose}){
-  return <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.5)",zIndex:1000,display:"flex",alignItems:"center",justifyContent:"center"}} onClick={onClose}>
-    <div style={{background:C.white,borderRadius:12,padding:24,maxWidth:500,width:"90%",maxHeight:"70vh",overflow:"auto"}} onClick={e=>e.stopPropagation()}>
-      <h3 style={{fontFamily:F.h,fontSize:18,margin:"0 0 16px"}}>Add Section</h3>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
-        {Object.entries(SECTION_TYPES).map(([key,meta])=>
-          <button key={key} onClick={()=>onAdd(key)} style={{background:C.white,border:`1px solid ${C.rule}`,borderRadius:8,padding:"12px",cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:8}}>
-            <span style={{width:28,height:28,borderRadius:6,background:meta.color+"18",color:meta.color,display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,fontSize:14}}>{meta.icon}</span>
-            <span style={{fontFamily:F.b,fontSize:12,fontWeight:600,color:C.black}}>{meta.label}</span>
-          </button>
-        )}
+        <button
+          type="button"
+          onClick={addItem}
+          style={{
+            width: "100%", padding: "8px 0", background: "transparent", border: "1px dashed " + C.rule,
+            borderRadius: 6, color: C.gray, fontSize: 12, cursor: "pointer", fontWeight: 600
+          }}
+        >
+          + Add another {labelFor("field", keyName).replace(/s$/, "").toLowerCase()}
+        </button>
       </div>
     </div>
-  </div>;
+  );
 }
 
-// ═══ MAIN APP ═══
-function TRWSiteEditor(){
+const sbtn = (enabled) => ({
+  padding: "6px 10px", background: "transparent", border: "1px solid " + C.rule,
+  borderRadius: 4, fontSize: 11, color: enabled ? C.gray : C.grayLt,
+  cursor: enabled ? "pointer" : "not-allowed", fontWeight: 600, opacity: enabled ? 1 : 0.5
+});
+
+// ═══ MAIN EDITOR ═══
+function TRWEditorV2() {
   const [user, setUser] = useState(null);
   const [authChecked, setAuthChecked] = useState(false);
-  const [requireApproval, setRequireApproval] = useState(true);
-  const [pendingCount, setPendingCount] = useState(0);
-  const [publishStatus, setPublishStatus] = useState("");
-  const [pages, setPages] = useState(PAGES);
+  const [content, setContent] = useState(null);
+  const [originalContent, setOriginalContent] = useState(null);
+  const [loadError, setLoadError] = useState("");
   const [activePage, setActivePage] = useState("home");
-  const [activeSection, setActiveSection] = useState(null);
-  const [view, setView] = useState("pages"); // pages | articles
-  const [showPalette, setShowPalette] = useState(false);
-  const [paletteInsertIdx, setPaletteInsertIdx] = useState(-1);
-  const [saved, setSaved] = useState(false);
-  const [articles, setArticles] = useState(ARTICLES_DATA);
-  const [activeArticle, setActiveArticle] = useState(null);
-  const [activeBlock, setActiveBlock] = useState(null);
-  const [showArtPalette, setShowArtPalette] = useState(false);
-  const [artPaletteIdx, setArtPaletteIdx] = useState(-1);
-  const previewRef = useRef(null);
+  const [publishState, setPublishState] = useState(""); // "" | "saving" | "saved" | "error"
+  const [publishError, setPublishError] = useState("");
 
+  // Check auth on mount
   useEffect(() => {
     API.checkAuth().then(res => {
       if (res.authenticated) setUser(res);
-      setAuthChecked(true);
-    }).catch(() => setAuthChecked(true));
+    }).catch(() => {}).finally(() => setAuthChecked(true));
   }, []);
 
+  // Load content after auth
   useEffect(() => {
-    if (user) {
-      API.getPending().then(res => {
-        if (res.settings) setRequireApproval(res.settings.requireApproval);
-        if (res.changes) setPendingCount(res.changes.filter(c => c.status === "pending").length);
-      }).catch(() => {});
-    }
+    if (!user) return;
+    API.loadContent().then(c => {
+      setContent(c);
+      setOriginalContent(JSON.parse(JSON.stringify(c))); // deep clone
+    }).catch(err => setLoadError("Could not load site content. Try refreshing."));
   }, [user]);
 
-  const page = pages.find(p=>p.id===activePage);
-  const article = articles.find(a=>a.id===activeArticle);
+  // Dirty-check: any diff between content and originalContent?
+  const isDirty = useMemo(() => {
+    if (!content || !originalContent) return false;
+    return JSON.stringify(content) !== JSON.stringify(originalContent);
+  }, [content, originalContent]);
 
-  const updateBlock = useCallback((blockId, updated) => {
-    setArticles(prev => prev.map(a => a.id===activeArticle ? {...a, blocks: a.blocks.map(b => b.id===blockId ? updated : b)} : a));
-  }, [activeArticle]);
+  // Warn on nav away if unsaved
+  useEffect(() => {
+    const handler = (e) => {
+      if (isDirty) { e.preventDefault(); e.returnValue = ""; }
+    };
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, [isDirty]);
 
-  const moveBlock = (idx, dir) => {
-    setArticles(prev => prev.map(a => {
-      if(a.id!==activeArticle) return a;
-      const b = [...a.blocks]; const ni = idx+dir;
-      if(ni<0||ni>=b.length) return a;
-      [b[idx],b[ni]]=[b[ni],b[idx]];
-      return {...a, blocks:b};
-    }));
-  };
+  // Update a value by path (e.g., ["home", "hero", "headline"])
+  const updatePath = useCallback((path, newValue) => {
+    setContent(prev => {
+      if (!prev) return prev;
+      const next = JSON.parse(JSON.stringify(prev));
+      let node = next;
+      for (let i = 0; i < path.length - 1; i++) node = node[path[i]];
+      node[path[path.length - 1]] = newValue;
+      return next;
+    });
+  }, []);
 
-  const deleteBlock = (idx) => {
-    setArticles(prev => prev.map(a => a.id===activeArticle ? {...a, blocks: a.blocks.filter((_,i)=>i!==idx)} : a));
-    setActiveBlock(null);
-  };
-
-  const addBlock = (type) => {
-    const meta = ART_BLOCK_TYPES[type];
-    const nb = {id:"ab_"+Date.now(),type,label:meta.label,data:type==="art_body"?{heading:"New Section",body:""}:type==="art_assessment"?{name:"Assessment",questions:["Question 1"],endpoint:"xnjbobyn"}:type==="art_sources"?{sources:["Source 1"]}:type==="art_bio"?{author:"Charlie",bio:"The Rail Way editorial team."}:type==="art_image"?{url:"",alt:"",caption:"",layout:"right"}:type==="art_callout"?{text:"Key statistic."}:{category:"",readTime:"",sources:""}};
-    setArticles(prev => prev.map(a => {
-      if(a.id!==activeArticle) return a;
-      const b=[...a.blocks]; b.splice(artPaletteIdx+1,0,nb); return {...a,blocks:b};
-    }));
-    setShowArtPalette(false); setActiveBlock(nb.id);
-  };
-
-  const updateSection = useCallback((sectionId, updated) => {
-    setPages(prev => prev.map(p => p.id===activePage ? {...p, sections: p.sections.map(s => s.id===sectionId ? updated : s)} : p));
-  }, [activePage]);
-
-  const moveSection = (idx, dir) => {
-    setPages(prev => prev.map(p => {
-      if(p.id!==activePage) return p;
-      const s = [...p.sections];
-      const newIdx = idx + dir;
-      if(newIdx < 0 || newIdx >= s.length) return p;
-      [s[idx], s[newIdx]] = [s[newIdx], s[idx]];
-      return {...p, sections: s};
-    }));
-  };
-
-  const deleteSection = (idx) => {
-    setPages(prev => prev.map(p => p.id===activePage ? {...p, sections: p.sections.filter((_,i)=>i!==idx)} : p));
-    setActiveSection(null);
-  };
-
-  const addSection = (type) => {
-    const meta = SECTION_TYPES[type];
-    const newSec = {id:"new_"+Date.now(),type,label:meta.label,data:{heading:"New "+meta.label}};
-    setPages(prev => prev.map(p => {
-      if(p.id!==activePage) return p;
-      const s = [...p.sections];
-      s.splice(paletteInsertIdx+1, 0, newSec);
-      return {...p, sections: s};
-    }));
-    setShowPalette(false);
-    setActiveSection(newSec.id);
-  };
-
-  const handleSave = async () => {
-    setSaved(true); setPublishStatus("Saving...");
+  const handlePublish = async () => {
+    if (!isDirty) return;
+    setPublishState("saving");
+    setPublishError("");
     try {
-      const contentData = { pages: pages.map(p => ({id:p.id,title:p.title,sections:p.sections})), articles: articles.map(a => ({id:a.id,title:a.title,type:a.type,date:a.date,blocks:a.blocks})) };
-      if (user?.role === "admin" && !requireApproval) {
-        const res = await API.publish("content", contentData, "Direct publish by " + user.name);
-        setPublishStatus(res.ok ? "Published!" : "Error: " + res.error);
+      const msg = "Content update by " + (user?.name || user?.email || "editor") + " at " + new Date().toISOString();
+      const res = await API.publish(content, msg);
+      if (res.ok) {
+        setPublishState("saved");
+        setOriginalContent(JSON.parse(JSON.stringify(content)));
+        setTimeout(() => setPublishState(""), 3500);
       } else {
-        const res = await API.submitChange({ type: "content", summary: "Content update", data: contentData });
-        if (res.autoPublish) { setPublishStatus("Published!"); }
-        else if (res.queued) { setPublishStatus("Submitted for review"); setPendingCount(prev => prev + 1); }
-        else { setPublishStatus("Error: " + (res.error || "Unknown")); }
+        setPublishState("error");
+        setPublishError(res.error || "Publish failed");
       }
-    } catch (e) { setPublishStatus("Error: " + e.message); }
-    setTimeout(() => { setSaved(false); setPublishStatus(""); }, 3000);
+    } catch (err) {
+      setPublishState("error");
+      setPublishError(err.message || "Network error");
+    }
   };
 
-  if (!authChecked) return <div style={{position:"fixed",inset:0,background:"#1A1A1A",display:"flex",alignItems:"center",justifyContent:"center"}}><div style={{color:"rgba(255,255,255,0.5)",fontFamily:"'Segoe UI',Arial,sans-serif"}}>Loading...</div></div>;
-  if (!user) return <LoginScreen onLogin={u => setUser(u)} />;
+  const handleDiscard = () => {
+    if (!confirm("Discard all unsaved changes?")) return;
+    setContent(JSON.parse(JSON.stringify(originalContent)));
+  };
 
-  return <div style={{display:"flex",height:"100vh",background:"#f0f0f0",fontFamily:F.b,overflow:"hidden"}}>
+  const handleLogout = async () => {
+    if (isDirty && !confirm("You have unsaved changes. Sign out anyway?")) return;
+    await API.logout();
+    setUser(null);
+    setContent(null);
+    setOriginalContent(null);
+  };
 
-    {/* ═══ LEFT SIDEBAR ═══ */}
-    <div style={{width:220,background:C.deep,color:C.white,display:"flex",flexDirection:"column",flexShrink:0}}>
-      <div style={{padding:"16px 16px 12px",borderBottom:"1px solid rgba(255,255,255,0.1)"}}>
-        <img src={I.logo} alt="TRW" style={{height:28,filter:"brightness(10)",marginBottom:8}}/>
-        <div style={{fontSize:9,color:"rgba(255,255,255,0.4)",letterSpacing:"1px",textTransform:"uppercase"}}>Site Editor</div>
-        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginTop:6}}>
-          <div style={{fontSize:10,color:"rgba(255,255,255,0.6)"}}>{user.name} <span style={{fontSize:9,color:user.role==="admin"?"#C4622D":"rgba(255,255,255,0.3)",textTransform:"uppercase"}}>{user.role}</span></div>
-          <button onClick={async()=>{await API.logout();setUser(null);}} style={{background:"none",border:"none",color:"rgba(255,255,255,0.3)",fontSize:9,cursor:"pointer",fontFamily:F.b}}>Sign out</button>
+  // Loading states
+  if (!authChecked) {
+    return <div style={fullscreenMsg}>Loading editor...</div>;
+  }
+  if (!user) {
+    return <LoginScreen onLogin={setUser} />;
+  }
+  if (loadError) {
+    return <div style={fullscreenMsg}>{loadError}</div>;
+  }
+  if (!content) {
+    return <div style={fullscreenMsg}>Loading site content...</div>;
+  }
+
+  // Main layout
+  const pageKeys = Object.keys(content).filter(k => k !== "_meta");
+  const pageData = content[activePage];
+  const sectionKeys = Object.keys(pageData || {});
+
+  return (
+    <div style={{ display: "flex", height: "100vh", fontFamily: F.b, background: C.bg }}>
+
+      {/* LEFT SIDEBAR — PAGE PICKER */}
+      <aside style={{ width: 220, background: C.deep, color: C.white, display: "flex", flexDirection: "column", flexShrink: 0 }}>
+        <div style={{ padding: "16px 18px 12px", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
+          <img src={LOGO_WHITE} alt="TRW" style={{ height: 28, filter: "brightness(10)" }} />
+          <div style={{ fontSize: 9, color: "rgba(255,255,255,0.4)", letterSpacing: 1.5, textTransform: "uppercase", marginTop: 8 }}>
+            Site Editor
+          </div>
+          <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", marginTop: 6, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span>
+              {user.name || user.email}{" "}
+              <span style={{ color: user.role === "admin" ? C.rust : "rgba(255,255,255,0.4)", fontSize: 9, textTransform: "uppercase", fontWeight: 600 }}>{user.role}</span>
+            </span>
+            <button onClick={handleLogout} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.4)", fontSize: 9, cursor: "pointer", textDecoration: "underline" }}>
+              Sign out
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div style={{display:"flex",borderBottom:"1px solid rgba(255,255,255,0.1)"}}>
-        <button onClick={()=>setView("pages")} style={{flex:1,padding:"10px",background:view==="pages"?"rgba(196,98,45,0.2)":"transparent",border:"none",color:view==="pages"?C.rust:"rgba(255,255,255,0.5)",fontFamily:F.b,fontSize:11,fontWeight:600,cursor:"pointer",borderBottom:view==="pages"?`2px solid ${C.rust}`:"2px solid transparent"}}>Pages</button>
-        <button onClick={()=>setView("articles")} style={{flex:1,padding:"10px",background:view==="articles"?"rgba(196,98,45,0.2)":"transparent",border:"none",color:view==="articles"?C.rust:"rgba(255,255,255,0.5)",fontFamily:F.b,fontSize:11,fontWeight:600,cursor:"pointer",borderBottom:view==="articles"?`2px solid ${C.rust}`:"2px solid transparent"}}>Articles</button>
-      </div>
-
-      <div style={{flex:1,overflow:"auto",padding:"8px 0"}}>
-        {view==="pages" ? pages.map(p=>
-          <button key={p.id} onClick={()=>{setActivePage(p.id);setActiveSection(null);setActiveArticle(null);}} style={{width:"100%",padding:"10px 16px",background:activePage===p.id?"rgba(196,98,45,0.15)":"transparent",border:"none",color:activePage===p.id?C.rust:"rgba(255,255,255,0.7)",fontFamily:F.b,fontSize:12,fontWeight:activePage===p.id?600:400,cursor:"pointer",textAlign:"left",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-            <span><Ico>{p.icon}</Ico>{p.title}</span>
-            <span style={{fontSize:10,color:"rgba(255,255,255,0.3)"}}>{p.sections.length}</span>
-          </button>
-        ) : <>
-          <button onClick={()=>{const id="new_"+Date.now();setArticles(prev=>[...prev,{id,title:"New Article",path:"/insights/new",type:"New",date:"2026",blocks:[{id:id+"_h",type:"art_header",label:"Header",data:{category:"",readTime:"8 min read",sources:""}},{id:id+"_b1",type:"art_body",label:"Introduction",data:{heading:"",body:""}},{id:id+"_i1",type:"art_image",label:"Inline Image",data:{url:"",alt:"",caption:"",layout:"right"}},{id:id+"_a1",type:"art_assessment",label:"Assessment",data:{name:"Assessment",questions:["Question 1"],endpoint:"xnjbobyn"}},{id:id+"_s1",type:"art_sources",label:"Sources",data:{sources:["Source 1"]}},{id:id+"_bio",type:"art_bio",label:"Author Bio",data:{author:"Charlie",bio:"The Rail Way editorial team."}}]}]);setActiveArticle(id);setActiveBlock(null);}} style={{width:"100%",padding:"10px 16px",background:"rgba(196,98,45,0.1)",border:"none",borderBottom:"1px solid rgba(255,255,255,0.05)",color:C.rust,fontFamily:F.b,fontSize:12,fontWeight:600,cursor:"pointer",textAlign:"left"}}>+ New Article</button>
-          {articles.map(a=>
-          <button key={a.id} onClick={()=>{setActiveArticle(a.id);setActiveBlock(null);}} style={{width:"100%",padding:"10px 16px",background:activeArticle===a.id?"rgba(196,98,45,0.15)":"transparent",border:"none",color:activeArticle===a.id?C.rust:"rgba(255,255,255,0.7)",fontFamily:F.b,fontSize:12,fontWeight:activeArticle===a.id?600:400,cursor:"pointer",textAlign:"left"}}>
-            <div>{a.title}</div>
-            <div style={{fontSize:9,color:"rgba(255,255,255,0.3)"}}>{a.type} · {a.date}</div>
-          </button>
-        )}</>}
-      </div>
-
-      <div style={{padding:12,borderTop:"1px solid rgba(255,255,255,0.1)"}}>
-        <button onClick={handleSave} style={{width:"100%",padding:"10px",background:saved?"#27AE60":C.rust,border:"none",borderRadius:6,color:C.white,fontFamily:F.b,fontSize:12,fontWeight:600,cursor:"pointer"}}>
-          {publishStatus || (requireApproval && user?.role!=="admin" ? "Submit for Review" : "Publish Changes")}
-        </button>
-        {user?.role==="admin" && <div style={{marginTop:8,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-          <span style={{fontSize:10,color:"rgba(255,255,255,0.4)"}}>Require approval</span>
-          <button onClick={async()=>{const nv=!requireApproval;setRequireApproval(nv);await API.updateSettings(nv);}} style={{background:requireApproval?"#C4622D":"rgba(255,255,255,0.2)",border:"none",borderRadius:10,width:36,height:20,cursor:"pointer",position:"relative"}}>
-            <div style={{width:16,height:16,borderRadius:8,background:"#fff",position:"absolute",top:2,left:requireApproval?18:2,transition:"left 0.2s"}}></div>
-          </button>
-        </div>}
-        {pendingCount > 0 && user?.role==="admin" && <div style={{marginTop:6,fontSize:10,color:"#C4622D"}}>{pendingCount} pending review</div>}
-        <a href="https://therailway.us" target="_blank" rel="noopener" style={{display:"block",textAlign:"center",marginTop:8,fontFamily:F.b,fontSize:10,color:"rgba(255,255,255,0.4)",textDecoration:"none"}}>View Live Site →</a>
-      </div>
-    </div>
-
-    {/* ═══ EDITOR PANEL ═══ */}
-    <div style={{width:320,background:C.white,borderRight:`1px solid ${C.rule}`,display:"flex",flexDirection:"column",flexShrink:0}}>
-      <div style={{padding:"14px 16px",borderBottom:`1px solid ${C.rule}`,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-        <div>
-          <h2 style={{fontFamily:F.h,fontSize:16,margin:0,color:C.black}}>{activeArticle ? (article?.title||"Article") : page?.title}</h2>
-          <p style={{fontFamily:F.b,fontSize:10,color:C.grayLt,margin:0}}>{activeArticle ? (article?.type+" · "+article?.blocks.length+" blocks") : (page?.path+" · "+page?.sections.length+" sections")}</p>
+        <div style={{ flex: 1, overflowY: "auto", padding: "8px 0" }} className="scrollbar-thin">
+          <div style={{ fontSize: 9, color: "rgba(255,255,255,0.3)", letterSpacing: 1.5, textTransform: "uppercase", padding: "12px 18px 8px" }}>Pages</div>
+          {pageKeys.map(k => (
+            <button
+              key={k}
+              onClick={() => setActivePage(k)}
+              style={{
+                display: "block", width: "100%", textAlign: "left",
+                padding: "10px 18px", background: activePage === k ? "rgba(196,98,45,0.2)" : "transparent",
+                border: "none", borderLeft: activePage === k ? "3px solid " + C.rust : "3px solid transparent",
+                color: activePage === k ? C.rust : "rgba(255,255,255,0.75)",
+                fontSize: 13, cursor: "pointer", fontWeight: activePage === k ? 600 : 400
+              }}
+            >
+              {labelFor("page", k)}
+            </button>
+          ))}
         </div>
-      </div>
 
-      <div style={{flex:1,overflow:"auto",padding:0}}>
-        {page?.sections.map((sec,idx)=><div key={sec.id}>
-          {/* Section header */}
-          <div onClick={()=>setActiveSection(activeSection===sec.id?null:sec.id)} style={{padding:"10px 16px",background:activeSection===sec.id?C.cream:C.white,borderBottom:`1px solid ${C.rule}`,cursor:"pointer",display:"flex",alignItems:"center",gap:8}}>
-            <span style={{width:20,height:20,borderRadius:4,background:(SECTION_TYPES[sec.type]?.color||C.rust)+"18",color:SECTION_TYPES[sec.type]?.color||C.rust,display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,flexShrink:0}}>{SECTION_TYPES[sec.type]?.icon||"·"}</span>
-            <div style={{flex:1}}>
-              <div style={{fontFamily:F.b,fontSize:12,fontWeight:600,color:C.black}}>{sec.label}</div>
-              <div style={{fontFamily:F.b,fontSize:9,color:C.grayLt}}>{SECTION_TYPES[sec.type]?.label}</div>
-            </div>
-            <div style={{display:"flex",gap:2}}>
-              <button onClick={e=>{e.stopPropagation();moveSection(idx,-1);}} style={{background:"none",border:"none",cursor:"pointer",fontSize:10,color:C.grayLt,padding:2}} title="Move up">▲</button>
-              <button onClick={e=>{e.stopPropagation();moveSection(idx,1);}} style={{background:"none",border:"none",cursor:"pointer",fontSize:10,color:C.grayLt,padding:2}} title="Move down">▼</button>
-              <button onClick={e=>{e.stopPropagation();deleteSection(idx);}} style={{background:"none",border:"none",cursor:"pointer",fontSize:10,color:"#e74c3c",padding:2}} title="Delete">✕</button>
-            </div>
-          </div>
-          {/* Section fields */}
-          {activeSection===sec.id && <div style={{padding:"12px 16px",background:C.cream,borderBottom:`1px solid ${C.rule}`}}>
-            <SectionFields section={sec} onChange={updated=>updateSection(sec.id,updated)}/>
-          </div>}
-          {/* Add section button between sections */}
-          <div style={{textAlign:"center",padding:"2px 0"}}>
-            <button onClick={()=>{setPaletteInsertIdx(idx);setShowPalette(true);}} style={{background:"none",border:"none",cursor:"pointer",fontFamily:F.b,fontSize:9,color:C.grayLt,padding:"2px 8px"}} title="Add section here">+ add section</button>
-          </div>
-        </div>)}
-        {activeArticle && article && article.blocks.map((blk,idx)=><div key={blk.id}>
-          <div onClick={()=>setActiveBlock(activeBlock===blk.id?null:blk.id)} style={{padding:"10px 16px",background:activeBlock===blk.id?C.cream:C.white,borderBottom:`1px solid ${C.rule}`,cursor:"pointer",display:"flex",alignItems:"center",gap:8}}>
-            <span style={{width:20,height:20,borderRadius:4,background:(ART_BLOCK_TYPES[blk.type]?.color||C.rust)+"18",color:ART_BLOCK_TYPES[blk.type]?.color||C.rust,display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,fontWeight:700,flexShrink:0}}>{ART_BLOCK_TYPES[blk.type]?.icon||"?"}</span>
-            <div style={{flex:1}}>
-              <div style={{fontFamily:F.b,fontSize:12,fontWeight:600,color:C.black}}>{blk.label}</div>
-              <div style={{fontFamily:F.b,fontSize:9,color:C.grayLt}}>{ART_BLOCK_TYPES[blk.type]?.label}</div>
-            </div>
-            <div style={{display:"flex",gap:2}}>
-              <button onClick={e=>{e.stopPropagation();moveBlock(idx,-1);}} style={{background:"none",border:"none",cursor:"pointer",fontSize:10,color:C.grayLt,padding:2}}>&#9650;</button>
-              <button onClick={e=>{e.stopPropagation();moveBlock(idx,1);}} style={{background:"none",border:"none",cursor:"pointer",fontSize:10,color:C.grayLt,padding:2}}>&#9660;</button>
-              <button onClick={e=>{e.stopPropagation();deleteBlock(idx);}} style={{background:"none",border:"none",cursor:"pointer",fontSize:10,color:"#e74c3c",padding:2}}>&#10005;</button>
-            </div>
-          </div>
-          {activeBlock===blk.id && <div style={{padding:"12px 16px",background:C.cream,borderBottom:`1px solid ${C.rule}`}}>
-            <ArticleFields block={blk} onChange={updated=>updateBlock(blk.id,updated)}/>
-          </div>}
-          <div style={{textAlign:"center",padding:"2px 0"}}>
-            <button onClick={()=>{setArtPaletteIdx(idx);setShowArtPalette(true);}} style={{background:"none",border:"none",cursor:"pointer",fontFamily:F.b,fontSize:9,color:C.grayLt,padding:"2px 8px"}}>+ add block</button>
-          </div>
-        </div>)}
-      </div>
-    </div>
+        <div style={{ padding: "12px 18px", borderTop: "1px solid rgba(255,255,255,0.08)", fontSize: 10, color: "rgba(255,255,255,0.35)", lineHeight: 1.6 }}>
+          <a href="/" target="_blank" rel="noopener" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>View Live Site ↗</a>
+        </div>
+      </aside>
 
-    {/* ═══ PREVIEW PANEL ═══ */}
-    <div style={{flex:1,overflow:"auto",background:"#e8e8e8",display:"flex",justifyContent:"center"}} ref={previewRef}>
-      <div style={{width:"100%",maxWidth:700,background:C.white,minHeight:"100%",boxShadow:"0 0 40px rgba(0,0,0,0.1)"}}>
-        {/* Mini header */}
-        <div style={{background:C.white,borderBottom:`1px solid ${C.rule}`,padding:"8px 24px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-          <img src={I.logo} alt="TRW" style={{height:28}}/>
-          <div style={{display:"flex",gap:12}}>
-            {["Home","Speak Up Culture","Our Process","Class II & III","Insights","About","Legacies","Contact"].map(n=>
-              <span key={n} style={{fontFamily:F.b,fontSize:9,color:page?.title===n?C.rust:C.grayLt,fontWeight:600}}>{n}</span>
+      {/* MAIN CONTENT AREA */}
+      <main style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
+
+        {/* TOP BAR */}
+        <header style={{
+          padding: "16px 28px", background: C.white, borderBottom: "1px solid " + C.rule,
+          display: "flex", justifyContent: "space-between", alignItems: "center", flexShrink: 0
+        }}>
+          <div>
+            <h1 style={{ fontFamily: F.h, fontSize: 22, fontWeight: 700, color: C.black, margin: 0 }}>
+              {labelFor("page", activePage)}
+            </h1>
+            <p style={{ fontSize: 12, color: C.grayLt, margin: "2px 0 0" }}>
+              {sectionKeys.length} section{sectionKeys.length !== 1 ? "s" : ""}
+              {isDirty && <span style={{ color: C.rust, marginLeft: 10, fontWeight: 600 }}>• Unsaved changes</span>}
+            </p>
+          </div>
+
+          <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+            {publishState === "saving" && <span style={{ fontSize: 12, color: C.gray }}>Publishing...</span>}
+            {publishState === "saved" && <span style={{ fontSize: 12, color: C.success, fontWeight: 600 }}>✓ Published — changes live in ~1–2 min</span>}
+            {publishState === "error" && <span style={{ fontSize: 12, color: C.danger }}>Error: {publishError}</span>}
+
+            {isDirty && (
+              <button onClick={handleDiscard} style={{
+                padding: "9px 14px", background: C.white, color: C.gray,
+                border: "1px solid " + C.rule, borderRadius: 6, fontSize: 13,
+                fontWeight: 600, cursor: "pointer"
+              }}>
+                Discard
+              </button>
             )}
-          </div>
-        </div>
-        {/* Sections */}
-        {activeArticle && article ? <>
-          <div style={{padding:"20px 24px",borderBottom:`2px solid ${C.rust}`}}>
-            <h1 style={{fontFamily:F.h,fontSize:26,fontWeight:700,color:C.black,margin:"0 0 4px"}}>{article.title}</h1>
-            <p style={{fontFamily:F.b,fontSize:11,color:C.grayLt,margin:0}}>By Charlie | The Rail Way</p>
-          </div>
-          {article.blocks.map(blk=>
-            <div key={blk.id} onClick={()=>setActiveBlock(blk.id)} style={{cursor:"pointer",outline:activeBlock===blk.id?`2px solid ${C.rust}`:"2px solid transparent",outlineOffset:-2,transition:"outline 0.15s"}}>
-              <ArticlePreviewBlock block={blk}/>
-            </div>
-          )}
-        </> : page?.sections.map(sec=>
-          <div key={sec.id} onClick={()=>setActiveSection(sec.id)} style={{cursor:"pointer",outline:activeSection===sec.id?`2px solid ${C.rust}`:"2px solid transparent",outlineOffset:-2,transition:"outline 0.15s"}}>
-            <PreviewSection section={sec}/>
-          </div>
-        )}
-        {/* Mini footer */}
-        <div style={{background:C.deep,padding:"20px 24px"}}>
-          <img src={I.logoW} alt="" style={{height:20,filter:"brightness(1.2)",marginBottom:8}}/>
-          <p style={{fontFamily:F.b,fontSize:9,color:"rgba(255,255,255,0.3)"}}>© 2026 KingdomBuilding Leadership, Inc.</p>
-        </div>
-      </div>
-    </div>
 
-    {/* ═══ ADD SECTION PALETTE ═══ */}
-    {showPalette && <AddSectionPalette onAdd={addSection} onClose={()=>setShowPalette(false)}/>}
-    {showArtPalette && <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.5)",zIndex:1000,display:"flex",alignItems:"center",justifyContent:"center"}} onClick={()=>setShowArtPalette(false)}><div style={{background:C.white,borderRadius:12,padding:24,maxWidth:400,width:"90%"}} onClick={e=>e.stopPropagation()}><h3 style={{fontFamily:F.h,fontSize:18,margin:"0 0 16px"}}>Add Article Block</h3><div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>{Object.entries(ART_BLOCK_TYPES).map(([key,meta])=><button key={key} onClick={()=>addBlock(key)} style={{background:C.white,border:`1px solid ${C.rule}`,borderRadius:8,padding:"12px",cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:8}}><span style={{width:28,height:28,borderRadius:6,background:meta.color+"18",color:meta.color,display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,fontSize:14}}>{meta.icon}</span><span style={{fontFamily:F.b,fontSize:12,fontWeight:600,color:C.black}}>{meta.label}</span></button>)}</div></div></div>}
-  </div>;
+            <button
+              onClick={handlePublish}
+              disabled={!isDirty || publishState === "saving"}
+              style={{
+                padding: "9px 18px",
+                background: isDirty ? C.rust : C.rule,
+                color: isDirty ? "#fff" : C.grayLt,
+                border: "none", borderRadius: 6, fontSize: 13,
+                fontWeight: 600, cursor: isDirty ? "pointer" : "not-allowed"
+              }}
+            >
+              {publishState === "saving" ? "Publishing..." : "Publish Changes"}
+            </button>
+          </div>
+        </header>
+
+        {/* FORM AREA */}
+        <div style={{ flex: 1, overflowY: "auto", padding: "24px 28px" }} className="scrollbar-thin">
+          <div style={{ maxWidth: 820, margin: "0 auto" }}>
+
+            {pageData && sectionKeys.map(sectionKey => (
+              <FieldRenderer
+                key={sectionKey}
+                keyName={sectionKey}
+                value={pageData[sectionKey]}
+                path={[activePage, sectionKey]}
+                onChange={updatePath}
+                userRole={user.role}
+                depth={0}
+              />
+            ))}
+
+            <div style={{ padding: 20, marginTop: 20, background: C.cream, borderRadius: 8, fontSize: 12, color: C.gray, lineHeight: 1.6 }}>
+              <strong>Tip:</strong> Click sections above to expand. Edit text, then click <strong>Publish Changes</strong> at the top. Your edits go live in about 1–2 minutes.
+              {user.role === "admin" && (
+                <div style={{ marginTop: 8, fontSize: 11, color: C.grayLt }}>
+                  Fields marked with 🔒 are admin-only and not visible to editor-role users.
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(TRWSiteEditor));
+const fullscreenMsg = {
+  position: "fixed", inset: 0, background: C.deep, color: "rgba(255,255,255,0.5)",
+  display: "flex", alignItems: "center", justifyContent: "center",
+  fontFamily: F.b, fontSize: 14
+};
+
+// ═══ MOUNT ═══
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<TRWEditorV2 />);
 </script>
 </body>
 </html>

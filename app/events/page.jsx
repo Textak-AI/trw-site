@@ -1,5 +1,6 @@
 import { PAGES } from "../components/shared";
 import { EventsContent } from "../components/pages";
+import content from "../../data/content.json";
 
 export const metadata = {
   title: PAGES.events.title,
@@ -7,5 +8,5 @@ export const metadata = {
 };
 
 export default function EventsPage() {
-  return <EventsContent />;
+  return <EventsContent data={content.events} />;
 }

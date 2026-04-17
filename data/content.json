@@ -1,0 +1,395 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-04-17",
+    "schemaDescription": "Source of truth for editable TRW site content. Keyed by page id. Each page object maps to a matching XxxContent component that reads from this structure. Layout/styling lives in JSX; only content lives here.",
+    "editableByRole": {
+      "admin": "all fields",
+      "editor": "all fields except any flagged as _adminOnly"
+    }
+  },
+
+  "home": {
+    "hero": {
+      "eyebrow": "The Rail Way™ — From the Boardroom to the Ballast Line",
+      "headline": "Railroad Safety Culture",
+      "headlineAccent": "Transformation",
+      "heroImageAlt": "Railroad tracks stretching to the horizon",
+      "sub": "70–90% of organizational transformations fail. Yours doesn't have to.",
+      "body": "Build a Speak Up Culture where safety concerns don't wait for an accident. Not just training. Not just consulting. A cultural residency that creates lasting change.",
+      "btnPrimaryLabel": "Take the Free Pulse Check",
+      "btnSecondaryLabel": "What Is Speak Up Culture?",
+      "btnSecondaryHref": "/speak-up-culture"
+    },
+    "stats": [
+      { "v": "214%", "l": "ROI from safety culture programs", "src": "BCG Research, 2023" },
+      { "v": "4x",   "l": "Higher employee retention with psychological safety", "src": "BCG Study" },
+      { "v": "565/yr", "l": "Average roadway worker injuries (2018–2023)", "src": "FRA Safety Reports" }
+    ],
+    "recognition": {
+      "eyebrow": "Industry Recognition",
+      "heading": "Building Generational Railroaders — and Industry Leaders",
+      "cards": [
+        {
+          "award": "Railway Age — 2026",
+          "name": "John Orr",
+          "title": "2026 Railroader of the Year",
+          "desc": "Railway Age's highest individual honor, recognizing John Orr of Norfolk Southern for exceptional leadership in rail operations and safety performance.",
+          "source": "Railway Age Magazine"
+        },
+        {
+          "award": "League of Railway Women — 2025",
+          "name": "Diane Barnett",
+          "title": "2025 Railway Woman of the Year",
+          "desc": "Recognized by the League of Railway Women as a people-first solutionist focused on nudging the progress needle — a generational railroader from Norfolk Southern.",
+          "source": "Progressive Railroading"
+        }
+      ],
+      "_adminOnly_nsCallout": {
+        "body": "We're proud of the work we've done with Norfolk Southern, helping elevate leadership capabilities and enhance safety performance.",
+        "subtext": "Two industry award winners. One client. Generational railroaders.",
+        "btnLabel": "Discuss How We Can Help Your Organization",
+        "btnHref": "/contact"
+      }
+    },
+    "whatWeDo": {
+      "eyebrow": "What We Do",
+      "heading": "Safety Culture Transformation — Not Training",
+      "body1": "Railroad executives have seen too many generic safety consultants with polished slide decks and no operational empathy. The Rail Way is different — we've been on the ground at CN, KCS, and other Class I operators, transforming how crews communicate and how leaders behave.",
+      "body2": "Our approach is a cultural residency: we embed with your team, transfer capability to internal faculty, and build systems that sustain transformation after we leave.",
+      "btnPrimaryLabel": "See Our Process",
+      "btnPrimaryHref": "/our-process",
+      "btnSecondaryLabel": "For Class II & III",
+      "btnSecondaryHref": "/class-ii-iii",
+      "images": {
+        "mainAlt": "Rail safety culture transformation workshop in progress",
+        "leftAlt": "Railway safety culture training session",
+        "rightAlt": "Rail yard safety training exercise"
+      }
+    },
+    "paulineFeature": {
+      "eyebrow": "Featured in Railway Age",
+      "heading": "Pauline Lipkewich — Contributing Editor",
+      "quote": "\"I am blessed to live in a region where heavy industry thrives. I have the gift of seeing firsthand the fruits of labor that come from calloused hands and dusty work boots.\"",
+      "bio": "14+ years in North American rail operations. Grew Rocky Mountaineer group revenue 7x. Worked alongside CN, KCS, and other Class I operators on safety performance and operational effectiveness. Today, she's the rail industry's voice on leadership behavior and culture transformation.",
+      "btnPrimaryLabel": "Full Bio",
+      "btnPrimaryHref": "/about",
+      "btnSecondaryLabel": "Read Her Column",
+      "btnSecondaryHref": "https://www.railwayage.com/author/pauline-lipkewich/",
+      "imageAlt": "Pauline Lipkewich, founder of The Rail Way and Contributing Editor at Railway Age"
+    },
+    "seriesGrid": {
+      "eyebrow": "Latest Insights",
+      "heading": "Leading Through Uncertainty — 4-Part Series",
+      "articles": [
+        { "imgKey": "roadAhead", "title": "The Road Ahead: Putting It All Together", "part": "Part 4 of 4", "date": "Feb 2026", "url": "/insights/the-road-ahead" },
+        { "imgKey": "fieldLeadership", "title": "Lead Yourself First: The Trinity of Excellence", "part": "Part 3 of 4", "date": "Jan 2026", "url": "/insights/lead-yourself-first" },
+        { "imgKey": "leaderTalking", "title": "Leading Through Uncertainty: What's Your Style?", "part": "Part 2 of 4", "date": "Oct 2025", "url": "/insights/leading-through-uncertainty-part-2" },
+        { "imgKey": "freightTrain", "title": "How Leaders Navigate Uncertainty and Come Out Stronger", "part": "Part 1 of 4", "date": "Aug 2025", "url": "/insights/leaders-navigate-uncertainty" }
+      ],
+      "viewAllLabel": "View All Insights",
+      "viewAllHref": "/insights"
+    },
+    "team": {
+      "eyebrow": "Our Team",
+      "heading": "Meet the Team Behind The Rail Way™",
+      "members": [
+        { "imgKey": "paulineAlt", "name": "Pauline Lipkewich", "role": "Managing Director", "desc": "14+ years transforming cultures in heavy industry. Contributing Editor, Railway Age.", "objectPosition": "center 28%" },
+        { "imgKey": "brenda", "name": "Brenda Huizinga", "role": "Performance Coaching", "desc": "Enhancing mindsets, behaviors and competencies that drive organizational culture and results.", "objectPosition": "center 32%" },
+        { "imgKey": "michael", "name": "Michael Powell", "role": "Business Optimization", "desc": "Proven models driving profitable growth, operational effectiveness, and safety improvements.", "objectPosition": "center 22%" }
+      ]
+    },
+    "pulseCheck": {
+      "eyebrow": "Free Assessment",
+      "heading": "Is Your Safety Culture a Competitive Advantage?",
+      "description": "Find out in about 5 minutes. This pulse check benchmarks your organization against industry best practices across leadership alignment, psychological safety, frontline engagement, and culture sustainability.",
+      "disclaimer": "Your responses are confidential. Results are delivered upon completion.",
+      "iframeSrc": "https://www.surveymonkey.com/r/RQTZW2W",
+      "iframeTitle": "Safety Culture Pulse Check",
+      "footerText": "Prefer to talk first?",
+      "footerLinkLabel": "Schedule a consultation",
+      "footerLinkHref": "/contact"
+    },
+    "faq": {
+      "eyebrow": "Frequently Asked Questions",
+      "heading": "Railroad Safety Culture — Common Questions",
+      "items": [
+        { "q": "What is railroad safety culture transformation?", "a": "Railroad safety culture transformation is the process of fundamentally changing how an organization's leaders and workers approach safety — moving from compliance-driven rule-following to a culture where every person feels empowered and responsible for safety outcomes. Unlike training, transformation changes the underlying behaviors and leadership habits that determine whether safety is lived or merely checked off." },
+        { "q": "What is Speak Up Culture in the rail industry?", "a": "Speak Up Culture is an organizational environment where railroad workers at every level feel safe raising safety concerns, reporting near-misses, and challenging unsafe conditions without fear of retaliation. Organizations with strong Speak Up Cultures see significantly fewer preventable incidents because hazards are identified before they become accidents." },
+        { "q": "How does safety culture transformation differ from safety training?", "a": "Safety training teaches what the rules are. Safety culture transformation changes whether people follow them — and whether they speak up when they see something wrong. Training fills a binder; transformation fills a culture. The Rail Way's approach is a cultural residency — we embed with your team, build internal capability, and transfer ownership so the transformation sustains itself." },
+        { "q": "What is the ROI of railroad safety culture programs?", "a": "Research from BCG shows organizations investing in safety culture transformation see up to 214% ROI through reduced incidents, lower turnover (4x higher retention with psychological safety), improved efficiency, and reduced compliance costs. For Class II and III railroads, the financial impact is proportionally even larger." }
+      ]
+    },
+    "cta": {
+      "heading": "Ready to Transform Your Safety Culture?",
+      "sub": "Every transformation begins with a conversation.",
+      "btnLabel": "Start a Conversation",
+      "btnHref": "/contact",
+      "bgImageAlt": "Railroad leadership workshop"
+    }
+  },
+
+  "speakup": {
+    "intro": {
+      "eyebrow": "Speak Up Culture for Railroads",
+      "body1": "Speak Up Culture is an organizational environment where every railroader — from track crews to the C-suite — feels safe raising safety concerns, reporting near-misses, and challenging unsafe conditions without fear of retaliation.",
+      "body2": "It is the single most reliable predictor of whether a railroad prevents incidents or merely investigates them after the fact. 65% of rail accidents are attributed to human factors — and the majority involve failures of communication, not knowledge.",
+      "imageAlt": "Pauline Lipkewich discussing Speak Up Culture at a railway industry event"
+    },
+    "whyItMatters": {
+      "heading": "Why Speak Up Culture Matters",
+      "costOfSilence": {
+        "heading": "The Cost of Silence",
+        "body": "When a roadway worker sees an unsafe condition but doesn't report it — because they fear discipline, think it won't matter, or accept \"that's how we've always done it\" — the risk stays invisible until it becomes an incident. 96 roadway workers have been killed since 1997. Many fatalities were preceded by unreported concerns."
+      },
+      "alternative": {
+        "heading": "The Alternative",
+        "body": "Organizations with strong Speak Up Cultures catch hazards upstream. One FRA C3RS pilot site reported nearly a 70% reduction in certain accident types after implementing confidential close-call reporting. The difference isn't technology — it's whether people feel safe using it."
+      }
+    },
+    "howWeBuild": {
+      "heading": "How We Build It",
+      "intro": "Our approach isn't a training module. It's a cultural residency — we embed with your leadership team and frontline supervisors to transform the daily behaviors that determine whether people speak up or stay silent.",
+      "steps": [
+        { "n": "1", "t": "Assess the Real Culture", "d": "Not the culture in your policy handbook — the one your crews experience every shift." },
+        { "n": "2", "t": "Transform Leader Behaviors", "d": "We work directly with supervisors to model communication patterns that make speaking up feel safe." },
+        { "n": "3", "t": "Build Internal Faculty", "d": "We train your people to sustain the transformation using our white-labeled materials." }
+      ],
+      "btnPrimaryLabel": "Discuss Speak Up Culture",
+      "btnPrimaryHref": "/contact",
+      "btnSecondaryLabel": "See Full Process",
+      "btnSecondaryHref": "/our-process"
+    },
+    "faq": {
+      "heading": "Speak Up Culture FAQ",
+      "items": [
+        { "q": "How is Speak Up Culture different from FRA's C3RS program?", "a": "C3RS is a specific confidential close-call reporting system. Speak Up Culture is the broader organizational environment that determines whether workers actually use reporting systems. You can implement C3RS and still have silence if leaders don't model openness." },
+        { "q": "How long does it take to build a Speak Up Culture?", "a": "Meaningful behavior change is typically visible within 90–180 days. Sustainable culture transformation generally requires 12–18 months of cultural residency, including transition to internal faculty." },
+        { "q": "Can smaller railroads afford this?", "a": "The Rail Way was built for Class II and III operators. Smaller railroads often see faster culture change because leadership is closer to the front lines." }
+      ]
+    }
+  },
+
+  "process": {
+    "hero": {
+      "eyebrow": "Our Proven Process",
+      "sub": "Not training. Not consulting. A cultural residency that creates lasting change.",
+      "heroImageAlt": "Railroad leadership discussion"
+    },
+    "stages": [
+      { "n": "Heighten Awareness", "t": "Days 1–30", "d": "Surface the real issues hiding behind compliance metrics. We uncover the gap between stated safety culture and lived reality." },
+      { "n": "Increase Clarity", "t": "Days 30–90", "d": "Define what 'good' looks like at every level. Actionable roadmaps tailored to your railroad's size and context." },
+      { "n": "Build Alignment", "t": "Days 90–270", "d": "Get leaders modeling the behaviors they expect. Internal faculty-in-training begin delivering content." },
+      { "n": "Drive Momentum", "t": "Day 270+", "d": "Internal academy operational. Faculty delivering independently. We transition to periodic auditing." }
+    ],
+    "comparison": {
+      "heading": "Training vs. Transformation",
+      "traditional": {
+        "heading": "Traditional Safety Training",
+        "body": "External consultant delivers a program. Binders filled. Consultant leaves. Behaviors revert within 90 days."
+      },
+      "residency": {
+        "heading": "The Rail Way Cultural Residency",
+        "body": "We embed with your team. Internal faculty developed. Materials white-labeled. Transformation happens with you, not to you."
+      },
+      "btnLabel": "Discuss Your Transformation",
+      "btnHref": "/contact"
+    }
+  },
+
+  "about": {
+    "hero": {
+      "eyebrow": "About",
+      "imageAlt": "Pauline Lipkewich"
+    },
+    "credentials": {
+      "heading": "Credentials",
+      "items": [
+        "MA (Leadership), U of Guelph",
+        "B.Comm, U of Guelph",
+        "Contributing Editor, Railway Age",
+        "14+ years North American rail",
+        "Rocky Mountaineer: 7x group revenue growth"
+      ]
+    },
+    "bio": {
+      "p1": "Pauline has been working with railroads since 2011. She led the global group sales team for Rocky Mountaineer, growing revenues more than 7x in less than four years. She has worked alongside Class I operators at CN, KCS, and NS with a focus on safety performance and operational effectiveness, seeing double and triple digit improvements within 2-3 years.",
+      "p2": "She holds a Bachelor of Commerce and a Master of Arts in Leadership from the University of Guelph. As Contributing Editor at Railway Age, her column reaches rail decision-makers across North America.",
+      "p3": "She founded KingdomBuilding Leadership with a core belief: when a leader gets better, everybody wins.",
+      "btnPrimaryLabel": "Get in Touch",
+      "btnPrimaryHref": "/contact",
+      "btnSecondaryLabel": "Read Her Column",
+      "btnSecondaryHref": "https://www.railwayage.com/author/pauline-lipkewich/"
+    },
+    "approach": {
+      "heading": "Pauline's Approach",
+      "quote": "\"This isn't happening to you. It's happening with you.\"",
+      "body": "Transformation happens with the organization, not to it. Her approach is built on respect for the people doing the work — their expertise, challenges, and pride in the industry.",
+      "imageAlt": "Pauline at a railway event"
+    }
+  },
+
+  "insights": {
+    "hero": {
+      "eyebrow": "The Rail Way™ Column & Pillar Articles",
+      "body": "Expert perspectives on rail leadership, safety culture, and operational excellence — from Contributing Editor Pauline Lipkewich and The Rail Way™ team."
+    },
+    "articles": [
+      { "imgKey": "coachingCaboose", "t": "Coaching from the Caboose: Making Yourself a Priority", "c": "Coaching", "d": "Mar 2026", "s": "", "url": "/insights/coaching-from-the-caboose" },
+      { "imgKey": "roadAhead", "t": "The Road Ahead: Putting It All Together", "c": "Leadership Series", "d": "Feb 2026", "s": "Part 4/4", "url": "/insights/the-road-ahead" },
+      { "imgKey": "fieldLeadership", "t": "Lead Yourself First: Trinity of Excellence", "c": "Leadership Series", "d": "Jan 2026", "s": "Part 3/4", "url": "/insights/lead-yourself-first" },
+      { "imgKey": "leaderTalking", "t": "Leading Through Uncertainty: What's Your Style?", "c": "Leadership Series", "d": "Oct 2025", "s": "Part 2/4", "url": "/insights/leading-through-uncertainty-part-2" },
+      { "imgKey": "freightTrain", "t": "How Leaders Navigate Uncertainty", "c": "Leadership Series", "d": "Aug 2025", "s": "Part 1/4", "url": "/insights/leaders-navigate-uncertainty" },
+      { "imgKey": "safetyCulture", "t": "Rail Safety by the Numbers: What FRA Data Reveals", "c": "Data & Analysis", "d": "2025", "s": "", "url": "/insights/rail-safety-human-factors" },
+      { "imgKey": "yardTraining", "t": "What Is Speak Up Culture — And Why Every Railroad Needs One", "c": "Speak Up Culture", "d": "Mar 2026", "s": "", "url": "/insights/speak-up-culture-rail-safety" },
+      { "imgKey": "teamTraining", "t": "Why Transformation Beats Training Every Time", "c": "Culture Change", "d": "Mar 2026", "s": "", "url": "/insights/transformation-vs-training" },
+      { "imgKey": "railwayTraining", "t": "The ROI of Safety Culture: Building the Business Case", "c": "ROI & Data", "d": "Mar 2026", "s": "", "url": "/insights/roi-safety-culture" }
+    ]
+  },
+
+  "classii": {
+    "hero": {
+      "eyebrow": "For Regional & Short-Line Operators",
+      "sub": "Proven blueprint with Class I's, right-sized to deliver exponential results for short line and regional carriers.",
+      "heroImageAlt": "Freight train on open track"
+    },
+    "why": {
+      "heading": "Why Smaller Railroads See Faster Results",
+      "cards": [
+        { "t": "Leadership Proximity", "d": "Executives closer to frontline. Behavioral modeling has direct impact." },
+        { "t": "Operational Agility", "d": "Decisions in days, not quarters. No enterprise bureaucracy." },
+        { "t": "Community Identity", "d": "'Railroad family' isn't a metaphor — it's the operational reality." }
+      ],
+      "btnLabel": "Discuss Your Railroad's Needs",
+      "btnHref": "/contact"
+    }
+  },
+
+  "contact": {
+    "hero": {
+      "eyebrow": "Let's Talk"
+    },
+    "form": {
+      "heading": "Schedule a Consultation",
+      "submitLabel": "Submit Request",
+      "sendingLabel": "Sending...",
+      "thankYou": {
+        "heading": "Thank You",
+        "body": "Your consultation request has been received. Pauline or a member of the team will be in touch within one business day."
+      }
+    },
+    "audience": {
+      "heading": "Who This Is For",
+      "roles": [
+        { "r": "C-Suite Executives", "d": "Strategic culture transformation aligned with business objectives" },
+        { "r": "VPs of Safety", "d": "Building sustainable safety cultures that deliver results" },
+        { "r": "VPs of Operations", "d": "Creating conditions for operational excellence" },
+        { "r": "HR Leaders", "d": "Engaging and retaining workforce through culture" }
+      ],
+      "directContact": {
+        "label": "Reach out directly:",
+        "email": "pauline@therailway.us",
+        "phone": "+1.780.991.9993"
+      }
+    }
+  },
+
+  "legacies": {
+    "hero": {
+      "eyebrow": "Honoring Rail Industry Leaders",
+      "intro": "The rail industry is built by people who give their careers — and sometimes their lives — to keeping freight and passengers moving safely. This page honors their contributions and tracks leadership changes across the industry."
+    },
+    "entries": [
+      {
+        "type": "news",
+        "date": "2026-03-20",
+        "dateLabel": "MAR 20, 2026",
+        "category": "Leadership Change",
+        "heading": "Sasser, Inc. Names Michael Kelly as President of Chicago Freight Car and CF Rail Services",
+        "body": "Sasser, Inc. announced that Michael Kelly has been named President of its Rail division, which includes Chicago Freight Car and CF Rail Services. Kelly succeeds Thomas Clark, who is retiring after a distinguished career in the rail industry.",
+        "linkLabel": "Read on Railway Age →",
+        "linkHref": "https://www.railwayage.com/news/people-news-sasser-port-of-long-beach/"
+      },
+      {
+        "type": "news",
+        "date": "2026-03-19",
+        "dateLabel": "MAR 19, 2026",
+        "category": "Industry Recognition",
+        "heading": "Goode, McClellan, Brosnan Inducted into National Railroad Hall of Fame",
+        "body": "Three iconic railroaders were inducted into the National Railroad Hall of Fame during a ceremony in Roanoke, Virginia. The inductees were recognized for decades of contributions to railroad strategy, operations, and industry leadership.",
+        "linkLabel": "Read on Railway Age →",
+        "linkHref": "https://www.railwayage.com/freight/class-i/goode-mcclellan-brosnan-inducted-into-national-railroad-hall-of-fame/"
+      },
+      {
+        "type": "memorial",
+        "date": "2026-03-11",
+        "dateLabel": "MAR 11, 2026",
+        "category": "In Memoriam",
+        "heading": "Jesse James Chalich",
+        "role": "President & COO, Northern Plains Railroad & Northern Plains Rail Services",
+        "lifespan": "September 21, 1976 — March 11, 2026",
+        "expandLabel": "Read tribute ▾",
+        "tribute": [
+          "Jesse James Chalich, 49, passed away unexpectedly on March 11, 2026. A 4th generation railroader, Jesse's connection to the industry wasn't just professional — it was in his blood. His grandfather, father, and uncle all worked in the Maintenance of Way department at the SOO Line. That heritage shaped a career defined by deep respect for the work and the people who do it.",
+          "Jesse started as a conductor/engineer on Northern Plains Railroad in 1997, the year the company was founded in central North Dakota. His natural ability to connect with people was evident from the start. He moved through customer service, marketing, and executive leadership, helping guide the company as it grew from forty employees to more than two hundred. He rose to President and Chief Operating Officer of the Northern Plains Rail companies — a role he led with humility, pride, and dedication.",
+          "Under Jesse's leadership, Northern Plains maintained exceptional employee morale and a culture that supported employees in putting safety and family first. He furthered his industry knowledge through the Railway Management Program at Michigan State University, and in 2014, Progressive Railroading named him one of the rail industry's \"20 Rising Stars.\" He served on the board of the Lake Superior Railroad Museum and the American Association of Railroad Superintendents.",
+          "Those who knew Jesse describe a consummate, natural leader — a best friend to many, including his children, with innate compassion and an uncanny ability to tell a story that made even the most ordinary moments hilarious. He was a true north compass with intuition and insights that always exceeded his years, and an absolute trusted advisor in both life and at work."
+        ],
+        "tributeItalic": "Jesse leaves behind a legacy that will continue far beyond the horizon. He is survived by his wife Julie, their four children — Jaden, Morgan, Ethan, and Maggie — and grandson Beckett."
+      },
+      {
+        "type": "news",
+        "date": "2026-02-03",
+        "dateLabel": "FEB 03, 2026",
+        "category": "Leadership Change",
+        "heading": "CSX Announces Leadership Changes to Its Executive Team",
+        "body": "CSX Corporation announced changes to its executive leadership team as part of ongoing organizational evolution. These leadership transitions reflect the rail industry's continued focus on operational performance and strategic growth.",
+        "linkLabel": "Read on CSX.com →",
+        "linkHref": "https://www.csx.com/index.cfm/about-us/media/press-releases/csx-announces-leadership-changes-to-its-executive-team/"
+      }
+    ],
+    "submit": {
+      "heading": "Know Someone We Should Honor?",
+      "sub": "Help us recognize the people who shaped the rail industry.",
+      "btnLabel": "Submit a Legacy",
+      "btnHref": "/contact",
+      "bgImageAlt": "Railroad operations"
+    }
+  },
+
+  "events": {
+    "hero": {
+      "eyebrow": "Speaking & Appearances",
+      "body": "Pauline Lipkewich speaks on safety culture transformation, Speak Up Culture, and adaptive leadership across the rail industry and beyond."
+    },
+    "events": [
+      {
+        "dateBadgeDay": "23",
+        "dateBadgeMonth": "Apr 2026",
+        "meta": "Virtual Conference — 2:00 PM EDT",
+        "heading": "Railway Age Young Professionals 2026",
+        "body": "Railway Age's fourth annual virtual conference for early- and mid-career rail professionals. Sessions cover career advancement, leadership style, and how new technologies are transforming the industry. Free to attend.",
+        "host": "Hosted by Railway Age",
+        "linkLabel": "Register (Free) →",
+        "linkHref": "https://www.railwayage.com/railway-age-young-professionals-2026/"
+      },
+      {
+        "dateBadgeDay": "1-2",
+        "dateBadgeMonth": "May 2026",
+        "meta": "In-Person Conference — Edmonton, AB, Canada",
+        "heading": "AIESEC Canada — Youth to Business Forum 2026",
+        "body": "A two-day forum connecting business leaders with emerging young professionals. This year's theme is \"Future of Work & Adaptive Leadership\" - bringing together keynote speakers, interactive workshops, and networking with 150+ university students from across Canada.",
+        "host": "Hosted by AIESEC in Canada",
+        "linkLabel": "Learn More →",
+        "linkHref": "https://www.aiesec.ca/y2b"
+      }
+    ],
+    "cta": {
+      "heading": "Interested in Having Pauline Speak?",
+      "sub": "Keynotes, panels, and workshops on safety culture transformation and Speak Up Culture.",
+      "btnLabel": "Get in Touch",
+      "btnHref": "/contact",
+      "bgImageAlt": "Railroad operations"
+    }
+  }
+}

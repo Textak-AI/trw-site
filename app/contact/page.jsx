@@ -1,5 +1,6 @@
 import { PAGES } from "../components/shared";
 import { ContactContent } from "../components/pages";
+import content from "../../data/content.json";
 
 export const metadata = {
   title: PAGES.contact.title,
@@ -7,5 +8,5 @@ export const metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactContent />;
+  return <ContactContent data={content.contact} />;
 }

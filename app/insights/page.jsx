@@ -1,5 +1,6 @@
 import { PAGES } from "../components/shared";
 import { InsightsContent } from "../components/pages";
+import content from "../../data/content.json";
 
 export const metadata = {
   title: PAGES.insights.title,
@@ -7,5 +8,5 @@ export const metadata = {
 };
 
 export default function InsightsPage() {
-  return <InsightsContent />;
+  return <InsightsContent data={content.insights} />;
 }

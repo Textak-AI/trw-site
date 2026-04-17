@@ -1,5 +1,6 @@
 import { PAGES } from "../components/shared";
 import { LegaciesContent } from "../components/pages";
+import content from "../../data/content.json";
 
 export const metadata = {
   title: PAGES.legacies.title,
@@ -7,5 +8,5 @@ export const metadata = {
 };
 
 export default function LegaciesPage() {
-  return <LegaciesContent />;
+  return <LegaciesContent data={content.legacies} />;
 }

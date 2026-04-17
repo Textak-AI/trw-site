@@ -1,5 +1,6 @@
 import { PAGES } from "../components/shared";
 import { ClassIIContent } from "../components/pages";
+import content from "../../data/content.json";
 
 export const metadata = {
   title: PAGES.classii.title,
@@ -7,5 +8,5 @@ export const metadata = {
 };
 
 export default function ClassIIPage() {
-  return <ClassIIContent />;
+  return <ClassIIContent data={content.classii} />;
 }

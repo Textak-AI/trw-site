@@ -1,5 +1,6 @@
 import { PAGES } from "../components/shared";
 import { SpeakUpContent } from "../components/pages";
+import content from "../../data/content.json";
 
 export const metadata = {
   title: PAGES.speakup.title,
@@ -7,5 +8,5 @@ export const metadata = {
 };
 
 export default function SpeakUpPage() {
-  return <SpeakUpContent />;
+  return <SpeakUpContent data={content.speakup} />;
 }
