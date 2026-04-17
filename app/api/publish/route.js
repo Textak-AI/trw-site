@@ -29,7 +29,14 @@ export async function POST(req) {
   if (!user) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
   try {
     const { type, data, message } = await req.json();
-    if (type === "content") { await commitFile("public/data/content.json", JSON.stringify(data, null, 2), message || "Update content [" + user.name + "]"); return NextResponse.json({ ok: true }); }
+    if (type === "content") {
+      await commitFile("public/data/content.json", JSON.stringify(data, null, 2), message || "Update content [" + user.name + "]");
+      // Fire Vercel deploy hook as safety net in case Git auto-deploy webhook fails
+      if (process.env.VERCEL_DEPLOY_HOOK_URL) {
+        try { await fetch(process.env.VERCEL_DEPLOY_HOOK_URL, { method: "POST" }); } catch (e) { console.error("Deploy hook failed:", e.message); }
+      }
+      return NextResponse.json({ ok: true });
+    }
     if (type === "article") { await commitFile("public/insights/" + data.slug + ".html", data.html, message || "Update article: " + data.title + " [" + user.name + "]"); return NextResponse.json({ ok: true }); }
     return NextResponse.json({ error: "Unknown type" }, { status: 400 });
   } catch (e) { return NextResponse.json({ error: e.message }, { status: 500 }); }
