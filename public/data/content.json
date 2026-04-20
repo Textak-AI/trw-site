@@ -149,6 +149,13 @@
           "role": "Business Optimization",
           "desc": "Proven models driving profitable growth, operational effectiveness, and safety improvements.",
           "objectPosition": "center 22%"
+        },
+        {
+          "imgKey": "rachel",
+          "name": "Rachel Bolton",
+          "role": "Leadership Development & Executive Coaching",
+          "desc": "Strengthening culture and navigating the human realities of rail and heavy-industry leadership.",
+          "objectPosition": "center 25%"
         }
       ]
     },

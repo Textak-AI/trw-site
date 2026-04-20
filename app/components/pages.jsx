@@ -95,7 +95,7 @@ export function HomeContent({ data }){
   <Sec bg={C.cream}>
     <Eye>{d.team.eyebrow}</Eye>
     <H2>{d.team.heading}</H2>
-    <div className="r-grid-3" style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:24,marginTop:16}}>
+    <div className="r-grid-team" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:24,marginTop:16,maxWidth:720,marginLeft:"auto",marginRight:"auto"}}>
       {d.team.members.map((t,i)=><div key={i} style={{background:C.white,borderRadius:8,overflow:"hidden"}}>
         <div style={{height:280,overflow:"hidden"}}><Img src={IMG[t.imgKey]} alt={t.name} style={{objectPosition:t.objectPosition}}/></div>
         <div style={{padding:"16px 18px"}}>

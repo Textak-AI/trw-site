@@ -16,6 +16,7 @@ img { max-width: 100%; }
   .r-grid { grid-template-columns: 1fr !important; }
   .r-grid-2 { grid-template-columns: 1fr !important; }
   .r-grid-3 { grid-template-columns: 1fr !important; }
+  .r-grid-team { grid-template-columns: 1fr !important; max-width: 400px !important; }
   .r-flex { flex-wrap: wrap !important; }
   .r-stack { flex-direction: column !important; }
   .r-hero { min-height: 340px !important; padding: 40px 20px !important; }

@@ -9,6 +9,7 @@ export const IMG = {
   paulineSpeaking: U+"team/pauline-speaking.jpg",
   brenda: U+"team/brenda-huizinga.jpg",
   michael: U+"team/michael-powell.jpg",
+  rachel: U+"team/rachel-bolton.jpg",
   safetyCulture: U+"operations/safety-culture.jpg",
   railwayTraining: U+"operations/railway-training.jpg",
   freightTrain: U+"articles/freight-train.jpg",
