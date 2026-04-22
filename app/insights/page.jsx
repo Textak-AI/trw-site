@@ -1,6 +1,6 @@
 import { PAGES } from "../components/shared";
 import { InsightsContent } from "../components/pages";
-import content from "../../data/content.json";
+import content from "../../public/data/content.json";
 
 export const metadata = {
   title: PAGES.insights.title,
