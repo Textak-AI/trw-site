@@ -487,6 +487,16 @@
     },
     "entries": [
       {
+        "type": "",
+        "date": "2026-05-01",
+        "dateLabel": "MAY 1, 2026",
+        "category": "In Memoriam",
+        "heading": "William W. \"Bill\" Stinson, Former Chairman & CEO of Canadian Pacific Limited (1934–2026)",
+        "body": "A fourth-generation railroader who joined Canadian Pacific Railway at the age of 16, Bill Stinson built a four-decade career that culminated in his appointment as President and CEO of Canadian Pacific Limited in 1988 - at the time, the youngest CEO in the railroad's history. He served as Chairman, President, and CEO until his retirement in 1996.\n\nMr. Stinson passed away in Vancouver, British Columbia on May 1, 2026, at the age of 92. In recognition of his contributions to the railway and to Canadian industry, CPKC recently renamed a location on the MacTier Subdivision in the Toronto area in his honor.\n\nThe Rail Way extends its condolences to Bill's family, his friends, and the CPKC community.",
+        "linkLabel": "Read on Railway Age →",
+        "linkHref": "https://www.railwayage.com/news/people-news-stephens-slsi-cpkc/"
+      },
+      {
         "type": "news",
         "date": "2026-03-20",
         "dateLabel": "MAR 20, 2026",
@@ -532,16 +542,6 @@
         "body": "CSX Corporation announced changes to its executive leadership team as part of ongoing organizational evolution. These leadership transitions reflect the rail industry's continued focus on operational performance and strategic growth.",
         "linkLabel": "Read on CSX.com →",
         "linkHref": "https://www.csx.com/index.cfm/about-us/media/press-releases/csx-announces-leadership-changes-to-its-executive-team/"
-      },
-      {
-        "type": "",
-        "date": "2026-05-01",
-        "dateLabel": "MAY 1, 2026",
-        "category": "In Memoriam",
-        "heading": "William W. \"Bill\" Stinson, Former Chairman & CEO of Canadian Pacific Limited (1934–2026)",
-        "body": "A fourth-generation railroader who joined Canadian Pacific Railway at the age of 16, Bill Stinson built a four-decade career that culminated in his appointment as President and CEO of Canadian Pacific Limited in 1988 - at the time, the youngest CEO in the railroad's history. He served as Chairman, President, and CEO until his retirement in 1996.\n\nMr. Stinson passed away in Vancouver, British Columbia on May 1, 2026, at the age of 92. In recognition of his contributions to the railway and to Canadian industry, CPKC recently renamed a location on the MacTier Subdivision in the Toronto area in his honor.\n\nThe Rail Way extends its condolences to Bill's family, his friends, and the CPKC community.",
-        "linkLabel": "Read on Railway Age →",
-        "linkHref": "https://www.railwayage.com/news/people-news-stephens-slsi-cpkc/"
       }
     ],
     "submit": {
