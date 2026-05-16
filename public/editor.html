@@ -337,6 +337,37 @@ function TextField({ label, value, onChange, multiline, required, hint }) {
   );
 }
 
+function SelectField({ label, value, onChange, options }) {
+  return (
+    <div style={{ marginBottom: 16 }}>
+      <label style={{ display: "block", fontSize: 11, color: C.gray, textTransform: "uppercase", letterSpacing: 0.6, marginBottom: 6, fontWeight: 600 }}>
+        {label}
+      </label>
+      <select
+        value={value ?? ""}
+        onChange={(e) => onChange(e.target.value)}
+        style={{
+          width: "100%",
+          padding: "10px 12px",
+          border: "1px solid " + C.rule,
+          borderRadius: 6,
+          fontSize: 14,
+          color: C.black,
+          background: C.white,
+          fontFamily: F.b,
+          cursor: "pointer"
+        }}
+      >
+        <option value="">Select category…</option>
+        {options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+      </select>
+    </div>
+  );
+}
+
+// Fixed category options for Legacy Entries — keep consistent across all entries
+const CATEGORY_OPTIONS = ["In Memoriam", "Leadership Change", "Hall of Fame", "Retirement", "Promotion", "Industry News"];
+
 // Renders any value recursively: scalars → inputs, objects → nested fieldset, arrays → repeatable
 function FieldRenderer({ keyName, value, path, onChange, userRole, depth = 0 }) {
   if (HIDDEN_FIELDS.has(keyName)) return null;
@@ -354,6 +385,19 @@ function FieldRenderer({ keyName, value, path, onChange, userRole, depth = 0 }) 
 
   // Scalar (string/number/boolean)
   const label = labelFor("field", keyName);
+
+  // Category fields → fixed dropdown for consistency across entries
+  if (keyName === "category" || keyName === "c") {
+    return (
+      <SelectField
+        label={label}
+        value={value}
+        onChange={(v) => onChange(path, v)}
+        options={CATEGORY_OPTIONS}
+      />
+    );
+  }
+
   const multiline = isLongText(keyName, value);
 
   return (
@@ -463,8 +507,8 @@ function ArrayField({ keyName, items, path, onChange, userRole, depth }) {
     const template = typeof items[0] === "string"
       ? ""
       : Object.fromEntries(Object.keys(items[0]).map(k => [k, ""]));
-    onChange(path, [...items, template]);
-    setOpenIdx(items.length);
+    onChange(path, [template, ...items]);
+    setOpenIdx(0);
   };
 
   const removeItem = (idx) => {
@@ -570,7 +614,7 @@ function ArrayField({ keyName, items, path, onChange, userRole, depth }) {
             borderRadius: 6, color: C.gray, fontSize: 12, cursor: "pointer", fontWeight: 600
           }}
         >
-          + Add another {labelFor("field", keyName).replace(/s$/, "").toLowerCase()}
+          + Add another {labelFor("field", keyName).replace(/ies$/, "y").replace(/s$/, "").toLowerCase()}
         </button>
       </div>
     </div>
