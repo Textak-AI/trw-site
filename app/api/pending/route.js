@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
+import { getAuthSecret } from "../auth-secret";
 const REPO = process.env.GITHUB_REPO || "Textak-AI/trw-site";
 function verifyToken(token) {
   if (!token) return null;
-  const secret = process.env.AUTH_SECRET || "trw-dev-secret";
+  const secret = getAuthSecret();
   const parts = token.split(".");
   if (parts.length !== 2) return null;
   const [data, sig] = parts;

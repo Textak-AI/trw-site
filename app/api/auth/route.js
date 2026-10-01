@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import crypto from "crypto";
+import { getAuthSecret } from "../auth-secret";
 
 function signToken(payload) {
-  const secret = process.env.AUTH_SECRET || "trw-dev-secret";
+  const secret = getAuthSecret();
   const data = Buffer.from(JSON.stringify(payload)).toString("base64url");
   const sig = crypto.createHmac("sha256", secret).update(data).digest("base64url");
   return data + "." + sig;
@@ -10,7 +11,7 @@ function signToken(payload) {
 
 export function verifyToken(token) {
   if (!token) return null;
-  const secret = process.env.AUTH_SECRET || "trw-dev-secret";
+  const secret = getAuthSecret();
   const parts = token.split(".");
   if (parts.length !== 2) return null;
   const [data, sig] = parts;
